@@ -506,6 +506,7 @@ footer{
       <button class="tab-btn" id="tab-jobs" onclick="switchTab('jobs')">채용공고</button>
       <button class="tab-btn" id="tab-firms" onclick="switchTab('firms')">회사별</button>
       <button class="tab-btn" id="tab-info" onclick="switchTab('info')">게시판</button>
+      <button class="tab-btn" id="tab-scrap" onclick="switchTab('scrap')">일간</button>
       <button class="tab-btn" id="tab-news" onclick="switchTab('news')">판례·소식</button>
     </nav>
     <button class="profile-btn" id="profile-btn" onclick="openProfile()">프로필</button>
@@ -529,9 +530,12 @@ footer{
         <div class="wg-b tight"><div class="wg-list" id="proxy-list"></div></div>
       </div>
 
-      <!-- 조간 스크랩 -->
+      <!-- 일간 스크랩 -->
       <div class="wg">
-        <div class="wg-h"><span class="wg-title"><span class="ic">📰</span>조간 스크랩</span></div>
+        <div class="wg-h">
+          <span class="wg-title"><span class="ic">📰</span>일간 스크랩</span>
+          <button class="wg-more" onclick="switchTab('scrap')">전체 보기</button>
+        </div>
         <div class="wg-b">
           <div class="mini-chips" id="scrap-chips"></div>
           <div class="wg-list" id="scrap-list"></div>
@@ -678,6 +682,15 @@ footer{
   </section>
 
   <!-- ══ 판례·소식 ══ -->
+  <section id="view-scrap" style="display:none;">
+    <h1 class="page-title">일간 스크랩 <span class="count" id="scrap-count"></span></h1>
+    <p class="page-desc">매일 아침 자동 수집. 제목·출처·원문 링크만 제공합니다.</p>
+    <div class="filter-bar">
+      <div class="filter-group" id="filter-scrap"></div>
+    </div>
+    <div class="wg"><div class="wg-b"><div class="wg-list" id="scrap-full"></div></div></div>
+  </section>
+
   <section id="view-news" style="display:none;">
     <h1 class="page-title">판례·소식 <span class="count" id="news-count"></span></h1>
     <p class="page-desc">대법원 판례공보 주요 판결 요지와 법조계 소식. 요지는 자유롭게, 기사는 링크로.</p>
@@ -1032,7 +1045,7 @@ const seedProxy = [
   {id:4, type:"구인", court:"대전지법 제3민사부", caseType:"민사", date:hoursFromNow(5,11,0), note:"변론기일. 지방 사건이라 현지 대리 구합니다.", author:"변 10회, 개업 4년차", created:daysAgo(1)},
 ];
 
-/* 조간 스크랩 시드 — 제목·출처·링크만 (본문 복사 없음) */
+/* 일간 스크랩 시드 — 제목·출처·링크만 (본문 복사 없음) */
 const seedScrap = [
   {id:1, cat:"금융", title:"[예시] 금융위, 가상자산 이용자보호법 2단계 입법예고", source:"법률신문", link:"https://www.lawtimes.co.kr", created:daysAgo(0)},
   {id:2, cat:"형사", title:"[예시] 대검, 마약 초범 조건부 기소유예 확대 방침 발표", source:"법조신문", link:"https://news.koreanbar.or.kr", created:daysAgo(0)},
@@ -1140,12 +1153,15 @@ function syncRoundOptions(){
 /* ── 탭 ── */
 function switchTab(tab){
   currentTab = tab;
-  ['home','jobs','firms','info','news'].forEach(t=>{
+  ['home','jobs','firms','info','news','scrap'].forEach(t=>{
     document.getElementById('view-'+t).style.display = tab===t ? '' : 'none';
     document.getElementById('tab-'+t).classList.toggle('active', tab===t);
   });
-  const labels = { home:'+ 복대리 등록', jobs:'+ 공고 등록', firms:'+ 회사 한줄평', info:'+ 글쓰기', news:'+ 판례·소식' };
-  document.getElementById('write-btn').textContent = labels[tab];
+  const labels = { home:'+ 복대리 등록', jobs:'+ 공고 등록', firms:'+ 회사 한줄평', info:'+ 글쓰기', news:'+ 판례·소식', scrap:'' };
+  const wb = document.getElementById('write-btn');
+  wb.textContent = labels[tab];
+  wb.style.display = tab==='scrap' ? 'none' : '';
+  if(tab==='scrap') renderScrapBoard();
   if(tab==='firms') renderFirms();
   if(tab==='home') renderHome();
 }
@@ -1799,6 +1815,26 @@ function renderScrapWidget(){
 }
 function setScrapFilter(c){ scrapFilter=c; store.set('bb-interest', c); renderScrapWidget(); }
 
+let scrapBoardFilter = '전체';
+function setScrapBoardFilter(c){ scrapBoardFilter = c; renderScrapBoard(); }
+function renderScrapBoard(){
+  const cats = ['전체', ...Array.from(new Set(scrap.map(s=>s.cat)))];
+  document.getElementById('filter-scrap').innerHTML =
+    '<span class="filter-label">분야</span>' +
+    cats.map(c=>`<button class="chip ${scrapBoardFilter===c?'on':''}" onclick="setScrapBoardFilter('${c}')">${esc(c)}</button>`).join('');
+  const items = scrap
+    .filter(s=> scrapBoardFilter==='전체' || s.cat===scrapBoardFilter)
+    .sort((a,b)=> new Date(b.created)-new Date(a.created));
+  document.getElementById('scrap-count').textContent = items.length + '건';
+  const el = document.getElementById('scrap-full');
+  if(!items.length){ el.innerHTML = `<div class="empty"><div class="seal-empty">空</div>해당 분야 스크랩이 없습니다.</div>`; return; }
+  el.innerHTML = items.map(s=>`
+    <div class="wg-li">
+      <a href="${esc(s.link)}" target="_blank" rel="noopener">${esc(s.title)}</a>
+      <div class="sub"><span class="wg-cat">${esc(s.cat)}</span><span>${esc(s.source)}</span><span>${timeAgo(s.created)}</span></div>
+    </div>`).join('');
+}
+
 function renderHomeNews(){
   const el = document.getElementById('home-news');
   const items = news.slice().sort((a,b)=> new Date(b.created)-new Date(a.created)).slice(0,4);
@@ -2032,7 +2068,8 @@ renderPosts();
 renderNews();
 renderFirms();
 renderHome();
-  /* ── 조간 스크랩: news.json 자동 로드 ── */
+
+/* ── 일간 스크랩: news.json 자동 로드 ── */
 async function loadNews(){
   try{
     const res = await fetch('data/news.json', { cache:'no-store' });
@@ -2042,8 +2079,9 @@ async function loadNews(){
       scrap = items;
       store.set('bb-scrap', scrap);
       renderScrapWidget();
+      if(currentTab==='scrap') renderScrapBoard();
     }
-  }catch(e){ /* 실패하면 기존 예시 데이터 그대로 유지 */ }
+  }catch(e){ /* 실패 시 기존 시드 유지 */ }
 }
 loadNews();
 </script>
