@@ -1,0 +1,38 @@
+# .github/workflows/news.yml
+# 매일 새벽 조간 뉴스를 수집해 data/news.json 을 갱신·커밋합니다.
+# 사전 준비: 저장소 Settings > Secrets and variables > Actions 에
+#            NAVER_CLIENT_ID, NAVER_CLIENT_SECRET 을 등록하세요.
+
+name: collect-news
+
+on:
+  schedule:
+    - cron: "0 21 * * *"      # UTC 21:00 = KST 06:00 (매일)
+  workflow_dispatch:            # 수동 실행 버튼
+
+permissions:
+  contents: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: 뉴스 수집
+        env:
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+        run: node fetch-news.js
+
+      - name: 변경분 커밋
+        run: |
+          git config user.name  "news-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/news.json
+          git diff --cached --quiet || git commit -m "조간 스크랩 갱신: $(date +%F)"
+          git push
