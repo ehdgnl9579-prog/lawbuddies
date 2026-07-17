@@ -2032,6 +2032,20 @@ renderPosts();
 renderNews();
 renderFirms();
 renderHome();
+  /* ── 조간 스크랩: news.json 자동 로드 ── */
+async function loadNews(){
+  try{
+    const res = await fetch('data/news.json', { cache:'no-store' });
+    if(!res.ok) return;
+    const { items } = await res.json();
+    if(items && items.length){
+      scrap = items;
+      store.set('bb-scrap', scrap);
+      renderScrapWidget();
+    }
+  }catch(e){ /* 실패하면 기존 예시 데이터 그대로 유지 */ }
+}
+loadNews();
 </script>
 </body>
 </html>
