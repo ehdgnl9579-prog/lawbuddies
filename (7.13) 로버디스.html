@@ -1,0 +1,2037 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>로버디스 — 변호사들의 방</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700;900&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1c2b4a;        /* 판례집 장정 네이비 */
+  --navy-deep:#131f38;
+  --paper:#fafaf6;       /* 백지 */
+  --paper-warm:#f3f2ec;
+  --ink:#26292e;         /* 본문 잉크 */
+  --ink-soft:#5c6470;
+  --line:#dcdcd2;
+  --seal:#bf2e1a;        /* 인주 레드 — 도장/강조에만 */
+  --seal-soft:#f6e3df;
+  --gold:#9c7c3c;
+  --radius:6px;
+  --serif:'Noto Serif KR', serif;
+  --sans:'Noto Sans KR', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{transition:none!important;animation:none!important;} }
+body{
+  font-family:var(--sans);
+  background:var(--paper);
+  color:var(--ink);
+  font-size:15px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+button{font-family:inherit;cursor:pointer;}
+input,select,textarea{font-family:inherit;font-size:14px;}
+:focus-visible{outline:2px solid var(--seal);outline-offset:2px;}
+
+/* ── 상단 관보 스트립 ─────────────────── */
+.gazette{
+  background:var(--navy-deep);
+  color:#aab4c8;
+  font-size:12px;
+  letter-spacing:.08em;
+  padding:6px 20px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.gazette b{color:#e8e4d8;font-weight:500;}
+
+/* ── 헤더 ─────────────────── */
+header{
+  background:var(--navy);
+  color:#fff;
+  padding:0 20px;
+  position:sticky;top:0;z-index:50;
+  box-shadow:0 2px 12px rgba(19,31,56,.25);
+}
+.header-inner{
+  max-width:1040px;margin:0 auto;
+  display:flex;align-items:center;gap:28px;
+  height:60px;
+}
+.logo{
+  font-family:var(--serif);font-weight:900;font-size:22px;
+  display:flex;align-items:center;gap:9px;
+  letter-spacing:.02em;color:#fff;text-decoration:none;
+}
+.logo .seal-mark{
+  width:26px;height:26px;background:var(--seal);
+  border-radius:4px;display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:900;color:#fff;
+  font-family:var(--serif);
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35);
+  transform:rotate(-3deg);
+}
+.logo small{font-family:var(--sans);font-weight:400;font-size:11px;color:#9fb0cc;letter-spacing:.1em;margin-top:6px;}
+nav{display:flex;gap:4px;flex:1;}
+.tab-btn{
+  background:none;border:none;color:#9fb0cc;
+  font-size:15px;font-weight:500;padding:19px 14px 17px;
+  border-bottom:2.5px solid transparent;
+  transition:color .15s;
+}
+.tab-btn:hover{color:#fff;}
+.tab-btn.active{color:#fff;border-bottom-color:var(--seal);font-weight:700;}
+.write-btn{
+  background:var(--seal);color:#fff;border:none;
+  padding:9px 18px;border-radius:var(--radius);
+  font-size:14px;font-weight:700;
+  transition:filter .15s;
+}
+.write-btn:hover{filter:brightness(1.12);}
+.profile-btn{
+  background:none;border:1px solid rgba(255,255,255,.35);color:#cfd8e8;
+  padding:8px 14px;border-radius:var(--radius);
+  font-size:13px;font-weight:500;
+  transition:all .15s;
+}
+.profile-btn:hover{border-color:#fff;color:#fff;}
+.profile-btn.set{border-color:var(--seal);color:#fff;background:rgba(191,46,26,.25);}
+.author-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  font-weight:600;color:var(--navy);
+}
+.author-badge .v{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:14px;height:14px;border-radius:3px;
+  background:var(--seal);color:#fff;font-size:9px;font-weight:900;
+  transform:rotate(-3deg);
+}
+
+/* ── 메인 ─────────────────── */
+main{max-width:1040px;margin:0 auto;padding:28px 20px 80px;}
+.page-title{
+  font-family:var(--serif);font-size:24px;font-weight:700;
+  display:flex;align-items:baseline;gap:12px;
+  margin-bottom:4px;
+}
+.page-title .count{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--ink-soft);}
+.page-desc{color:var(--ink-soft);font-size:13.5px;margin-bottom:22px;}
+
+/* ── 필터 ─────────────────── */
+.filter-bar{
+  display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+  padding:14px 16px;
+  background:var(--paper-warm);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  margin-bottom:20px;
+}
+.filter-group{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+.filter-label{font-size:12px;font-weight:700;color:var(--ink-soft);margin-right:2px;letter-spacing:.05em;}
+.chip{
+  border:1px solid var(--line);background:#fff;color:var(--ink-soft);
+  font-size:13px;padding:5px 12px;border-radius:20px;
+  transition:all .12s;
+}
+.chip:hover{border-color:var(--navy);color:var(--navy);}
+.chip.on{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:600;}
+.filter-divider{width:1px;height:20px;background:var(--line);margin:0 6px;}
+.search-input{
+  flex:1;min-width:180px;
+  border:1px solid var(--line);border-radius:var(--radius);
+  padding:7px 12px;background:#fff;
+}
+
+/* ── 채용 카드 ─────────────────── */
+.job-list{display:flex;flex-direction:column;gap:12px;}
+.job-card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px 20px;
+  display:grid;grid-template-columns:1fr auto;gap:6px 16px;
+  transition:box-shadow .15s, border-color .15s;
+  position:relative;
+}
+.job-card:hover{border-color:var(--navy);box-shadow:0 4px 16px rgba(28,43,74,.08);}
+.job-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.job-title{font-family:var(--serif);font-size:17px;font-weight:700;}
+.badge-new{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:20px;
+  background:var(--seal);color:#fff;font-size:10.5px;font-weight:900;
+  border-radius:3px;transform:rotate(-2deg);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.3);
+  letter-spacing:.05em;
+}
+.job-firm{font-size:13.5px;color:var(--ink-soft);font-weight:500;}
+.job-meta{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--ink-soft);margin-top:2px;}
+.job-meta span b{color:var(--ink);font-weight:600;}
+.job-pay{
+  font-size:14.5px;font-weight:700;color:var(--navy);
+  font-variant-numeric:tabular-nums;
+}
+.job-right{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;gap:8px;grid-row:span 2;}
+.dday{
+  font-size:12.5px;font-weight:700;padding:3px 10px;border-radius:12px;
+  background:var(--paper-warm);color:var(--ink-soft);border:1px solid var(--line);
+}
+.dday.urgent{background:var(--seal-soft);color:var(--seal);border-color:#e8c4bc;}
+.job-body{grid-column:1/-1;font-size:13.5px;color:var(--ink-soft);border-top:1px dashed var(--line);padding-top:10px;margin-top:6px;display:none;white-space:pre-line;}
+.job-card.open .job-body{display:block;}
+.job-toggle{background:none;border:none;font-size:12.5px;color:var(--navy);font-weight:600;padding:0;}
+.badge-repeat{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:11px;font-weight:700;color:var(--gold);
+  border:1px solid var(--gold);border-radius:3px;
+  padding:1px 7px;letter-spacing:.02em;
+}
+.job-actions{grid-column:1/-1;display:flex;gap:14px;align-items:center;margin-top:4px;}
+.seen-btn{
+  background:none;border:1px solid var(--line);border-radius:14px;
+  font-size:12px;color:var(--ink-soft);padding:3px 11px;
+  transition:all .12s;
+}
+.seen-btn:hover{border-color:var(--gold);color:var(--gold);}
+.seen-btn.done{border-color:var(--gold);color:var(--gold);background:#faf6ec;font-weight:600;}
+.comments{grid-column:1/-1;border-top:1px dashed var(--line);margin-top:8px;padding-top:10px;display:none;}
+.job-card.open .comments{display:block;}
+.comment{font-size:13px;padding:8px 0;border-bottom:1px solid var(--paper-warm);}
+.comment .c-author{font-size:11.5px;color:var(--navy);font-weight:700;margin-right:8px;}
+.comment .c-time{font-size:11px;color:#9aa1ab;margin-left:8px;}
+.comment-form{display:flex;gap:8px;margin-top:10px;}
+.comment-form input{flex:1;border:1px solid var(--line);border-radius:var(--radius);padding:7px 11px;background:var(--paper);}
+.comment-form button{background:var(--navy);color:#fff;border:none;border-radius:var(--radius);padding:7px 14px;font-size:13px;font-weight:600;}
+.comments-title{font-size:12px;font-weight:700;color:var(--ink-soft);letter-spacing:.05em;}
+
+/* ── 게시판 ─────────────────── */
+.post-list{display:flex;flex-direction:column;}
+.post-item{
+  background:#fff;border:1px solid var(--line);
+  border-bottom:none;
+  padding:16px 20px;
+  cursor:pointer;
+  transition:background .12s;
+}
+.post-item:first-child{border-radius:var(--radius) var(--radius) 0 0;}
+.post-item:last-child{border-bottom:1px solid var(--line);border-radius:0 0 var(--radius) var(--radius);}
+.post-item:only-child{border-radius:var(--radius);}
+.post-item:hover{background:var(--paper-warm);}
+.post-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.post-cat{
+  font-size:11.5px;font-weight:700;color:var(--navy);
+  border:1px solid var(--navy);border-radius:3px;
+  padding:1px 7px;letter-spacing:.03em;
+}
+.post-topic{
+  font-size:11.5px;font-weight:600;color:var(--ink-soft);
+  letter-spacing:.02em;
+}
+.post-title{font-size:15.5px;font-weight:600;}
+.post-preview{font-size:13px;color:var(--ink-soft);margin-top:4px;
+  overflow:hidden;text-overflow:ellipsis;display:-webkit-box;
+  -webkit-line-clamp:1;-webkit-box-orient:vertical;}
+.post-full{font-size:14px;color:var(--ink);margin-top:10px;white-space:pre-line;display:none;
+  border-top:1px dashed var(--line);padding-top:12px;}
+.post-item.open .post-full{display:block;}
+.post-item.open .post-preview{display:none;}
+.post-meta{font-size:12px;color:#9aa1ab;margin-top:8px;display:flex;gap:12px;}
+
+/* ── 라운지 글 댓글 ─────────────────── */
+.post-comments{grid-column:1/-1;border-top:1px dashed var(--line);margin-top:12px;padding-top:10px;display:none;}
+.post-item.open .post-comments{display:block;}
+
+/* ── 회사별 게시판 ─────────────────── */
+.firm-list{display:flex;flex-direction:column;gap:10px;}
+.firm-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
+.firm-head{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:15px 18px;cursor:pointer;transition:background .12s;
+}
+.firm-head:hover{background:var(--paper-warm);}
+.firm-name{font-family:var(--serif);font-weight:700;font-size:16.5px;color:var(--ink);}
+.firm-sub{display:flex;gap:10px;flex-wrap:wrap;margin-top:5px;font-size:12px;color:var(--ink-soft);}
+.firm-sub b{color:var(--navy);font-weight:700;}
+.firm-score{
+  flex-shrink:0;text-align:center;min-width:52px;
+}
+.firm-score .num{font-family:var(--serif);font-weight:900;font-size:20px;color:var(--seal);line-height:1;}
+.firm-score .star{font-size:11px;color:var(--gold);letter-spacing:1px;}
+.firm-score .none{font-size:11px;color:#b7bcc4;}
+.firm-detail{display:none;border-top:1px solid var(--line);padding:14px 18px 16px;background:var(--paper);}
+.firm-card.open .firm-detail{display:block;}
+.firm-block-title{font-size:11.5px;font-weight:700;color:var(--ink-soft);letter-spacing:.06em;margin:2px 0 8px;text-transform:uppercase;}
+.firm-jobrow{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  font-size:13px;padding:7px 0;border-bottom:1px solid var(--paper-warm);
+}
+.firm-jobrow a{color:var(--navy);font-weight:600;text-decoration:none;}
+.firm-jobrow a:hover{color:var(--seal);}
+.firm-jobrow .jr-date{font-size:11.5px;color:#9aa1ab;flex-shrink:0;}
+.firm-reviews{margin-top:16px;}
+.review{padding:9px 0;border-bottom:1px solid var(--paper-warm);}
+.review .rv-top{display:flex;align-items:center;gap:8px;margin-bottom:2px;}
+.review .rv-author{font-size:11.5px;color:var(--navy);font-weight:700;}
+.review .rv-stars{font-size:11px;color:var(--gold);letter-spacing:1px;}
+.review .rv-time{font-size:11px;color:#9aa1ab;margin-left:auto;}
+.review .rv-text{font-size:13.5px;color:var(--ink);line-height:1.6;}
+.review-form{margin-top:12px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:12px;}
+.review-form .rf-guide{font-size:11.5px;color:var(--ink-soft);line-height:1.5;margin-bottom:9px;}
+.review-form .rf-guide b{color:var(--seal);}
+.rf-rating{display:flex;align-items:center;gap:6px;margin-bottom:8px;}
+.rf-rating .rf-label{font-size:12px;color:var(--ink-soft);}
+.star-pick{font-size:20px;color:var(--line);cursor:pointer;line-height:1;user-select:none;transition:color .1s;}
+.star-pick.on{color:var(--gold);}
+.rf-row{display:flex;gap:8px;}
+.rf-row input{flex:1;border:1px solid var(--line);border-radius:var(--radius);padding:8px 11px;background:var(--paper);}
+.rf-row button{background:var(--navy);color:#fff;border:none;border-radius:var(--radius);padding:8px 16px;font-size:13px;font-weight:600;flex-shrink:0;}
+
+/* ── 회사별 5요소 (연봉·근무조건·면접·반론) ── */
+.firm-subtabs{display:flex;gap:2px;border-bottom:1.5px solid var(--line);margin:16px 0 0;flex-wrap:wrap;}
+.firm-subtab{background:none;border:none;font-family:var(--sans);font-size:13px;font-weight:700;color:var(--ink-soft);padding:9px 13px;cursor:pointer;border-bottom:2.5px solid transparent;margin-bottom:-1.5px;}
+.firm-subtab.on{color:var(--navy);border-bottom-color:var(--seal);}
+.firm-subtab .c{font-size:10.5px;color:#fff;background:var(--ink-soft);border-radius:9px;padding:0 6px;margin-left:4px;}
+.firm-subtab.on .c{background:var(--seal);}
+.subpanel{padding:14px 0 2px;}
+.sub-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:11px;}
+.sub-head .sh-note{font-size:11.5px;color:var(--ink-soft);margin-top:3px;line-height:1.45;}
+.mini-btn{background:var(--seal);color:#fff;border:none;border-radius:var(--radius);padding:6px 12px;font-size:12px;font-weight:700;flex-shrink:0;cursor:pointer;}
+.mini-btn:hover{background:#a5260f;}
+/* 인증 배지 */
+.vb{display:inline-flex;align-items:center;gap:3px;background:#f6efdd;color:#6f571f;border:1px solid var(--gold);border-radius:3px;padding:1px 7px;font-size:10.5px;font-weight:700;}
+.vb::before{content:"辯";font-family:var(--serif);}
+/* 연봉 테이블 */
+.sal-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
+.sal-table th{background:var(--navy);color:#fff;font-size:11.5px;font-weight:700;padding:8px 12px;text-align:left;}
+.sal-table td{padding:8px 12px;border-top:1px solid var(--line);font-size:13px;vertical-align:middle;}
+.sal-table tr:nth-child(even) td{background:var(--paper-warm);}
+.sal-amt{font-family:var(--serif);font-weight:700;color:var(--navy);}
+.sal-bar{height:7px;background:var(--gold);border-radius:4px;opacity:.85;min-width:3px;}
+/* 근무조건 리뷰 카드 */
+.rvx{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:13px 15px;margin-bottom:9px;}
+.rvx-top{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+.rvx-time{font-size:11px;color:#9aa1ab;margin-left:auto;}
+.rvx-axes{display:grid;grid-template-columns:1fr 1fr;gap:5px 22px;margin-bottom:10px;}
+.rvx-axis{display:flex;justify-content:space-between;font-size:12.5px;}
+.rvx-axis .lab{color:var(--ink-soft);}
+.rvx-axis .st{color:var(--gold);letter-spacing:1px;font-size:12px;}
+.rvx-facts{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+.rvx-fact{background:var(--paper-warm);border:1px solid var(--line);border-radius:4px;padding:3px 8px;font-size:11.5px;color:var(--ink);}
+.rvx-fact b{color:var(--navy);}
+.rvx-text{font-size:13px;color:var(--ink);background:var(--paper);border-left:2.5px solid var(--navy);padding:8px 11px;border-radius:0 var(--radius) var(--radius) 0;margin-bottom:10px;line-height:1.6;}
+.rvx-foot{display:flex;gap:8px;align-items:center;border-top:1px dashed var(--line);padding-top:10px;}
+.rvx-foot button{background:none;border:1px solid var(--line);border-radius:4px;padding:4px 10px;font-size:11.5px;color:var(--ink-soft);cursor:pointer;font-family:var(--sans);}
+.rvx-foot button:hover{border-color:var(--navy);color:var(--navy);}
+.rvx-corr{font-size:11px;color:var(--seal);font-weight:700;}
+.rvx-empty{font-size:12.5px;color:var(--ink-soft);padding:8px 0 10px;}
+/* 반론 스레드 */
+.reb-wrap{margin-top:10px;border-top:1px solid var(--line);padding-top:10px;display:none;}
+.reb-wrap.open{display:block;}
+.reb-item{background:var(--seal-soft);border-left:2.5px solid var(--seal);border-radius:0 var(--radius) var(--radius) 0;padding:8px 11px;margin-bottom:6px;}
+.reb-item .rh{display:flex;align-items:center;gap:6px;margin-bottom:4px;}
+.reb-tag{font-size:9.5px;font-weight:700;color:#fff;background:var(--seal);padding:1px 6px;border-radius:3px;}
+.reb-item .rt{font-size:12.5px;color:var(--ink);line-height:1.55;}
+.corr-log{background:#fbf6ea;border:1px solid #e7dcc0;border-radius:var(--radius);padding:9px 12px;margin-top:9px;}
+.corr-log h5{font-size:11px;color:#7a6222;margin-bottom:5px;}
+.corr-log div{font-size:11.5px;color:var(--ink-soft);line-height:1.5;}
+/* 면접 후기 */
+.ivx{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:13px 15px;margin-bottom:9px;}
+.ivx-top{display:flex;align-items:center;gap:8px;margin-bottom:9px;flex-wrap:wrap;}
+.ivx-meta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:9px;}
+.ivx-pill{font-size:11.5px;padding:2px 9px;border-radius:4px;background:var(--navy);color:#fff;}
+.ivx-pill.g{background:var(--paper-warm);color:var(--ink);border:1px solid var(--line);}
+.ivx-pill.ok{background:#1f6b47;}
+.own-tag{font-size:10.5px;color:#1f6b47;font-weight:700;}
+/* 모달 내 항목별 평점 · 확인 체크 */
+.axis-rate{display:flex;justify-content:space-between;align-items:center;padding:5px 0;}
+.axis-rate .lab{font-size:13px;color:var(--ink);}
+.checkline{display:flex;gap:8px;align-items:flex-start;background:#eef5f0;border:1px solid #c9e2d4;border-radius:var(--radius);padding:10px 12px;font-size:12px;color:#245c40;font-weight:400;}
+.checkline input{margin-top:2px;flex-shrink:0;}
+
+/* ── 빈 상태 ─────────────────── */
+.empty{
+  text-align:center;padding:64px 20px;color:var(--ink-soft);
+  border:1.5px dashed var(--line);border-radius:var(--radius);
+  background:#fff;
+}
+.empty .seal-empty{
+  width:44px;height:44px;margin:0 auto 14px;
+  border:2px solid var(--line);border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-weight:900;font-size:20px;color:var(--line);
+  transform:rotate(-4deg);
+}
+
+/* ── 모달 ─────────────────── */
+.modal-back{
+  position:fixed;inset:0;background:rgba(19,31,56,.55);
+  display:none;align-items:flex-start;justify-content:center;
+  z-index:100;padding:40px 16px;overflow-y:auto;
+}
+.modal-back.show{display:flex;}
+.modal{
+  background:#fff;border-radius:10px;
+  width:100%;max-width:560px;
+  padding:28px;
+  box-shadow:0 20px 60px rgba(0,0,0,.3);
+}
+.modal h2{font-family:var(--serif);font-size:20px;margin-bottom:4px;}
+.modal .sub{font-size:13px;color:var(--ink-soft);margin-bottom:20px;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.form-grid .full{grid-column:1/-1;}
+.field label{display:block;font-size:12.5px;font-weight:700;color:var(--ink-soft);margin-bottom:5px;}
+.field input,.field select,.field textarea{
+  width:100%;border:1px solid var(--line);border-radius:var(--radius);
+  padding:9px 11px;background:var(--paper);
+}
+.field textarea{resize:vertical;min-height:90px;}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:22px;}
+.btn-ghost{background:none;border:1px solid var(--line);border-radius:var(--radius);padding:9px 18px;font-size:14px;color:var(--ink-soft);}
+.btn-primary{background:var(--navy);color:#fff;border:none;border-radius:var(--radius);padding:9px 22px;font-size:14px;font-weight:700;}
+.btn-primary:hover{background:var(--navy-deep);}
+.form-note{font-size:12px;color:#9aa1ab;margin-top:14px;line-height:1.6;}
+
+/* ── 홈 대시보드 ─────────────────── */
+.dash{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start;}
+.wg{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;}
+.wg.full{grid-column:1/-1;}
+.wg-h{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 15px;background:var(--navy);color:#fff;}
+.wg-h .wg-title{font-family:var(--serif);font-weight:700;font-size:14.5px;display:flex;align-items:center;gap:7px;}
+.wg-h .wg-title .ic{font-size:13px;opacity:.9;}
+.wg-h .wg-more{font-size:11.5px;color:#aeb9d0;text-decoration:none;background:none;border:none;cursor:pointer;font-family:inherit;}
+.wg-h .wg-more:hover{color:#fff;}
+.wg-b{padding:13px 15px;font-size:13.5px;}
+.wg-b.tight{padding:5px 15px 11px;}
+.wg-hero .wg-h{background:var(--seal);}
+
+/* 복대리 */
+.proxy-row{display:flex;gap:11px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--paper-warm);}
+.proxy-row:last-child{border-bottom:none;}
+.proxy-tag{flex-shrink:0;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;letter-spacing:.02em;margin-top:1px;}
+.proxy-tag.need{background:var(--seal-soft);color:var(--seal);}
+.proxy-tag.offer{background:#e4efe6;color:#2f6b3a;}
+.proxy-main{flex:1;min-width:0;}
+.proxy-when{font-weight:700;color:var(--ink);font-size:13.5px;}
+.proxy-where{font-size:12.5px;color:var(--ink-soft);margin-top:1px;}
+.proxy-note{font-size:12.5px;color:var(--ink);margin-top:3px;}
+.proxy-meta{font-size:11px;color:#9aa1ab;margin-top:3px;}
+.proxy-dday{flex-shrink:0;font-size:12px;font-weight:700;color:var(--seal);text-align:right;margin-top:1px;}
+.proxy-dday.soon{color:var(--seal);}
+.proxy-dday.far{color:var(--ink-soft);}
+
+/* 리스트형 위젯 공통 */
+.wg-list{display:flex;flex-direction:column;}
+.wg-li{padding:8px 0;border-bottom:1px solid var(--paper-warm);}
+.wg-li:last-child{border-bottom:none;}
+.wg-li a,.wg-li .ln{color:var(--ink);text-decoration:none;font-weight:500;display:block;}
+.wg-li a:hover{color:var(--seal);}
+.wg-li .sub{font-size:11.5px;color:#9aa1ab;margin-top:2px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+.wg-cat{font-size:10.5px;font-weight:700;color:var(--navy);border:1px solid var(--line);border-radius:3px;padding:0 5px;}
+.dday-pill{font-size:10.5px;font-weight:700;color:var(--seal);}
+.dday-pill.far{color:var(--ink-soft);}
+
+/* 관심분야 mini 필터 */
+.mini-chips{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:9px;}
+.mini-chip{font-size:11px;border:1px solid var(--line);border-radius:11px;padding:2px 10px;background:#fff;color:var(--ink-soft);cursor:pointer;}
+.mini-chip.on{background:var(--navy);border-color:var(--navy);color:#fff;}
+
+/* 다이제스트 */
+.dg-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--paper-warm);align-items:baseline;}
+.dg-item:last-child{border-bottom:none;}
+.dg-k{font-size:11px;font-weight:700;color:var(--seal);flex-shrink:0;width:60px;}
+.dg-v{font-size:13px;color:var(--ink);cursor:pointer;}
+.dg-v:hover{color:var(--seal);}
+.dg-v b{color:var(--navy);}
+
+/* 계산기 */
+.calc-tabs{display:flex;gap:4px;margin-bottom:11px;flex-wrap:wrap;}
+.calc-tab{font-size:11.5px;border:1px solid var(--line);border-radius:4px;padding:3px 10px;background:#fff;color:var(--ink-soft);cursor:pointer;font-family:inherit;}
+.calc-tab.on{background:var(--navy);border-color:var(--navy);color:#fff;}
+.calc-body{display:flex;flex-direction:column;gap:8px;}
+.calc-body label{font-size:11.5px;color:var(--ink-soft);display:block;margin-bottom:3px;}
+.calc-body input,.calc-body select{border:1px solid var(--line);border-radius:4px;padding:7px 9px;background:var(--paper);width:100%;}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.calc-out{margin-top:3px;padding:10px 12px;background:var(--paper-warm);border-radius:4px;font-size:13px;color:var(--ink);}
+.calc-out b{font-family:var(--serif);color:var(--seal);font-size:16px;}
+.calc-note{font-size:10.5px;color:#9aa1ab;margin-top:2px;line-height:1.55;}
+
+/* 자주 쓰는 사이트 */
+.qlinks{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.qlink{display:flex;flex-direction:column;gap:2px;align-items:center;text-align:center;padding:12px 6px;border:1px solid var(--line);border-radius:var(--radius);text-decoration:none;background:var(--paper);transition:transform .1s,border-color .1s,background .1s;}
+.qlink:hover{border-color:var(--navy);background:#fff;transform:translateY(-1px);}
+.qlink .ql-name{font-size:12px;font-weight:700;color:var(--navy);}
+.qlink .ql-desc{font-size:10px;color:var(--ink-soft);}
+
+@media (max-width:640px){
+  .dash{grid-template-columns:1fr;}
+  .qlinks{grid-template-columns:repeat(2,1fr);}
+  .calc-grid{grid-template-columns:1fr;}
+}
+
+/* ── 푸터 ─────────────────── */
+footer{
+  border-top:1px solid var(--line);
+  padding:24px 20px 40px;
+  max-width:1040px;margin:0 auto;
+  font-size:12px;color:#9aa1ab;line-height:1.8;
+}
+
+@media (max-width:640px){
+  .header-inner{gap:12px;height:54px;}
+  .logo{font-size:18px;}
+  .logo small{display:none;}
+  .tab-btn{padding:16px 8px 14px;font-size:14px;}
+  .write-btn{padding:7px 12px;font-size:13px;}
+  .job-card{grid-template-columns:1fr;}
+  .job-right{flex-direction:row;grid-row:auto;align-items:center;justify-content:flex-start;}
+  .form-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="gazette">
+  <span>제2026-호 · <b id="today-str"></b></span>
+  <span>변호사 인증 커뮤니티 (베타)</span>
+</div>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="#" onclick="return false;">
+      <span class="seal-mark">辯</span>로버디스<small>변호사들의 방</small>
+    </a>
+    <nav>
+      <button class="tab-btn active" id="tab-home" onclick="switchTab('home')">홈</button>
+      <button class="tab-btn" id="tab-jobs" onclick="switchTab('jobs')">채용공고</button>
+      <button class="tab-btn" id="tab-firms" onclick="switchTab('firms')">회사별</button>
+      <button class="tab-btn" id="tab-info" onclick="switchTab('info')">게시판</button>
+      <button class="tab-btn" id="tab-news" onclick="switchTab('news')">판례·소식</button>
+    </nav>
+    <button class="profile-btn" id="profile-btn" onclick="openProfile()">프로필</button>
+    <button class="write-btn" id="write-btn" onclick="openModal()">+ 복대리 등록</button>
+  </div>
+</header>
+
+<main>
+  <!-- ══ 홈 대시보드 ══ -->
+  <section id="view-home">
+    <h1 class="page-title">홈 <span class="count" id="home-greeting"></span></h1>
+    <p class="page-desc">출근하면 여기부터. 오늘 챙겨야 할 것들을 한 화면에 모았습니다.</p>
+    <div class="dash">
+
+      <!-- 복대리 (킬러) -->
+      <div class="wg wg-hero full">
+        <div class="wg-h">
+          <span class="wg-title"><span class="ic">⚖</span>복대리 현황</span>
+          <button class="wg-more" onclick="openProxyModal()">+ 복대리 등록</button>
+        </div>
+        <div class="wg-b tight"><div class="wg-list" id="proxy-list"></div></div>
+      </div>
+
+      <!-- 조간 스크랩 -->
+      <div class="wg">
+        <div class="wg-h"><span class="wg-title"><span class="ic">📰</span>조간 스크랩</span></div>
+        <div class="wg-b">
+          <div class="mini-chips" id="scrap-chips"></div>
+          <div class="wg-list" id="scrap-list"></div>
+        </div>
+      </div>
+
+      <!-- 판례 속보 -->
+      <div class="wg">
+        <div class="wg-h">
+          <span class="wg-title"><span class="ic">§</span>판례 속보</span>
+          <button class="wg-more" onclick="switchTab('news')">전체 보기</button>
+        </div>
+        <div class="wg-b"><div class="wg-list" id="home-news"></div></div>
+      </div>
+
+      <!-- 오늘의 다이제스트 -->
+      <div class="wg">
+        <div class="wg-h"><span class="wg-title"><span class="ic">◈</span>오늘의 다이제스트</span></div>
+        <div class="wg-b tight"><div id="digest"></div></div>
+      </div>
+
+      <!-- 실무 계산기 -->
+      <div class="wg">
+        <div class="wg-h"><span class="wg-title"><span class="ic">🖩</span>실무 계산기</span></div>
+        <div class="wg-b">
+          <div class="calc-tabs">
+            <button class="calc-tab on" data-c="interest" onclick="calcTab('interest')">지연손해금</button>
+            <button class="calc-tab" data-c="period" onclick="calcTab('period')">기간 계산</button>
+            <button class="calc-tab" data-c="stamp" onclick="calcTab('stamp')">인지대</button>
+          </div>
+          <div class="calc-body" id="calc-interest">
+            <div class="calc-grid">
+              <div><label>원금 (원)</label><input id="ci-p" type="number" value="10000000" oninput="calcInterest()" /></div>
+              <div><label>연이율 (%)</label><input id="ci-r" type="number" value="12" oninput="calcInterest()" /></div>
+            </div>
+            <div class="calc-grid">
+              <div><label>기산일</label><input id="ci-s" type="date" oninput="calcInterest()" /></div>
+              <div><label>종료일</label><input id="ci-e" type="date" oninput="calcInterest()" /></div>
+            </div>
+            <div class="calc-out" id="ci-out">—</div>
+            <div class="calc-note">단리·일할(365일) 기준 참고 계산. 소송촉진법상 지연손해금 이율은 시기별로 달라질 수 있으니 실제 사건은 적용 이율·기간을 직접 확인하세요.</div>
+          </div>
+          <div class="calc-body" id="calc-period" style="display:none;">
+            <div class="calc-grid">
+              <div><label>기산일</label><input id="cp-s" type="date" oninput="calcPeriod()" /></div>
+              <div><label>기간 (일)</label><input id="cp-d" type="number" value="14" oninput="calcPeriod()" /></div>
+            </div>
+            <div class="calc-out" id="cp-out">—</div>
+            <div class="calc-note">초일불산입(민법 §157) 가정. 말일이 토·공휴일이면 익영업일로 만료(민법 §161) — 공휴일 자동보정은 미반영이니 달력으로 확인하세요.</div>
+          </div>
+          <div class="calc-body" id="calc-stamp" style="display:none;">
+            <div><label>소가 (원)</label><input id="cs-v" type="number" value="50000000" oninput="calcStamp()" /></div>
+            <div class="calc-out" id="cs-out">—</div>
+            <div class="calc-note">민사 1심 인지액 근사(전자소송 감액 전, 1,000원 미만 절사). 실제 납부액은 전자소송에서 확인하세요.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 자주 쓰는 사이트 -->
+      <div class="wg full">
+        <div class="wg-h"><span class="wg-title"><span class="ic">🔗</span>자주 쓰는 사이트</span></div>
+        <div class="wg-b"><div class="qlinks" id="qlinks"></div></div>
+      </div>
+
+      <!-- 법령 개정·시행 -->
+      <div class="wg">
+        <div class="wg-h"><span class="wg-title"><span class="ic">▤</span>법령 개정·시행</span></div>
+        <div class="wg-b"><div class="wg-list" id="law-list"></div></div>
+      </div>
+
+      <!-- 변협·지방회 공지 -->
+      <div class="wg">
+        <div class="wg-h"><span class="wg-title"><span class="ic">◇</span>변협·지방회 공지</span></div>
+        <div class="wg-b"><div class="wg-list" id="notice-list"></div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ 채용공고 ══ -->
+  <section id="view-jobs" style="display:none;">
+    <h1 class="page-title">채용공고 <span class="count" id="jobs-count"></span></h1>
+    <p class="page-desc">직군·지역·연차로 필터링되는 구조화된 공고. 게시판을 뒤지지 말고, 조건으로 거르세요.</p>
+
+    <div class="filter-bar">
+      <div class="filter-group" id="filter-role">
+        <span class="filter-label">직군</span>
+        <button class="chip on" data-v="전체">전체</button>
+        <button class="chip" data-v="송무">송무</button>
+        <button class="chip" data-v="자문">자문</button>
+        <button class="chip" data-v="사내변호사">사내변호사</button>
+        <button class="chip" data-v="공공">공공</button>
+        <button class="chip" data-v="기타">기타</button>
+      </div>
+      <div class="filter-divider"></div>
+      <div class="filter-group" id="filter-region">
+        <span class="filter-label">지역</span>
+        <button class="chip on" data-v="전체">전체</button>
+        <button class="chip" data-v="서울">서울</button>
+        <button class="chip" data-v="경기·인천">경기·인천</button>
+        <button class="chip" data-v="지방">지방</button>
+      </div>
+    </div>
+
+    <div class="job-list" id="job-list"></div>
+  </section>
+
+  <!-- ══ 회사별 ══ -->
+  <section id="view-firms" style="display:none;">
+    <h1 class="page-title">회사별 <span class="count" id="firms-count"></span></h1>
+    <p class="page-desc">공고는 마감되면 사라지지만, 회사는 남습니다. 회사별로 최근 공고 이력과 한줄평이 쌓입니다.</p>
+    <div class="filter-bar">
+      <input class="search-input" id="firm-search" type="search" placeholder="회사·사무소명 검색" oninput="renderFirms()" style="flex:1;" />
+    </div>
+    <div class="firm-list" id="firm-list"></div>
+  </section>
+
+  <!-- ══ 게시판 ══ -->
+  <section id="view-info" style="display:none;">
+    <h1 class="page-title">게시판 <span class="count" id="info-count"></span></h1>
+    <p class="page-desc">개업·이직·실무. 카더라가 아니라 겪은 사람의 기록.</p>
+
+    <div class="filter-bar">
+      <div class="filter-group" id="filter-board">
+        <span class="filter-label">라운지</span>
+        <button class="chip on" data-v="전체">전체</button>
+        <button class="chip" data-v="개업">개업</button>
+        <button class="chip" data-v="사내변">사내변</button>
+        <button class="chip" data-v="송무·로펌">송무·로펌</button>
+        <button class="chip" data-v="공공">공공</button>
+      </div>
+      <div class="filter-divider"></div>
+      <div class="filter-group" id="filter-topic">
+        <span class="filter-label">주제</span>
+        <button class="chip on" data-v="전체">전체</button>
+        <button class="chip" data-v="이직·연봉">이직·연봉</button>
+        <button class="chip" data-v="실무·판례">실무·판례</button>
+        <button class="chip" data-v="자유">자유</button>
+      </div>
+      <input class="search-input" id="post-search" type="search" placeholder="제목·내용 검색" oninput="renderPosts()" />
+    </div>
+
+    <div class="post-list" id="post-list"></div>
+  </section>
+
+  <!-- ══ 판례·소식 ══ -->
+  <section id="view-news" style="display:none;">
+    <h1 class="page-title">판례·소식 <span class="count" id="news-count"></span></h1>
+    <p class="page-desc">대법원 판례공보 주요 판결 요지와 법조계 소식. 요지는 자유롭게, 기사는 링크로.</p>
+
+    <div class="filter-bar">
+      <div class="filter-group" id="filter-news">
+        <span class="filter-label">구분</span>
+        <button class="chip on" data-v="전체">전체</button>
+        <button class="chip" data-v="판례공보">판례공보</button>
+        <button class="chip" data-v="법조뉴스">법조뉴스</button>
+      </div>
+    </div>
+
+    <div class="post-list" id="news-list"></div>
+  </section>
+</main>
+
+<!-- ══ 채용 등록 모달 ══ -->
+<div class="modal-back" id="modal-job">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-job-title">
+    <h2 id="modal-job-title">채용공고 등록</h2>
+    <p class="sub">필드를 채우면 필터에 자동 반영됩니다. 사무소명은 익명 표기도 가능합니다.</p>
+    <div class="form-grid">
+      <div class="field full"><label>공고 제목 *</label><input id="j-title" placeholder="예: 형사 전문 어쏘시에잇 변호사 채용" /></div>
+      <div class="field full"><label>사무소·기관명 *</label><input id="j-firm" placeholder="예: 서초 형사전문 A법률사무소 (익명 가능)" /></div>
+      <div class="field"><label>직군 *</label>
+        <select id="j-role"><option>송무</option><option>자문</option><option>사내변호사</option><option>공공</option><option>기타</option></select>
+      </div>
+      <div class="field"><label>지역 *</label>
+        <select id="j-region"><option>서울</option><option>경기·인천</option><option>지방</option></select>
+      </div>
+      <div class="field"><label>요구 연차</label><input id="j-exp" placeholder="예: 3~5년차 / 신입 가능" /></div>
+      <div class="field"><label>보수 (세전, 만원)</label><input id="j-pay" placeholder="예: 7,000~8,500 / 협의" /></div>
+      <div class="field full"><label>마감일</label><input id="j-deadline" type="date" /></div>
+      <div class="field full"><label>상세 내용</label><textarea id="j-body" placeholder="담당 업무, 우대사항, 지원 방법 등"></textarea></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeModal()">취소</button>
+      <button class="btn-primary" onclick="submitJob()">등록</button>
+    </div>
+    <p class="form-note">※ 허위 공고, 제3자 비방, 특정인 식별 정보가 포함된 글은 삭제될 수 있습니다.</p>
+  </div>
+</div>
+
+<!-- ══ 정보글 작성 모달 ══ -->
+<div class="modal-back" id="modal-post">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-post-title">
+    <h2 id="modal-post-title">정보글 작성</h2>
+    <p class="sub">겪은 것, 아는 것, 확인한 것. 출처가 있으면 함께 적어주세요.</p>
+    <div class="form-grid">
+      <div class="field"><label>라운지 *</label>
+        <select id="p-board"><option>개업</option><option>사내변</option><option>송무·로펌</option><option>공공</option></select>
+      </div>
+      <div class="field"><label>주제 *</label>
+        <select id="p-topic"><option>이직·연봉</option><option>실무·판례</option><option>자유</option></select>
+      </div>
+      <div class="field full"><label>제목 *</label><input id="p-title" placeholder="예: 개업 6개월차 고정비 정리해봄" /></div>
+      <div class="field full"><label>내용 *</label><textarea id="p-body" rows="7" placeholder="구체적인 숫자와 경험 위주로. 특정 개인·사무소가 식별되지 않게 써주세요."></textarea></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeModal()">취소</button>
+      <button class="btn-primary" onclick="submitPost()">등록</button>
+    </div>
+    <p class="form-note">※ 명예훼손 소지가 있는 특정 사무소·개인 실명 비방 글은 게시가 제한됩니다.</p>
+  </div>
+</div>
+
+<!-- ══ 프로필 설정 모달 ══ -->
+<div class="modal-back" id="modal-profile">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-profile-title">
+    <h2 id="modal-profile-title">익명 프로필 설정</h2>
+    <p class="sub">설정하면 글에 <b>변 11회, 송무 5년차</b> 또는 <b>사법 46기, 사내변 2년차</b>처럼 표시됩니다. 익명은 유지하면서 신뢰도만 올리는 장치예요.</p>
+    <div class="form-grid">
+      <div class="field"><label>자격 구분</label>
+        <select id="pf-type" onchange="syncRoundOptions()">
+          <option value="">선택 안 함</option>
+          <option value="변">변호사시험</option>
+          <option value="사법">사법연수원</option>
+        </select>
+      </div>
+      <div class="field"><label>회차·기수</label>
+        <select id="pf-round"><option value="">선택 안 함</option></select>
+      </div>
+      <div class="field"><label>직역</label>
+        <select id="pf-role">
+          <option value="">선택 안 함</option>
+          <option>송무</option><option>자문</option><option>사내변</option><option>공공</option><option>개업</option><option>기타</option>
+        </select>
+      </div>
+      <div class="field"><label>현 직역 연차</label>
+        <select id="pf-years">
+          <option value="">선택 안 함</option>
+          <option>1년차</option><option>2년차</option><option>3년차</option><option>4년차</option><option>5년차</option>
+          <option>6년차</option><option>7년차</option><option>8년차</option><option>9년차</option><option>10년차 이상</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeModal()">취소</button>
+      <button class="btn-primary" onclick="saveProfile()">저장</button>
+    </div>
+    <p class="form-note">※ 베타에서는 자기신고 방식입니다. 정식 버전에서는 변호사 자격·재직 인증 절차를 거쳐 <span class="author-badge"><span class="v">辯</span>인증</span> 뱃지가 부여됩니다.</p>
+  </div>
+</div>
+
+<!-- ══ 판례·소식 등록 모달 ══ -->
+<div class="modal-back" id="modal-news">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-news-title">
+    <h2 id="modal-news-title">판례·소식 등록</h2>
+    <p class="sub">판례는 요지를 직접 정리해 올려주세요. 기사는 본문 복사 없이 한줄 요약과 원문 링크만 등록합니다.</p>
+    <div class="form-grid">
+      <div class="field full"><label>구분 *</label>
+        <select id="n-type"><option>판례공보</option><option>법조뉴스</option></select>
+      </div>
+      <div class="field full"><label>제목 *</label><input id="n-title" placeholder="예: 대법원 2026다OOOOO — 추심총량제 위반의 효과" /></div>
+      <div class="field full"><label>요지·요약 *</label><textarea id="n-body" rows="5" placeholder="판례: 판결 요지를 정리. 기사: 한두 문장 요약만 (본문 복사 금지)"></textarea></div>
+      <div class="field full"><label>원문 링크</label><input id="n-link" placeholder="https:// (판례공보 PDF, 기사 원문 등)" /></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeModal()">취소</button>
+      <button class="btn-primary" onclick="submitNews()">등록</button>
+    </div>
+    <p class="form-note">※ 언론 기사 본문을 그대로 옮겨 붙이는 것은 저작권 침해로 게시가 제한됩니다.</p>
+  </div>
+</div>
+
+<!-- ══ 회사 한줄평 등록 모달 ══ -->
+<div class="modal-back" id="modal-firm">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-firm-title">
+    <h2 id="modal-firm-title">회사 한줄평 남기기</h2>
+    <p class="sub">공고가 아직 없는 회사도 여기서 추가할 수 있습니다. 근무조건·분위기 위주로 남겨주세요.</p>
+    <div class="form-grid">
+      <div class="field full"><label>회사·사무소명 *</label><input id="fm-firm" placeholder="예: OO법률사무소 / OO기업 법무팀" /></div>
+      <div class="field full"><label>추천도</label>
+        <div class="rf-rating" id="fm-rating" data-val="0">
+          <span class="rf-label">별점(선택):</span>
+          <span class="star-pick" onclick="modalPickStar(1)">★</span><span class="star-pick" onclick="modalPickStar(2)">★</span><span class="star-pick" onclick="modalPickStar(3)">★</span><span class="star-pick" onclick="modalPickStar(4)">★</span><span class="star-pick" onclick="modalPickStar(5)">★</span>
+        </div>
+      </div>
+      <div class="field full"><label>한줄평 *</label><input id="fm-text" placeholder="예: 워라밸 좋고 실무 경험 폭넓음 / 사건량 많은 편" /></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeModal()">취소</button>
+      <button class="btn-primary" onclick="submitFirmReview()">등록</button>
+    </div>
+    <p class="form-note">※ <b style="color:var(--seal);">특정 개인 지목·비방, 확인되지 않은 사실 적시</b>는 명예훼손이 될 수 있어 게시가 제한됩니다. 회사의 근무조건·처우에 대한 본인 경험 위주로 작성해주세요.</p>
+  </div>
+</div>
+
+<!-- ══ 연봉 제보 모달 ══ -->
+<div class="modal-back" id="modal-salary">
+  <div class="modal" role="dialog" aria-modal="true">
+    <h2>연봉 제보</h2>
+    <p class="sub">세전 연봉을 숫자로만 기록합니다. 본인 기준 제보만 남겨주세요.</p>
+    <div class="form-grid">
+      <div class="field"><label>연차</label>
+        <select id="sl-year"><option>1년차</option><option>2년차</option><option>3년차</option><option>4년차</option><option>5년차</option><option>6년차 이상</option></select></div>
+      <div class="field"><label>연봉 (만원, 세전)</label><input id="sl-amount" inputmode="numeric" placeholder="예: 7200" /></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeModal()">취소</button>
+      <button class="btn-primary" onclick="submitSalary()">등록</button>
+    </div>
+    <p class="form-note">※ 숫자 사실만 기록됩니다. 개인을 특정하는 서술은 등록되지 않습니다. 작성 자격(<b id="sl-me" style="color:var(--navy);"></b>)이 함께 표기됩니다.</p>
+  </div>
+</div>
+
+<!-- ══ 근무조건 리뷰 모달 ══ -->
+<div class="modal-back" id="modal-review">
+  <div class="modal" role="dialog" aria-modal="true">
+    <h2>근무조건 리뷰</h2>
+    <p class="sub">항목별 평가 + 사실 정보로 남깁니다. 감정적 낙인 표현은 지양해주세요.</p>
+    <div class="field full" style="margin-bottom:14px;"><label>항목별 평가</label>
+      <div class="axis-rate"><span class="lab">워라밸</span><span class="rf-rating" id="ax-워라밸" data-val="0"><span class="star-pick" onclick="pickAxisStar('워라밸',1)">★</span><span class="star-pick" onclick="pickAxisStar('워라밸',2)">★</span><span class="star-pick" onclick="pickAxisStar('워라밸',3)">★</span><span class="star-pick" onclick="pickAxisStar('워라밸',4)">★</span><span class="star-pick" onclick="pickAxisStar('워라밸',5)">★</span></span></div>
+      <div class="axis-rate"><span class="lab">보상</span><span class="rf-rating" id="ax-보상" data-val="0"><span class="star-pick" onclick="pickAxisStar('보상',1)">★</span><span class="star-pick" onclick="pickAxisStar('보상',2)">★</span><span class="star-pick" onclick="pickAxisStar('보상',3)">★</span><span class="star-pick" onclick="pickAxisStar('보상',4)">★</span><span class="star-pick" onclick="pickAxisStar('보상',5)">★</span></span></div>
+      <div class="axis-rate"><span class="lab">성장</span><span class="rf-rating" id="ax-성장" data-val="0"><span class="star-pick" onclick="pickAxisStar('성장',1)">★</span><span class="star-pick" onclick="pickAxisStar('성장',2)">★</span><span class="star-pick" onclick="pickAxisStar('성장',3)">★</span><span class="star-pick" onclick="pickAxisStar('성장',4)">★</span><span class="star-pick" onclick="pickAxisStar('성장',5)">★</span></span></div>
+      <div class="axis-rate"><span class="lab">문화</span><span class="rf-rating" id="ax-문화" data-val="0"><span class="star-pick" onclick="pickAxisStar('문화',1)">★</span><span class="star-pick" onclick="pickAxisStar('문화',2)">★</span><span class="star-pick" onclick="pickAxisStar('문화',3)">★</span><span class="star-pick" onclick="pickAxisStar('문화',4)">★</span><span class="star-pick" onclick="pickAxisStar('문화',5)">★</span></span></div>
+    </div>
+    <div class="form-grid">
+      <div class="field"><label>야근 빈도</label><select id="rvm-night"><option>주 1회 미만</option><option>주 1~2회</option><option>주 3회 이상</option></select></div>
+      <div class="field"><label>포괄임금</label><select id="rvm-pogal"><option>아니오</option><option>예</option><option>모름</option></select></div>
+      <div class="field"><label>재택</label><select id="rvm-remote"><option>없음</option><option>주 1회</option><option>주 2회 이상</option><option>자율</option></select></div>
+      <div class="field"><label>연차 소진</label><select id="rvm-annual"><option>자유로운 편</option><option>보통</option><option>눈치 보임</option></select></div>
+      <div class="field full"><label>한줄 코멘트 (선택)</label><textarea id="rvm-text" placeholder="사실 기반으로 작성해주세요. 예) 성수기에는 정시 퇴근이 어려운 편."></textarea></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeModal()">취소</button>
+      <button class="btn-primary" onclick="submitWorkReview()">등록</button>
+    </div>
+    <p class="form-note">※ <b style="color:var(--seal);">특정 개인 지목·감정적 낙인(블랙/최악 등)</b>은 등록되지 않습니다. 작성 자격(<b id="rvm-me" style="color:var(--navy);"></b>)이 함께 표기됩니다.</p>
+  </div>
+</div>
+
+<!-- ══ 면접 후기 모달 ══ -->
+<div class="modal-back" id="modal-interview">
+  <div class="modal" role="dialog" aria-modal="true">
+    <h2>면접 후기</h2>
+    <p class="sub">본인이 직접 경험한 면접만 등록해주세요.</p>
+    <div class="form-grid">
+      <div class="field"><label>지원 직군</label><select id="ivm-role"><option>송무</option><option>사내변</option><option>M&amp;A·자문</option><option>공공</option></select></div>
+      <div class="field"><label>결과</label><select id="ivm-result"><option>합격</option><option>불합격</option><option>대기</option></select></div>
+      <div class="field full"><label>면접 방식</label><input id="ivm-format" placeholder="예: 대면 2차 (실무진 → 파트너)" /></div>
+      <div class="field full"><label>후기 (선택)</label><textarea id="ivm-text" placeholder="질문 유형·분위기 등 본인이 겪은 내용 위주로."></textarea></div>
+      <div class="field full"><label class="checkline"><input type="checkbox" id="ivm-own" /><span>위 내용은 <b>제가 직접 경험한</b> 면접이며, 전해 들은 내용이 아닙니다.</span></label></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeModal()">취소</button>
+      <button class="btn-primary" onclick="submitInterview()">등록</button>
+    </div>
+    <p class="form-note">작성 자격(<b id="ivm-me" style="color:var(--navy);"></b>)이 함께 표기됩니다.</p>
+  </div>
+</div>
+
+<!-- ══ 반론 등록 모달 ══ -->
+<div class="modal-back" id="modal-rebuttal">
+  <div class="modal" role="dialog" aria-modal="true">
+    <h2>반론 등록</h2>
+    <p class="sub">사실이 다르거나 보완이 필요한 부분에 반론을 남깁니다. 원 리뷰는 삭제되지 않고, 반론이 함께 표시됩니다.</p>
+    <div class="form-grid">
+      <div class="field full"><label>반론 내용</label><textarea id="rbm-text" placeholder="예: 부서마다 편차가 큽니다. 저희 팀 기준 야근은 주 1~2회입니다."></textarea></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeModal()">취소</button>
+      <button class="btn-primary" onclick="submitReb()">반론 등록</button>
+    </div>
+    <p class="form-note">반론에도 인증 자격(<b id="rbm-me" style="color:var(--navy);"></b>)이 함께 기록됩니다. 사실 기반으로 작성해주세요.</p>
+  </div>
+</div>
+
+<!-- ══ 복대리 등록 모달 ══ -->
+<div class="modal-back" id="modal-proxy">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-proxy-title">
+    <h2 id="modal-proxy-title">복대리 등록</h2>
+    <p class="sub">기일 복대리 구인/구직을 실시간으로 매칭합니다. 시간이 생명이니 일시·법원은 정확히.</p>
+    <div class="form-grid">
+      <div class="field"><label>구분 *</label>
+        <select id="px-type"><option value="구인">구인 (복대리 구합니다)</option><option value="구직">구직 (복대리 가능합니다)</option></select>
+      </div>
+      <div class="field"><label>사건 유형</label>
+        <select id="px-case"><option>민사</option><option>형사</option><option>가사</option><option>행정</option><option>신청·집행</option><option>기타</option></select>
+      </div>
+      <div class="field full"><label>법원·재판부 *</label><input id="px-court" placeholder="예: 서울중앙지법 제12민사부 / 수원지법 안양지원" /></div>
+      <div class="field full"><label>기일 일시 *</label><input id="px-date" type="datetime-local" /></div>
+      <div class="field full"><label>메모</label><input id="px-note" placeholder="예: 변론기일 출석·조서 확인만. 사건기록 당일 공유. 보수 협의." /></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeModal()">취소</button>
+      <button class="btn-primary" onclick="submitProxy()">등록</button>
+    </div>
+    <p class="form-note">※ 복대리는 소송위임 관계·보수에 관한 사항을 당사자 간 별도로 확인해야 합니다. 사건 내용·당사자가 특정되지 않도록 작성해주세요.</p>
+  </div>
+</div>
+
+<footer>
+  <b style="color:var(--ink-soft);">로버디스 (베타)</b> — 변호사 커리어 정보 플랫폼<br/>
+  본 사이트에 게시된 보수·처우 정보는 게시자 개인의 제보에 기반한 것으로, 정확성이 보장되지 않습니다.
+  채용공고의 내용에 대한 책임은 게시자에게 있습니다.
+</footer>
+
+<script>
+/* ── 저장소: localStorage 사용 가능하면 영속, 아니면 세션 메모리 ── */
+const store = (() => {
+  let mem = {};
+  let ok = false;
+  try { localStorage.setItem('__t','1'); localStorage.removeItem('__t'); ok = true; } catch(e){ ok = false; }
+  return {
+    get(k){ try { return ok ? JSON.parse(localStorage.getItem(k)) : (mem[k] ?? null); } catch(e){ return mem[k] ?? null; } },
+    set(k,v){ try { if(ok) localStorage.setItem(k, JSON.stringify(v)); else mem[k]=v; } catch(e){ mem[k]=v; } }
+  };
+})();
+
+/* ── 시드 데이터 (가상의 예시) ── */
+const seedJobs = [
+  {id:1, title:"범죄피해자 국선전담 소속변호사 (전국)", firm:"대한법률구조공단", role:"공공", region:"지방", exp:"변호사 자격 (실무수습 요건 확인)", pay:"공고 참조", deadline:null, link:"https://www.alio.go.kr/information/informationRecruitDtl.do?seq=294020", body:"· 범죄피해자 국선전담 계약직\n· 계약기간: 임용 시부터 2027. 12. 31.까지 (근무성적에 따라 2년 단위 재계약 가능)\n· 서류: 자기소개서 — 전문성·사명감·공익활동 평가\n· 접수: 공단 채용시스템 (recruit.klac.or.kr)\n\n※ 실제 공고 — 접수기간·상세요건은 원문에서 확인", created:daysAgo(3), comments:[], seen:0},
+  {id:2, title:"2026년도 법률사무종사(실무수습) 변호사", firm:"정부법무공단", role:"공공", region:"서울", exp:"신입 (변시 합격자)", pay:"공고 참조", deadline:null, link:"https://www.jinhakpro.com/recruit/41500", body:"· 법률사무종사(실무수습) 계약직\n· 근무지: 서울 강남구 (테헤란로)\n· 접수: 홈페이지 지원 (2026. 4. 27.~5. 12. 접수분 기준)\n\n※ 실제 공고 — 매년 반복 게시되는 유형의 공고. 차기 공고는 원문 링크에서 확인", created:daysAgo(10), comments:[], seen:0},
+  {id:3, title:"법률사무종사 변호사 채용", firm:"국민건강보험공단", role:"공공", region:"지방", exp:"신입 (변시 합격자)", pay:"공고 참조", deadline:null, link:"https://www.jinhakpro.com/recruit/41500", body:"· 법률사무종사(실무수습) 변호사\n\n※ 실제 공고 — 마감일·상세요건은 원문에서 확인", created:daysAgo(5), comments:[], seen:0},
+  {id:4, title:"해외 변호사 부문 경력직 (M&A·전략 프로젝트)", firm:"OCI홀딩스 법무", role:"사내변호사", region:"서울", exp:"경력", pay:"공고 참조", deadline:null, link:"https://kr.indeed.com/q-%ED%95%B4%EC%99%B8-%EB%B3%80%ED%98%B8%EC%82%AC-%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0.html", body:"· 영문 계약서(M&A, 합작투자, 라이선스 등) 검토·협상 지원\n· 그룹 전략 프로젝트 법률 실사, 리스크 분석\n· 중대 소송·중재 전략 수립, 로펌 네트워크 관리\n\n※ 실제 공고 — 상세요건은 원문에서 확인", created:daysAgo(7), comments:[], seen:0},
+  {id:5, title:"국내 변호사 채용 (방산·M&A·인사)", firm:"한화에어로스페이스 법무", role:"사내변호사", region:"서울", exp:"경력", pay:"공고 참조", deadline:null, link:"https://bebee.com/kr/jobs/role/%EB%B3%80%ED%98%B8%EC%82%AC", body:"· 방산, M&A, 인사 관련 법무\n· 글로벌 비즈니스 법적 대응 체계 구축\n\n※ 실제 공고 — 상세요건은 원문에서 확인", created:daysAgo(12), comments:[], seen:0},
+  {id:6, title:"[예시] 형사 전문 어쏘시에잇 변호사 (2차 공고)", firm:"서초 형사전문 A법률사무소 (예시)", role:"송무", region:"서울", exp:"2~5년차", pay:"8,000~9,500", deadline:daysFromNow(9), link:"", body:"[공고빈도 카운터 시연용 가상 데이터]\n같은 사무소가 두 번 공고를 올리면 카드에 '최근 1년 공고 2회' 뱃지가 자동으로 붙는 것을 보여주기 위한 예시입니다.", created:daysAgo(2), comments:[{author:"변 9회, 송무 3년차", text:"작년에도 이맘때 공고 봤던 곳. 어쏘 순환 빠른 편이라고 들었음.", created:daysAgo(1)}], seen:3},
+  {id:7, title:"[예시] 형사 전문 어쏘시에잇 변호사 (1차 공고)", firm:"서초 형사전문 A법률사무소 (예시)", role:"송무", region:"서울", exp:"2~5년차", pay:"8,000~9,000", deadline:daysAgo(60).slice(0,10), link:"", body:"[공고빈도 카운터 시연용 가상 데이터]\n같은 사무소의 이전 공고 예시.", created:daysAgo(70), comments:[], seen:5},
+];
+
+const seedPosts = [
+  {id:1, board:"개업", topic:"자유", title:"개업 6개월차, 고정비 얼마나 드는지 정리해봄", body:"보증금 제외 월 기준.\n\n· 임대료(서초, 전용 12평): 220\n· 직원 1인 급여: 250\n· 광고비(블로그 대행+키워드): 150\n· 협회비·보험·기타: 40\n\n합계 월 660. 손익분기 넘기는 데 4개월 걸림. 광고비는 첫 3개월엔 더 썼는데 효율 낮은 채널 끊고 이 수준으로 정리함.", author:"변 8회, 개업 1년차", created:daysAgo(3), views:412, comments:[
+    {author:"변 10회, 개업 6개월차", text:"광고비 비중 비슷함. 블로그 대행은 효율 안 나와서 저도 접었어요.", created:daysAgo(2)},
+    {author:"사법 44기, 개업 4년차", text:"직원 급여에 4대보험·퇴직충당까지 넣으면 실제론 더 나갈 거예요.", created:daysAgo(1)},
+  ]},
+  {id:2, board:"사내변", topic:"이직·연봉", title:"중소펌 → 인하우스 이직 후기 (연봉 협상 포함)", body:"송무 4년차에 제조업 대기업 법무팀으로 이직.\n\n· 전 직장: 계약연봉 7,800 (세전)\n· 이직 후: 8,600 + 성과급 별도\n\n협상 팁: 현재 연봉 원천징수영수증 기준으로 얘기하되, 인센티브 포함 총액으로 제시할 것. 워라밸은 확실히 좋아졌는데 소송 감각 잃는 건 감수해야 함.", author:"변 10회, 사내변 1년차", created:daysAgo(6), views:891, comments:[
+    {author:"변 11회, 송무 4년차", text:"원천징수영수증 기준 제시 팁 유용하네요. 저도 이직 준비 중인데 참고하겠습니다.", created:daysAgo(4)},
+  ]},
+  {id:3, board:"개업", topic:"실무·판례", title:"변호사 광고규정 개정 이후 주의할 것들", body:"올해 광고 심사 걸린 사례 몇 개 공유.\n\n1. '전문' 표기 — 변협 전문분야 등록 없이 쓰면 안 됨\n2. 승소율·성공사례 구체적 수치 광고 제한\n3. 포털 CPC 광고는 규정 변동이 잦으니 집행 전 최신 규정 확인 필수\n\n대행사가 알아서 해준다고 믿지 말고 본인이 최종 확인해야 함. 징계는 본인이 받는다.", author:"사법 45기, 개업 3년차", created:daysAgo(10), views:1204},
+  {id:4, board:"송무·로펌", topic:"실무·판례", title:"개인채무자보호법 시행 후 추심 실무 변화 체감", body:"채권추심 수임 사건에서 체감되는 변화:\n\n· 추심총량제·연락제한 위반 다툼이 새로운 쟁점으로 등장\n· 채무조정 요청권 행사 시 추심 중지 관련 분쟁 증가\n\n금융회사 상대 사건 수임 시 개보법 위반 여부를 먼저 체크하는 게 루틴이 됨.", author:"변 7회, 송무 5년차", created:daysAgo(14), views:673},
+  {id:5, board:"사내변", topic:"자유", title:"사내변 3년차, 로펌 복귀 고민되는 이유", body:"워라밸 보고 인하우스 왔는데 3년쯤 되니 딜레마.\n\n· 장점: 정시 퇴근, 예측 가능한 삶\n· 고민: 전문성 정체되는 느낌, 연봉 상승폭이 로펌보다 완만\n\n같은 고민 하신 분들 어떻게 결정하셨는지 궁금. 특히 사내→로펌 복귀해보신 분 있으면 후기 부탁.", author:"변 9회, 사내변 3년차", created:daysAgo(4), views:558},
+  {id:6, board:"공공", topic:"이직·연봉", title:"공공기관 임기제 만료 후 진로, 다들 어디로 가나요", body:"임기제 6급으로 들어와서 2년 곧 만료.\n\n주변 보면 ① 재계약 ② 로펌 이직 ③ 개업 ④ 다른 공공기관 순환 정도로 갈리는 듯. 공공 경력이 민간에서 얼마나 인정받는지가 관건인데, 실제 이직해보신 분들 경험이 궁금합니다.", author:"변 11회, 공공 2년차", created:daysAgo(8), views:329},
+];
+
+const seedNews = [
+  {id:1, type:"판례공보", title:"[예시] 대법원 — 채권추심 시 연락제한 요청의 효력 범위", body:"[화면 구성용 예시 데이터입니다]\n\n개인채무자보호법상 채무자의 연락제한 요청이 있는 경우 추심자의 연락 가능 범위와 위반 시 효과에 관한 판시. 실제 운영 시 이 자리에 판례공보 요지를 정리해 올립니다.", link:"https://www.scourt.go.kr", author:"운영자", created:daysAgo(2), views:284},
+  {id:2, type:"판례공보", title:"[예시] 대법원 — 법무법인 구성원 탈퇴와 수임계약의 귀속", body:"[화면 구성용 예시 데이터입니다]\n\n구성원 변호사 탈퇴 시 기존 수임 사건의 처리와 보수 정산에 관한 법리. 개업·이직을 앞둔 변호사에게 실무상 의미가 큰 쟁점.", link:"https://www.scourt.go.kr", author:"운영자", created:daysAgo(5), views:412},
+  {id:3, type:"법조뉴스", title:"[예시] 변협, 광고규정 개정안 입법예고 — 온라인 플랫폼 광고 기준 정비", body:"[화면 구성용 예시 데이터입니다]\n\n한줄 요약과 원문 링크만 게시하는 방식의 예시입니다. 기사 본문은 저작권 문제로 옮기지 않습니다.", link:"https://www.lawtimes.co.kr", author:"운영자", created:daysAgo(1), views:530},
+];
+
+/* 회사별 근무조건 리뷰 시드 — 항목별 평가 + 사실 정보 구조 (key는 normFirm 기준) */
+const seedReviews = {
+  '대한법률구조공단': { firm:'대한법률구조공단', items:[
+    {id:'rv1', author:'변 11회, 공공 2년차', axes:{워라밸:3,보상:3,성장:5,문화:4}, facts:{'야근빈도':'주 1~2회','포괄임금':'예','연차소진':'자유로운 편'},
+     text:'국선전담 사건량은 많지만 공익 실무 경험으로는 확실. 계약직 신분 안정성은 감안 필요.', rating:3.75, created:daysAgo(9),
+     rebuttals:[], corrections:[{date:daysAgo(8), text:"'신분 불안정' 표현 → '계약직 신분 안정성은 감안 필요'로 정정 (작성자 수정)"}]},
+    {id:'rv2', author:'변 9회, 공공 1년차', axes:{워라밸:3,보상:2,성장:4,문화:3}, facts:{'야근빈도':'주 1~2회','재택':'없음'},
+     text:'지역 배치 편차가 큼. 수도권 아니면 정주 여건 미리 확인 권장.', rating:3, created:daysAgo(20),
+     rebuttals:[{author:'변 12회, 공공 4년차', text:'배치는 희망지 반영 비율이 최근 올라갔습니다. 연도별로 차이가 있어요.', created:daysAgo(19)}], corrections:[]},
+  ]},
+  '정부법무공단': { firm:'정부법무공단', items:[
+    {id:'rv3', author:'변 12회, 공공 3년차', axes:{워라밸:4,보상:3,성장:4,문화:4}, facts:{'야근빈도':'주 1회 미만','포괄임금':'아니오','재택':'주 1회'},
+     text:'국가·공공기관 소송 실무를 폭넓게 경험. 실무수습 트랙으로 시작하기 무난.', rating:3.75, created:daysAgo(15), rebuttals:[], corrections:[]},
+  ]},
+  'OCI홀딩스법무': { firm:'OCI홀딩스 법무', items:[
+    {id:'rv4', author:'변 10회, 사내변 2년차', axes:{워라밸:3,보상:4,성장:5,문화:3}, facts:{'야근빈도':'주 3회 이상','포괄임금':'예','재택':'주 2회 이상'},
+     text:'영문 계약·M&A 노출이 많아 성장에는 좋음. 프로젝트 몰릴 때 업무 강도는 있는 편.', rating:3.75, created:daysAgo(12), rebuttals:[], corrections:[]},
+  ]},
+};
+
+/* 회사별 연차별 연봉 시드 (세전·만원) */
+const seedSalaries = {
+  '대한법률구조공단':[
+    {id:'sl1', year:'1년차', amount:5200, author:'변 11회, 공공 2년차', created:daysAgo(9)},
+    {id:'sl2', year:'3년차', amount:6100, author:'변 12회, 공공 3년차', created:daysAgo(15)},
+  ],
+  'OCI홀딩스법무':[
+    {id:'sl3', year:'2년차', amount:8200, author:'변 10회, 사내변 2년차', created:daysAgo(12)},
+    {id:'sl4', year:'4년차', amount:10500, author:'변 8회, 사내변 4년차', created:daysAgo(30)},
+  ],
+};
+
+/* 회사별 면접 후기 시드 (본인 경험만) */
+const seedInterviews = {
+  '정부법무공단':[
+    {id:'iv1', author:'변 12회, 공공 3년차', role:'공공', format:'대면 2차 (실무진 → 면접위원)', result:'합격',
+     text:'1차는 지원동기·공공 소송 이해도 위주, 2차는 최근 처리 경험을 구체적으로 물었다.', own:true, created:daysAgo(15)},
+  ],
+};
+
+function daysFromNow(n){ const d=new Date(); d.setDate(d.getDate()+n); return d.toISOString().slice(0,10); }
+function daysAgo(n){ const d=new Date(); d.setDate(d.getDate()-n); return d.toISOString(); }
+function hoursFromNow(days,h,m){ const d=new Date(); d.setDate(d.getDate()+days); d.setHours(h,m||0,0,0); return d.toISOString(); }
+
+/* 복대리 현황 시드 */
+const seedProxy = [
+  {id:1, type:"구인", court:"서울중앙지법 제12민사부", caseType:"민사", date:hoursFromNow(1,10,0), note:"변론기일 출석·조서 확인. 기록 당일 공유. 보수 협의.", author:"변 9회, 개업 2년차", created:daysAgo(0)},
+  {id:2, type:"구인", court:"수원지법 안양지원", caseType:"형사", date:hoursFromNow(2,14,30), note:"증인신문기일. 오전 사건과 겹쳐 대리 구합니다.", author:"변 12회, 송무 6년차", created:daysAgo(0)},
+  {id:3, type:"구직", court:"서울·수도권 전반", caseType:"기타", date:hoursFromNow(3,0,0), note:"이번 주 목·금 오후 서울권 기일 복대리 가능합니다. 민사·신청 위주.", author:"변 13회, 개업 1년차", created:daysAgo(1)},
+  {id:4, type:"구인", court:"대전지법 제3민사부", caseType:"민사", date:hoursFromNow(5,11,0), note:"변론기일. 지방 사건이라 현지 대리 구합니다.", author:"변 10회, 개업 4년차", created:daysAgo(1)},
+];
+
+/* 조간 스크랩 시드 — 제목·출처·링크만 (본문 복사 없음) */
+const seedScrap = [
+  {id:1, cat:"금융", title:"[예시] 금융위, 가상자산 이용자보호법 2단계 입법예고", source:"법률신문", link:"https://www.lawtimes.co.kr", created:daysAgo(0)},
+  {id:2, cat:"형사", title:"[예시] 대검, 마약 초범 조건부 기소유예 확대 방침 발표", source:"법조신문", link:"https://news.koreanbar.or.kr", created:daysAgo(0)},
+  {id:3, cat:"노동", title:"[예시] 대법원, 통상임금 재직조건 관련 후속 하급심 잇따라", source:"법률신문", link:"https://www.lawtimes.co.kr", created:daysAgo(0)},
+  {id:4, cat:"M&A", title:"[예시] 공정위 기업결합 심사기준 개정안 행정예고", source:"법률신문", link:"https://www.lawtimes.co.kr", created:daysAgo(1)},
+  {id:5, cat:"일반", title:"[예시] 법원행정처, 전자소송 시스템 정기점검 안내", source:"대법원", link:"https://ecfs.scourt.go.kr", created:daysAgo(1)},
+  {id:6, cat:"금융", title:"[예시] 개인채무자보호법 시행 후 첫 추심 제재 사례 보도", source:"법조신문", link:"https://news.koreanbar.or.kr", created:daysAgo(2)},
+];
+
+/* 법령 개정·시행 시드 */
+const seedLaws = [
+  {id:1, kind:"개정", title:"[예시] 상법 일부개정법률 (전자주주총회 관련)", effective:daysFromNow(12), link:"https://www.law.go.kr"},
+  {id:2, kind:"시행", title:"[예시] 개인채무자보호법 시행령 후속 개정", effective:daysFromNow(3), link:"https://www.law.go.kr"},
+  {id:3, kind:"제정", title:"[예시] 가상자산 이용자 보호 감독규정", effective:daysFromNow(28), link:"https://www.law.go.kr"},
+  {id:4, kind:"개정", title:"[예시] 민사소송규칙 일부개정 (전자문서 제출)", effective:daysFromNow(-2), link:"https://www.law.go.kr"},
+];
+
+/* 변협·지방회 공지 시드 */
+const seedNotices = [
+  {id:1, org:"대한변협", title:"[예시] 2026년도 의무연수 상반기 이수 마감 안내", deadline:daysFromNow(6), link:"https://www.koreanbar.or.kr", created:daysAgo(1)},
+  {id:2, org:"서울지방변호사회", title:"[예시] 청년변호사 대상 무료 실무연수 신청 접수", deadline:daysFromNow(9), link:"https://www.seoulbar.or.kr", created:daysAgo(2)},
+  {id:3, org:"대한변협", title:"[예시] 변호사 광고규정 개정 관련 회원 설명회 개최", deadline:daysFromNow(14), link:"https://www.koreanbar.or.kr", created:daysAgo(3)},
+  {id:4, org:"서울지방변호사회", title:"[예시] 사무직원 채용·4대보험 실무 세미나", deadline:null, link:"https://www.seoulbar.or.kr", created:daysAgo(4)},
+];
+
+/* 자주 쓰는 사이트 */
+const quickLinks = [
+  {name:"전자소송", desc:"제출·열람", url:"https://ecfs.scourt.go.kr"},
+  {name:"나의 사건검색", desc:"진행 조회", url:"https://www.scourt.go.kr"},
+  {name:"종합법률정보", desc:"판례·법령", url:"https://glaw.scourt.go.kr"},
+  {name:"국가법령정보", desc:"법령·조문", url:"https://www.law.go.kr"},
+  {name:"인터넷등기소", desc:"등기·열람", url:"https://www.iros.go.kr"},
+  {name:"엘박스", desc:"판례검색", url:"https://lbox.kr"},
+  {name:"케이스노트", desc:"판례검색", url:"https://casenote.kr"},
+  {name:"대한변협", desc:"공지·연수", url:"https://www.koreanbar.or.kr"},
+  {name:"서울지방회", desc:"공지·연수", url:"https://www.seoulbar.or.kr"},
+];
+
+/* ── 상태 ── */
+const DATA_VER = 7;
+if(store.get('bb-ver') !== DATA_VER){
+  store.set('bb-jobs', seedJobs);
+  store.set('bb-posts', seedPosts);
+  store.set('bb-news', seedNews);
+  store.set('bb-reviews', seedReviews);
+  store.set('bb-proxy', seedProxy);
+  store.set('bb-scrap', seedScrap);
+  store.set('bb-laws', seedLaws);
+  store.set('bb-notices', seedNotices);
+  store.set('bb-salaries', seedSalaries);
+  store.set('bb-interviews', seedInterviews);
+  store.set('bb-ver', DATA_VER);
+}
+let jobs = store.get('bb-jobs') || seedJobs;
+let posts = store.get('bb-posts') || seedPosts;
+let news = store.get('bb-news') || seedNews;
+let reviews = store.get('bb-reviews') || seedReviews;
+let firmSalaries = store.get('bb-salaries') || seedSalaries;
+let firmInterviews = store.get('bb-interviews') || seedInterviews;
+let proxy = store.get('bb-proxy') || seedProxy;
+let scrap = store.get('bb-scrap') || seedScrap;
+let laws = store.get('bb-laws') || seedLaws;
+let notices = store.get('bb-notices') || seedNotices;
+let profile = store.get('bb-profile') || { type:'', round:'', role:'', years:'' };
+if(!store.get('bb-jobs')) store.set('bb-jobs', jobs);
+if(!store.get('bb-posts')) store.set('bb-posts', posts);
+if(!store.get('bb-news')) store.set('bb-news', news);
+if(!store.get('bb-reviews')) store.set('bb-reviews', reviews);
+if(!store.get('bb-proxy')) store.set('bb-proxy', proxy);
+
+let currentTab = 'home';
+let jobFilter = { role:'전체', region:'전체' };
+let postFilter = { board:'전체', topic:'전체' };
+let newsFilter = { type:'전체' };
+let openFirms = new Set();   // 펼쳐진 회사 카드(정규화 key)
+let scrapFilter = store.get('bb-interest') || '전체';
+
+function myAuthorName(){
+  // 예: "변 11회, 송무 5년차" / "사법 46기, 사내변 2년차"
+  const cred = (profile.type && profile.round) ? (profile.type + ' ' + profile.round) : '';
+  const job = profile.role ? (profile.role + (profile.years ? ' ' + profile.years : '')) : (profile.years || '');
+  const parts = [cred, job].filter(Boolean);
+  return parts.length ? parts.join(', ') : '익명';
+}
+function refreshProfileBtn(){
+  const btn = document.getElementById('profile-btn');
+  const set = (profile.type && profile.round) || profile.role || profile.years;
+  btn.textContent = set ? myAuthorName() : '프로필';
+  btn.classList.toggle('set', !!set);
+}
+function syncRoundOptions(){
+  const type = document.getElementById('pf-type').value;
+  const sel = document.getElementById('pf-round');
+  const prev = sel.value;
+  let opts = ['<option value="">선택 안 함</option>'];
+  if(type==='변'){
+    for(let i=1;i<=15;i++) opts.push(`<option>${i}회</option>`);
+  } else if(type==='사법'){
+    for(let i=30;i<=48;i++) opts.push(`<option>${i}기</option>`);
+  }
+  sel.innerHTML = opts.join('');
+  if([...sel.options].some(o=>o.value===prev)) sel.value = prev;
+}
+
+/* ── 탭 ── */
+function switchTab(tab){
+  currentTab = tab;
+  ['home','jobs','firms','info','news'].forEach(t=>{
+    document.getElementById('view-'+t).style.display = tab===t ? '' : 'none';
+    document.getElementById('tab-'+t).classList.toggle('active', tab===t);
+  });
+  const labels = { home:'+ 복대리 등록', jobs:'+ 공고 등록', firms:'+ 회사 한줄평', info:'+ 글쓰기', news:'+ 판례·소식' };
+  document.getElementById('write-btn').textContent = labels[tab];
+  if(tab==='firms') renderFirms();
+  if(tab==='home') renderHome();
+}
+
+/* ── 필터 칩 ── */
+function bindChips(groupId, onPick){
+  const group = document.getElementById(groupId);
+  group.addEventListener('click', e=>{
+    const btn = e.target.closest('.chip'); if(!btn) return;
+    group.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+    btn.classList.add('on');
+    onPick(btn.dataset.v);
+  });
+}
+bindChips('filter-role', v=>{ jobFilter.role=v; renderJobs(); });
+bindChips('filter-region', v=>{ jobFilter.region=v; renderJobs(); });
+bindChips('filter-board', v=>{ postFilter.board=v; renderPosts(); });
+bindChips('filter-topic', v=>{ postFilter.topic=v; renderPosts(); });
+bindChips('filter-news', v=>{ newsFilter.type=v; renderNews(); });
+
+/* ── 렌더: 채용 ── */
+function ddayInfo(deadline){
+  if(!deadline) return {label:'상시', urgent:false};
+  const diff = Math.ceil((new Date(deadline) - new Date().setHours(0,0,0,0)) / 86400000);
+  if(diff < 0) return {label:'마감', urgent:false};
+  if(diff === 0) return {label:'오늘 마감', urgent:true};
+  return {label:'D-'+diff, urgent: diff<=5};
+}
+function isNew(created){
+  return (Date.now() - new Date(created).getTime()) < 7*86400000;
+}
+function esc(s){ return String(s??'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+function normFirm(f){ return String(f||'').replace(/\s+/g,'').replace(/\(예시\)/g,''); }
+function firmCounts(){
+  const map = {};
+  const oneYearAgo = Date.now() - 365*86400000;
+  jobs.forEach(j=>{
+    if(new Date(j.created).getTime() < oneYearAgo) return;
+    const k = normFirm(j.firm);
+    map[k] = (map[k]||0)+1;
+  });
+  return map;
+}
+
+function renderJobs(){
+  const list = document.getElementById('job-list');
+  const counts = firmCounts();
+  const filtered = jobs.filter(j =>
+    (jobFilter.role==='전체' || j.role===jobFilter.role) &&
+    (jobFilter.region==='전체' || j.region===jobFilter.region)
+  ).sort((a,b)=> new Date(b.created)-new Date(a.created));
+
+  document.getElementById('jobs-count').textContent = filtered.length + '건';
+
+  if(!filtered.length){
+    list.innerHTML = `<div class="empty"><div class="seal-empty">空</div>조건에 맞는 공고가 아직 없습니다.<br/>첫 공고를 등록해보세요.</div>`;
+    return;
+  }
+  const mySeen = store.get('bb-seen') || {};
+  list.innerHTML = filtered.map(j=>{
+    const dd = j.deadline===null ? {label:'공고 참조', urgent:false} : ddayInfo(j.deadline);
+    const repeat = counts[normFirm(j.firm)] || 1;
+    const cmts = j.comments || [];
+    return `
+    <article class="job-card" id="job-${j.id}">
+      <div>
+        <div class="job-head">
+          ${isNew(j.created) ? '<span class="badge-new">NEW</span>' : ''}
+          <span class="job-title">${esc(j.title)}</span>
+          ${repeat>=2 ? `<span class="badge-repeat">최근 1년 공고 ${repeat}회</span>` : ''}
+        </div>
+        <div class="job-firm">${esc(j.firm)}</div>
+        <div class="job-meta">
+          <span>직군 <b>${esc(j.role)}</b></span>
+          <span>지역 <b>${esc(j.region)}</b></span>
+          <span>연차 <b>${esc(j.exp||'무관')}</b></span>
+        </div>
+      </div>
+      <div class="job-right">
+        <span class="dday ${dd.urgent?'urgent':''}">${dd.label}</span>
+        <span class="job-pay">${esc(j.pay||'협의')}${/^[\d,~.\s]+$/.test(j.pay||'') ? '<small style="font-weight:400;color:var(--ink-soft);"> 만원</small>' : ''}</span>
+      </div>
+      <div class="job-body">${esc(j.body)}${j.link ? `\n\n<a href="${esc(j.link)}" target="_blank" rel="noopener" style="color:var(--seal);font-weight:600;">공고 원문 보기 ↗</a>` : ''}</div>
+      <div class="comments">
+        <div class="comments-title">한줄 평 · 근속 제보 (${cmts.length})</div>
+        ${cmts.map(c=>`<div class="comment"><span class="c-author">辯 ${esc(c.author)}</span>${esc(c.text)}<span class="c-time">${timeAgo(c.created)}</span></div>`).join('')}
+        <div class="comment-form">
+          <input id="cmt-${j.id}" placeholder="이 사무소에 대해 아는 것 (특정 개인 비방 금지)" onclick="event.stopPropagation();" />
+          <button onclick="addComment(${j.id})">등록</button>
+        </div>
+      </div>
+      <div class="job-actions">
+        <button class="job-toggle" onclick="toggleJob(${j.id})">상세·한줄평 보기 ▾</button>
+        <button class="seen-btn ${mySeen[j.id]?'done':''}" onclick="markSeen(${j.id})">👁 전에도 봤어요 ${j.seen||0}</button>
+      </div>
+    </article>`;
+  }).join('');
+}
+function addComment(id){
+  const input = document.getElementById('cmt-'+id);
+  const text = (input.value||'').trim();
+  if(!text) return;
+  const j = jobs.find(x=>x.id===id);
+  if(!j) return;
+  j.comments = j.comments || [];
+  j.comments.push({ author: myAuthorName(), text, created:new Date().toISOString() });
+  store.set('bb-jobs', jobs);
+  renderJobs();
+  const el = document.getElementById('job-'+id);
+  if(el) el.classList.add('open');
+}
+function markSeen(id){
+  const mySeen = store.get('bb-seen') || {};
+  if(mySeen[id]) return;
+  const j = jobs.find(x=>x.id===id);
+  if(!j) return;
+  j.seen = (j.seen||0)+1;
+  mySeen[id] = true;
+  store.set('bb-jobs', jobs);
+  store.set('bb-seen', mySeen);
+  renderJobs();
+}
+function toggleJob(id){
+  const el = document.getElementById('job-'+id);
+  el.classList.toggle('open');
+  el.querySelector('.job-toggle').textContent = el.classList.contains('open') ? '접기 ▴' : '상세·한줄평 보기 ▾';
+}
+
+/* ── 렌더: 게시판 ── */
+function timeAgo(iso){
+  const diff = Date.now() - new Date(iso).getTime();
+  const days = Math.floor(diff/86400000);
+  if(days===0) return '오늘';
+  if(days<7) return days+'일 전';
+  if(days<30) return Math.floor(days/7)+'주 전';
+  return Math.floor(days/30)+'개월 전';
+}
+function renderPosts(){
+  const list = document.getElementById('post-list');
+  const q = (document.getElementById('post-search').value||'').trim().toLowerCase();
+  const filtered = posts.filter(p =>
+    (postFilter.board==='전체' || p.board===postFilter.board) &&
+    (postFilter.topic==='전체' || p.topic===postFilter.topic) &&
+    (!q || p.title.toLowerCase().includes(q) || p.body.toLowerCase().includes(q))
+  ).sort((a,b)=> new Date(b.created)-new Date(a.created));
+
+  document.getElementById('info-count').textContent = filtered.length + '건';
+
+  if(!filtered.length){
+    list.innerHTML = `<div class="empty"><div class="seal-empty">空</div>아직 글이 없습니다. 첫 기록을 남겨보세요.</div>`;
+    return;
+  }
+  list.innerHTML = filtered.map(p=>{
+    const cmts = p.comments || [];
+    return `
+    <article class="post-item" id="post-${p.id}" onclick="togglePost(${p.id})">
+      <div class="post-top">
+        <span class="post-cat">${esc(p.board)}</span>
+        ${p.topic ? `<span class="post-topic">#${esc(p.topic)}</span>` : ''}
+        ${isNew(p.created) ? '<span class="badge-new">NEW</span>' : ''}
+        <span class="post-title">${esc(p.title)}</span>
+      </div>
+      <div class="post-preview">${esc(p.body)}</div>
+      <div class="post-full">${esc(p.body)}</div>
+      <div class="post-meta">
+        <span class="author-badge"><span class="v">辯</span>${esc(p.author)}</span>
+        <span>${timeAgo(p.created)}</span>
+        <span>조회 ${p.views||0}</span>
+        <span>댓글 ${cmts.length}</span>
+      </div>
+      <div class="post-comments" onclick="event.stopPropagation();">
+        <div class="comments-title">댓글 (${cmts.length})</div>
+        ${cmts.map(c=>`<div class="comment"><span class="c-author">辯 ${esc(c.author)}</span>${esc(c.text)}<span class="c-time">${timeAgo(c.created)}</span></div>`).join('')}
+        <div class="comment-form">
+          <input id="pcmt-${p.id}" placeholder="댓글 남기기 (특정 개인 비방 금지)" />
+          <button onclick="addPostComment(${p.id})">등록</button>
+        </div>
+      </div>
+    </article>
+  `;}).join('');
+}
+function addPostComment(id){
+  const input = document.getElementById('pcmt-'+id);
+  const text = (input.value||'').trim();
+  if(!text) return;
+  const p = posts.find(x=>x.id===id);
+  if(!p) return;
+  p.comments = p.comments || [];
+  p.comments.push({ author: myAuthorName(), text, created:new Date().toISOString() });
+  store.set('bb-posts', posts);
+  renderPosts();
+  const el = document.getElementById('post-'+id);
+  if(el) el.classList.add('open');
+}
+
+/* ── 렌더: 판례·소식 ── */
+function renderNews(){
+  const list = document.getElementById('news-list');
+  const filtered = news.filter(n =>
+    newsFilter.type==='전체' || n.type===newsFilter.type
+  ).sort((a,b)=> new Date(b.created)-new Date(a.created));
+
+  document.getElementById('news-count').textContent = filtered.length + '건';
+
+  if(!filtered.length){
+    list.innerHTML = `<div class="empty"><div class="seal-empty">空</div>등록된 판례·소식이 없습니다.</div>`;
+    return;
+  }
+  list.innerHTML = filtered.map(n=>`
+    <article class="post-item" id="news-${n.id}" onclick="toggleNews(${n.id})">
+      <div class="post-top">
+        <span class="post-cat" style="${n.type==='판례공보' ? 'border-color:var(--seal);color:var(--seal);' : ''}">${esc(n.type)}</span>
+        ${isNew(n.created) ? '<span class="badge-new">NEW</span>' : ''}
+        <span class="post-title">${esc(n.title)}</span>
+      </div>
+      <div class="post-preview">${esc(n.body)}</div>
+      <div class="post-full">${esc(n.body)}${n.link ? `\n\n<a href="${esc(n.link)}" target="_blank" rel="noopener" style="color:var(--seal);font-weight:600;" onclick="event.stopPropagation();">원문 보기 ↗</a>` : ''}</div>
+      <div class="post-meta">
+        <span class="author-badge"><span class="v">辯</span>${esc(n.author)}</span>
+        <span>${timeAgo(n.created)}</span>
+        <span>조회 ${n.views||0}</span>
+      </div>
+    </article>
+  `).join('');
+}
+function toggleNews(id){
+  const el = document.getElementById('news-'+id);
+  const wasOpen = el.classList.contains('open');
+  el.classList.toggle('open');
+  if(!wasOpen){
+    const n = news.find(x=>x.id===id);
+    if(n){ n.views = (n.views||0)+1; store.set('bb-news', news); }
+  }
+}
+
+function togglePost(id){
+  const el = document.getElementById('post-'+id);
+  const wasOpen = el.classList.contains('open');
+  el.classList.toggle('open');
+  if(!wasOpen){
+    const p = posts.find(x=>x.id===id);
+    if(p){ p.views = (p.views||0)+1; store.set('bb-posts', posts); }
+  }
+}
+
+/* ── 렌더: 회사별 ── */
+let firmList = [];   // renderFirms가 채우는 [{key, firm, jobs, reviews, avg, latest}]
+
+function buildFirmDirectory(){
+  const oneYearAgo = Date.now() - 365*86400000;
+  const dir = {};
+  const ensure = (key, display) => {
+    if(!dir[key]) dir[key] = { key, firm:display, jobs:[], reviews:[], latest:0 };
+    else if(display && !dir[key].firm) dir[key].firm = display;
+    return dir[key];
+  };
+  jobs.forEach(j=>{
+    const key = normFirm(j.firm);
+    if(!key) return;
+    const d = ensure(key, j.firm);
+    const t = new Date(j.created).getTime();
+    d.jobs.push({ id:j.id, title:j.title, created:j.created, deadline:j.deadline, recent: t>=oneYearAgo });
+    d.latest = Math.max(d.latest, t);
+  });
+  Object.entries(reviews).forEach(([key, v])=>{
+    const d = ensure(key, (v && v.firm) || key);
+    (v.items||[]).forEach(r=>{
+      d.reviews.push(r);
+      d.latest = Math.max(d.latest, new Date(r.created).getTime());
+    });
+  });
+  Object.values(dir).forEach(d=>{
+    d.jobs.sort((a,b)=> new Date(b.created)-new Date(a.created));
+    d.reviews.sort((a,b)=> new Date(b.created)-new Date(a.created));
+    const rated = d.reviews.filter(r=>r.rating>0);
+    d.avg = rated.length ? (rated.reduce((s,r)=>s+r.rating,0)/rated.length) : 0;
+    d.recentCount = d.jobs.filter(j=>j.recent).length;
+  });
+  return Object.values(dir).sort((a,b)=> b.latest - a.latest);
+}
+
+function stars(n){
+  const full = Math.round(n);
+  return '★★★★★'.slice(0,full) + '☆☆☆☆☆'.slice(0,5-full);
+}
+
+function renderFirms(){
+  const list = document.getElementById('firm-list');
+  const q = (document.getElementById('firm-search').value||'').trim().toLowerCase();
+  firmList = buildFirmDirectory().filter(d => !q || d.firm.toLowerCase().includes(q));
+
+  document.getElementById('firms-count').textContent = firmList.length + '곳';
+
+  if(!firmList.length){
+    list.innerHTML = `<div class="empty"><div class="seal-empty">空</div>${q ? '검색 결과가 없습니다.' : '아직 등록된 회사가 없습니다.'}<br/>상단 <b>+ 회사 한줄평</b>으로 첫 회사를 추가해보세요.</div>`;
+    return;
+  }
+
+  list.innerHTML = firmList.map((d,i)=>{
+    const isOpen = openFirms.has(d.key);
+    const dd = (dl)=> dl===null||!dl ? '상시/참조' : (Math.ceil((new Date(dl)-new Date().setHours(0,0,0,0))/86400000) < 0 ? '마감' : 'D-'+Math.ceil((new Date(dl)-new Date().setHours(0,0,0,0))/86400000));
+    return `
+    <article class="firm-card ${isOpen?'open':''}" id="firm-${i}">
+      <div class="firm-head" onclick="toggleFirm(${i})">
+        <div>
+          <span class="firm-name">${esc(d.firm)}</span>
+          <div class="firm-sub">
+            <span>최근 1년 공고 <b>${d.recentCount}회</b></span>
+            <span>한줄평 <b>${d.reviews.length}개</b></span>
+          </div>
+        </div>
+        <div class="firm-score">
+          ${d.avg ? `<div class="num">${d.avg.toFixed(1)}</div><div class="star">${stars(d.avg)}</div>` : `<div class="none">평점 없음</div>`}
+        </div>
+      </div>
+      <div class="firm-detail">
+        ${d.jobs.length ? `
+          <div class="firm-block-title">공고 이력</div>
+          ${d.jobs.map(j=>`<div class="firm-jobrow"><a href="#job-${j.id}" onclick="event.stopPropagation(); switchTab('jobs'); setTimeout(()=>{const e=document.getElementById('job-${j.id}'); if(e){e.classList.add('open'); e.scrollIntoView({behavior:'smooth',block:'center'});}},60);">${esc(j.title)}</a><span class="jr-date">${timeAgo(j.created)}</span></div>`).join('')}
+        ` : `<div class="firm-block-title">공고 이력 없음</div>`}
+
+        ${firmSubtabsHtml(d)}
+      </div>
+    </article>`;
+  }).join('');
+}
+
+function toggleFirm(i){
+  const d = firmList[i]; if(!d) return;
+  if(openFirms.has(d.key)) openFirms.delete(d.key); else openFirms.add(d.key);
+  document.getElementById('firm-'+i).classList.toggle('open');
+}
+
+function pickStar(i, s){
+  const box = document.getElementById('rate-'+i);
+  if(!box) return;
+  box.dataset.val = s;
+  box.querySelectorAll('.star-pick').forEach((el,idx)=> el.classList.toggle('on', idx < s));
+}
+
+/* ── 회사별 5요소 (연봉·근무조건·면접·반론) ── */
+const RVX_AXES = ['워라밸','보상','성장','문화'];
+const YEAR_OPTS = ['1년차','2년차','3년차','4년차','5년차','6년차 이상'];
+let firmSubTab = {};          // key → 'review' | 'salary' | 'interview'
+let openReb = new Set();      // 펼쳐진 반론 스레드 (review id)
+let activeFirm = null, activeReview = null;
+
+function yearRank(y){ const i = YEAR_OPTS.indexOf(y); return i<0 ? 99 : i; }
+function firmDisplayName(key){
+  if(reviews[key] && reviews[key].firm) return reviews[key].firm;
+  const f = (firmList||[]).find(x=>x.key===key);
+  return f ? f.firm : key;
+}
+
+function firmSubtabsHtml(d){
+  const key = d.key;
+  const tab = firmSubTab[key] || 'review';
+  const revN = ((reviews[key]&&reviews[key].items)||[]).length;
+  const salN = (firmSalaries[key]||[]).length;
+  const ivN  = (firmInterviews[key]||[]).length;
+  const t = (id,label,n)=>`<button class="firm-subtab ${tab===id?'on':''}" onclick="firmSubTabSet('${key}','${id}')">${label}<span class="c">${n}</span></button>`;
+  let panel;
+  if(tab==='salary') panel = salaryPanelHtml(key);
+  else if(tab==='interview') panel = interviewPanelHtml(key);
+  else panel = reviewPanelHtml(key);
+  return `<div class="firm-subtabs">${t('review','근무조건',revN)}${t('salary','연차별 연봉',salN)}${t('interview','면접 후기',ivN)}</div>
+    <div class="subpanel">${panel}</div>`;
+}
+function firmSubTabSet(key, tab){ firmSubTab[key] = tab; openFirms.add(key); renderFirms(); }
+function toggleReb(id){
+  if(openReb.has(id)) openReb.delete(id); else openReb.add(id);
+  const el = document.getElementById('rebw-'+id); if(el) el.classList.toggle('open');
+}
+
+/* ① 연차별 연봉 */
+function salaryPanelHtml(key){
+  const list = (firmSalaries[key]||[]).slice().sort((a,b)=> yearRank(a.year)-yearRank(b.year));
+  const max = Math.max(1, ...list.map(s=>s.amount));
+  const rows = list.length ? list.map(s=>`
+    <tr>
+      <td><b>${esc(s.year)}</b></td>
+      <td class="sal-amt">${s.amount.toLocaleString()}만원</td>
+      <td style="width:32%"><div class="sal-bar" style="width:${Math.round(s.amount/max*100)}%"></div></td>
+      <td><span class="vb">${esc(s.author)}</span></td>
+    </tr>`).join('') : `<tr><td colspan="4"><div class="rvx-empty" style="text-align:center;padding:14px 0;">아직 등록된 연봉 정보가 없습니다.</div></td></tr>`;
+  return `<div class="sub-head"><div><div class="firm-block-title" style="margin:0;">연차별 연봉</div><div class="sh-note">세전 기준·본인 제보. 숫자 사실만 기록합니다.</div></div>
+      <button class="mini-btn" onclick="openSalaryModal('${key}')">+ 연봉 제보</button></div>
+    <table class="sal-table"><thead><tr><th>연차</th><th>연봉</th><th>분포</th><th>작성자</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+/* ② 근무조건 리뷰 */
+function reviewPanelHtml(key){
+  const items = (reviews[key]&&reviews[key].items)||[];
+  const cards = items.length ? items.map(r=>reviewCardHtml(key,r)).join('')
+    : `<div class="rvx-empty">아직 등록된 근무조건 리뷰가 없습니다. 겪어보셨다면 첫 기록을 남겨주세요.</div>`;
+  return `<div class="sub-head"><div><div class="firm-block-title" style="margin:0;">근무조건 리뷰</div><div class="sh-note">항목별 평가 + 사실 정보. 감정적 낙인 대신 구조화된 사실로 기록합니다.</div></div>
+      <button class="mini-btn" onclick="openReviewModal('${key}')">+ 리뷰</button></div>${cards}`;
+}
+function reviewCardHtml(key, r){
+  const hasAxes = r.axes && Object.keys(r.axes).length;
+  let axes = '';
+  if(hasAxes){
+    axes = `<div class="rvx-axes">${RVX_AXES.map(a=>`<div class="rvx-axis"><span class="lab">${a}</span><span class="st">${stars(r.axes[a]||0)}</span></div>`).join('')}</div>`;
+  } else if(r.rating>0){
+    axes = `<div class="rvx-axes"><div class="rvx-axis"><span class="lab">추천도</span><span class="st">${stars(r.rating)}</span></div></div>`;
+  }
+  const facts = (r.facts && Object.keys(r.facts).length)
+    ? `<div class="rvx-facts">${Object.entries(r.facts).map(([k,v])=>`<span class="rvx-fact"><b>${esc(k)}</b> ${esc(v)}</span>`).join('')}</div>` : '';
+  const corr = (r.corrections && r.corrections.length) ? `<span class="rvx-corr">✎ 정정 ${r.corrections.length}회</span>` : '';
+  const corrLog = (r.corrections && r.corrections.length)
+    ? `<div class="corr-log"><h5>✎ 정정 이력</h5>${r.corrections.map(c=>`<div>· ${timeAgo(c.date||c.created)} — ${esc(c.text)}</div>`).join('')}</div>` : '';
+  const rebN = (r.rebuttals && r.rebuttals.length) || 0;
+  const rebList = rebN ? r.rebuttals.map(rb=>`
+    <div class="reb-item"><div class="rh"><span class="reb-tag">반론</span><span class="vb">${esc(rb.author)}</span><span class="rvx-time">${timeAgo(rb.created)}</span></div>
+    <div class="rt">${esc(rb.text)}</div></div>`).join('') : `<div class="rvx-empty">등록된 반론이 없습니다.</div>`;
+  const rid = r.id || ('rv'+Math.abs(hashStr(r.author+r.created)));
+  return `<div class="rvx">
+    <div class="rvx-top"><span class="vb">${esc(r.author)}</span>${corr}<span class="rvx-time">${timeAgo(r.created)}</span></div>
+    ${axes}${facts}
+    ${r.text?`<div class="rvx-text">${esc(r.text)}</div>`:''}
+    <div class="rvx-foot">
+      <button onclick="toggleReb('${rid}')">💬 반론 ${rebN}</button>
+      <button onclick="openRebModal('${key}','${rid}')">반론 등록</button>
+    </div>
+    ${corrLog}
+    <div class="reb-wrap ${openReb.has(rid)?'open':''}" id="rebw-${rid}">${rebList}</div>
+  </div>`;
+}
+function hashStr(s){ let h=0; for(let i=0;i<s.length;i++){ h=(h<<5)-h+s.charCodeAt(i); h|=0; } return h; }
+
+/* ③ 면접 후기 */
+function interviewPanelHtml(key){
+  const list = (firmInterviews[key]||[]);
+  const cards = list.length ? list.map(v=>`
+    <div class="ivx">
+      <div class="ivx-top"><span class="vb">${esc(v.author)}</span>${v.own?'<span class="own-tag">✓ 본인 경험</span>':''}<span class="rvx-time">${timeAgo(v.created)}</span></div>
+      <div class="ivx-meta"><span class="ivx-pill">${esc(v.role)}</span><span class="ivx-pill g">${esc(v.format)}</span><span class="ivx-pill ${v.result==='합격'?'ok':'g'}">${esc(v.result)}</span></div>
+      ${v.text?`<div class="rvx-text">${esc(v.text)}</div>`:''}
+    </div>`).join('') : `<div class="rvx-empty">아직 등록된 면접 후기가 없습니다.</div>`;
+  return `<div class="sub-head"><div><div class="firm-block-title" style="margin:0;">면접 후기</div><div class="sh-note">본인이 직접 경험한 내용만. 전해 들은 내용은 제외해주세요.</div></div>
+      <button class="mini-btn" onclick="openInterviewModal('${key}')">+ 면접 후기</button></div>${cards}`;
+}
+
+/* ── 모달: 연봉 ── */
+function openSalaryModal(key){
+  activeFirm = key;
+  document.getElementById('sl-year').value = '1년차';
+  document.getElementById('sl-amount').value = '';
+  document.getElementById('sl-me').textContent = myAuthorName();
+  document.getElementById('modal-salary').classList.add('show');
+}
+function submitSalary(){
+  const amount = parseInt((document.getElementById('sl-amount').value||'').replace(/[^0-9]/g,''),10);
+  if(!amount){ alert('연봉 금액을 숫자로 입력해주세요.'); return; }
+  const year = document.getElementById('sl-year').value;
+  if(!firmSalaries[activeFirm]) firmSalaries[activeFirm] = [];
+  firmSalaries[activeFirm].push({ id:'sl'+Date.now(), year, amount, author:myAuthorName(), created:new Date().toISOString() });
+  store.set('bb-salaries', firmSalaries);
+  firmSubTab[activeFirm]='salary'; openFirms.add(activeFirm);
+  closeModal(); renderFirms();
+}
+
+/* ── 모달: 근무조건 리뷰 ── */
+function pickAxisStar(axis, n){
+  const box = document.getElementById('ax-'+axis);
+  box.dataset.val = n;
+  box.querySelectorAll('.star-pick').forEach((el,i)=> el.classList.toggle('on', i<n));
+}
+function openReviewModal(key){
+  activeFirm = key;
+  RVX_AXES.forEach(a=>{ const b=document.getElementById('ax-'+a); b.dataset.val='0'; b.querySelectorAll('.star-pick').forEach(el=>el.classList.remove('on')); });
+  document.getElementById('rvm-text').value='';
+  document.getElementById('rvm-me').textContent = myAuthorName();
+  document.getElementById('modal-review').classList.add('show');
+}
+function submitWorkReview(){
+  const axes={}; let ok=true;
+  RVX_AXES.forEach(a=>{ const v=parseInt(document.getElementById('ax-'+a).dataset.val||'0',10); axes[a]=v; if(!v) ok=false; });
+  if(!ok){ alert('네 항목(워라밸·보상·성장·문화)을 모두 평가해주세요.'); return; }
+  const facts = {
+    '야근빈도':document.getElementById('rvm-night').value,
+    '포괄임금':document.getElementById('rvm-pogal').value,
+    '재택':document.getElementById('rvm-remote').value,
+    '연차소진':document.getElementById('rvm-annual').value
+  };
+  const rating = (axes['워라밸']+axes['보상']+axes['성장']+axes['문화'])/4;
+  if(!reviews[activeFirm]) reviews[activeFirm] = { firm:firmDisplayName(activeFirm), items:[] };
+  reviews[activeFirm].items.unshift({ id:'rv'+Date.now(), author:myAuthorName(), axes, facts,
+    text:document.getElementById('rvm-text').value.trim(), rating, created:new Date().toISOString(), rebuttals:[], corrections:[] });
+  store.set('bb-reviews', reviews);
+  firmSubTab[activeFirm]='review'; openFirms.add(activeFirm);
+  closeModal(); renderFirms();
+}
+
+/* ── 모달: 면접 후기 ── */
+function openInterviewModal(key){
+  activeFirm = key;
+  document.getElementById('ivm-role').value='송무';
+  document.getElementById('ivm-result').value='합격';
+  document.getElementById('ivm-format').value='';
+  document.getElementById('ivm-text').value='';
+  document.getElementById('ivm-own').checked=false;
+  document.getElementById('ivm-me').textContent = myAuthorName();
+  document.getElementById('modal-interview').classList.add('show');
+}
+function submitInterview(){
+  if(!document.getElementById('ivm-own').checked){ alert('본인 경험 확인에 체크해주세요.'); return; }
+  if(!firmInterviews[activeFirm]) firmInterviews[activeFirm] = [];
+  firmInterviews[activeFirm].unshift({ id:'iv'+Date.now(), author:myAuthorName(),
+    role:document.getElementById('ivm-role').value,
+    format:document.getElementById('ivm-format').value.trim()||'미기재',
+    result:document.getElementById('ivm-result').value,
+    text:document.getElementById('ivm-text').value.trim(), own:true, created:new Date().toISOString() });
+  store.set('bb-interviews', firmInterviews);
+  firmSubTab[activeFirm]='interview'; openFirms.add(activeFirm);
+  closeModal(); renderFirms();
+}
+
+/* ── 모달: 반론 ── */
+function openRebModal(key, reviewId){
+  activeFirm = key; activeReview = reviewId;
+  document.getElementById('rbm-text').value='';
+  document.getElementById('rbm-me').textContent = myAuthorName();
+  document.getElementById('modal-rebuttal').classList.add('show');
+}
+function submitReb(){
+  const text = document.getElementById('rbm-text').value.trim();
+  if(!text){ alert('반론 내용을 입력해주세요.'); return; }
+  const items = (reviews[activeFirm]&&reviews[activeFirm].items)||[];
+  const it = items.find(x=>x.id===activeReview);
+  if(!it){ closeModal(); return; }
+  if(!it.rebuttals) it.rebuttals = [];
+  it.rebuttals.push({ author:myAuthorName(), text, created:new Date().toISOString() });
+  store.set('bb-reviews', reviews);
+  openReb.add(activeReview); firmSubTab[activeFirm]='review'; openFirms.add(activeFirm);
+  closeModal(); renderFirms();
+}
+
+function addReview(i){
+  const d = firmList[i]; if(!d) return;
+  const input = document.getElementById('rev-'+i);
+  const text = (input.value||'').trim();
+  if(!text){ alert('한줄평 내용을 입력해주세요.'); return; }
+  const rating = parseInt(document.getElementById('rate-'+i).dataset.val||'0',10);
+  if(!reviews[d.key]) reviews[d.key] = { firm:d.firm, items:[] };
+  reviews[d.key].items.push({ author: myAuthorName(), rating, text, created:new Date().toISOString() });
+  store.set('bb-reviews', reviews);
+  openFirms.add(d.key);
+  renderFirms();
+}
+
+/* 회사 한줄평 모달 별점 */
+function modalPickStar(s){
+  const box = document.getElementById('fm-rating');
+  box.dataset.val = s;
+  box.querySelectorAll('.star-pick').forEach((el,idx)=> el.classList.toggle('on', idx < s));
+}
+function submitFirmReview(){
+  const firm = document.getElementById('fm-firm').value.trim();
+  const text = document.getElementById('fm-text').value.trim();
+  if(!firm || !text){ alert('회사명과 한줄평은 필수입니다.'); return; }
+  const key = normFirm(firm);
+  const rating = parseInt(document.getElementById('fm-rating').dataset.val||'0',10);
+  if(!reviews[key]) reviews[key] = { firm, items:[] };
+  reviews[key].items.unshift({ id:'rv'+Date.now(), author: myAuthorName(), rating, text, created:new Date().toISOString(), rebuttals:[], corrections:[] });
+  firmSubTab[key] = 'review';
+  store.set('bb-reviews', reviews);
+  openFirms.add(key);
+  document.getElementById('fm-firm').value='';
+  document.getElementById('fm-text').value='';
+  document.getElementById('fm-rating').dataset.val='0';
+  document.getElementById('fm-rating').querySelectorAll('.star-pick').forEach(el=>el.classList.remove('on'));
+  closeModal();
+  renderFirms();
+}
+
+/* ── 렌더: 홈 대시보드 ── */
+function fmtWon(n){ return Math.round(n).toLocaleString('ko-KR'); }
+
+function hearingInfo(iso){
+  const d = new Date(iso);
+  const now = new Date();
+  const dayStart = new Date().setHours(0,0,0,0);
+  const diffDays = Math.floor((new Date(d).setHours(0,0,0,0) - dayStart)/86400000);
+  const wd = ['일','월','화','수','목','금','토'][d.getDay()];
+  const hh = String(d.getHours()).padStart(2,'0');
+  const mm = String(d.getMinutes()).padStart(2,'0');
+  const whenStr = `${d.getMonth()+1}.${d.getDate()}(${wd}) ${hh}:${mm}`;
+  let label, soon;
+  if(d < now){ label='지남'; soon=false; }
+  else if(diffDays===0){ label='오늘'; soon=true; }
+  else if(diffDays===1){ label='내일'; soon=true; }
+  else { label='D-'+diffDays; soon=diffDays<=3; }
+  return { whenStr, label, soon, past: d<now };
+}
+
+function renderHome(){
+  const g = document.getElementById('home-greeting');
+  if(g){
+    const wd = ['일','월','화','수','목','금','토'][new Date().getDay()];
+    const t = new Date();
+    g.textContent = `${t.getMonth()+1}월 ${t.getDate()}일 (${wd})`;
+  }
+  renderProxyWidget();
+  renderScrapWidget();
+  renderHomeNews();
+  renderDigest();
+  renderLaws();
+  renderNotices();
+  renderQuickLinks();
+  calcInterest(); calcPeriod(); calcStamp();
+}
+
+function renderProxyWidget(){
+  const el = document.getElementById('proxy-list');
+  const upcoming = proxy
+    .map(p=>({...p, h:hearingInfo(p.date)}))
+    .filter(p=>!p.h.past)
+    .sort((a,b)=> new Date(a.date)-new Date(b.date))
+    .slice(0,5);
+  if(!upcoming.length){ el.innerHTML = `<div style="padding:14px 0;color:var(--ink-soft);font-size:13px;">예정된 복대리 요청이 없습니다. 상단 <b>+ 복대리 등록</b>으로 남겨보세요.</div>`; return; }
+  el.innerHTML = upcoming.map(p=>`
+    <div class="proxy-row">
+      <span class="proxy-tag ${p.type==='구인'?'need':'offer'}">${p.type}</span>
+      <div class="proxy-main">
+        <div class="proxy-when">${esc(p.h.whenStr)} · ${esc(p.caseType)}</div>
+        <div class="proxy-where">${esc(p.court)}</div>
+        ${p.note?`<div class="proxy-note">${esc(p.note)}</div>`:''}
+        <div class="proxy-meta">辯 ${esc(p.author)} · ${timeAgo(p.created)} 등록</div>
+      </div>
+      <span class="proxy-dday ${p.h.soon?'soon':'far'}">${p.h.label}</span>
+    </div>`).join('');
+}
+
+function renderScrapWidget(){
+  const chipBox = document.getElementById('scrap-chips');
+  const cats = ['전체', ...Array.from(new Set(scrap.map(s=>s.cat)))];
+  chipBox.innerHTML = cats.map(c=>`<span class="mini-chip ${scrapFilter===c?'on':''}" onclick="setScrapFilter('${c}')">${c}</span>`).join('');
+  const list = document.getElementById('scrap-list');
+  const items = scrap
+    .filter(s=> scrapFilter==='전체' || s.cat===scrapFilter)
+    .sort((a,b)=> new Date(b.created)-new Date(a.created))
+    .slice(0,6);
+  if(!items.length){ list.innerHTML = `<div style="color:var(--ink-soft);font-size:13px;padding:6px 0;">해당 분야 스크랩이 없습니다.</div>`; return; }
+  list.innerHTML = items.map(s=>`
+    <div class="wg-li">
+      <a href="${esc(s.link)}" target="_blank" rel="noopener">${esc(s.title)}</a>
+      <div class="sub"><span class="wg-cat">${esc(s.cat)}</span><span>${esc(s.source)}</span><span>${timeAgo(s.created)}</span></div>
+    </div>`).join('');
+}
+function setScrapFilter(c){ scrapFilter=c; store.set('bb-interest', c); renderScrapWidget(); }
+
+function renderHomeNews(){
+  const el = document.getElementById('home-news');
+  const items = news.slice().sort((a,b)=> new Date(b.created)-new Date(a.created)).slice(0,4);
+  el.innerHTML = items.map(n=>`
+    <div class="wg-li">
+      <a href="${n.link?esc(n.link):'#'}" ${n.link?'target="_blank" rel="noopener"':''}>${esc(n.title)}</a>
+      <div class="sub"><span class="wg-cat" style="${n.type==='판례공보'?'border-color:var(--seal);color:var(--seal);':''}">${esc(n.type)}</span><span>${timeAgo(n.created)}</span></div>
+    </div>`).join('');
+}
+
+function renderDigest(){
+  const el = document.getElementById('digest');
+  const rows = [];
+  const latestJob = jobs.slice().sort((a,b)=> new Date(b.created)-new Date(a.created))[0];
+  if(latestJob) rows.push({k:'새 공고', v:`<b>${esc(latestJob.firm)}</b> ${esc(latestJob.title)}`, go:"switchTab('jobs')"});
+  let latestReview=null, latestFirm='';
+  Object.values(reviews).forEach(v=>(v.items||[]).forEach(r=>{ if(!latestReview || new Date(r.created)>new Date(latestReview.created)){ latestReview=r; latestFirm=v.firm; } }));
+  if(latestReview) rows.push({k:'새 한줄평', v:`<b>${esc(latestFirm)}</b> "${esc(latestReview.text.slice(0,28))}${latestReview.text.length>28?'…':''}"`, go:"switchTab('firms')"});
+  const hotPost = posts.slice().sort((a,b)=> (b.views||0)-(a.views||0))[0];
+  if(hotPost) rows.push({k:'라운지 hot', v:`<b>[${esc(hotPost.board)}]</b> ${esc(hotPost.title)}`, go:"switchTab('info')"});
+  const proxyCount = proxy.map(p=>hearingInfo(p.date)).filter(h=>!h.past).length;
+  rows.push({k:'복대리', v:`대기 중 <b>${proxyCount}건</b>`, go:null});
+  el.innerHTML = rows.map(r=>`
+    <div class="dg-item">
+      <span class="dg-k">${r.k}</span>
+      <span class="dg-v" ${r.go?`onclick="${r.go}"`:''}>${r.v}</span>
+    </div>`).join('');
+}
+
+function renderLaws(){
+  const el = document.getElementById('law-list');
+  const items = laws.slice().sort((a,b)=> new Date(a.effective)-new Date(b.effective));
+  el.innerHTML = items.map(l=>{
+    const diff = Math.ceil((new Date(l.effective)-new Date().setHours(0,0,0,0))/86400000);
+    const pill = diff<0 ? `<span class="dday-pill far">시행됨</span>` : `<span class="dday-pill ${diff<=7?'':'far'}">시행 D-${diff}</span>`;
+    return `<div class="wg-li">
+      <a href="${esc(l.link)}" target="_blank" rel="noopener">${esc(l.title)}</a>
+      <div class="sub"><span class="wg-cat">${esc(l.kind)}</span><span>시행 ${esc(l.effective)}</span>${pill}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderNotices(){
+  const el = document.getElementById('notice-list');
+  const items = notices.slice().sort((a,b)=>{
+    const ad=a.deadline?new Date(a.deadline).getTime():Infinity;
+    const bd=b.deadline?new Date(b.deadline).getTime():Infinity;
+    return ad-bd;
+  });
+  el.innerHTML = items.map(n=>{
+    let pill='';
+    if(n.deadline){
+      const diff = Math.ceil((new Date(n.deadline)-new Date().setHours(0,0,0,0))/86400000);
+      pill = diff<0 ? `<span class="dday-pill far">마감</span>` : `<span class="dday-pill ${diff<=7?'':'far'}">마감 D-${diff}</span>`;
+    }
+    return `<div class="wg-li">
+      <a href="${esc(n.link)}" target="_blank" rel="noopener">${esc(n.title)}</a>
+      <div class="sub"><span class="wg-cat">${esc(n.org)}</span>${pill}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderQuickLinks(){
+  const el = document.getElementById('qlinks');
+  el.innerHTML = quickLinks.map(q=>`
+    <a class="qlink" href="${esc(q.url)}" target="_blank" rel="noopener">
+      <span class="ql-name">${esc(q.name)}</span>
+      <span class="ql-desc">${esc(q.desc)}</span>
+    </a>`).join('');
+}
+
+/* ── 실무 계산기 ── */
+function calcTab(c){
+  ['interest','period','stamp'].forEach(k=>{
+    document.getElementById('calc-'+k).style.display = k===c ? 'flex' : 'none';
+  });
+  document.querySelectorAll('.calc-tab').forEach(b=> b.classList.toggle('on', b.dataset.c===c));
+}
+function calcInterest(){
+  const P = parseFloat(document.getElementById('ci-p').value)||0;
+  const r = parseFloat(document.getElementById('ci-r').value)||0;
+  const s = document.getElementById('ci-s').value, e = document.getElementById('ci-e').value;
+  const out = document.getElementById('ci-out');
+  if(!P || !s || !e){ out.innerHTML='금액·기간을 입력하세요.'; return; }
+  const days = Math.round((new Date(e)-new Date(s))/86400000);
+  if(days<0){ out.innerHTML='종료일이 기산일보다 빠릅니다.'; return; }
+  const interest = P * (r/100) * (days/365);
+  out.innerHTML = `${days}일분 지연손해금 <b>${fmtWon(interest)}원</b><br/><span style="font-size:11.5px;color:var(--ink-soft);">원리금 합계 ${fmtWon(P+interest)}원</span>`;
+}
+function calcPeriod(){
+  const s = document.getElementById('cp-s').value;
+  const d = parseInt(document.getElementById('cp-d').value)||0;
+  const out = document.getElementById('cp-out');
+  if(!s){ out.innerHTML='기산일을 입력하세요.'; return; }
+  const end = new Date(new Date(s).getTime() + d*86400000);
+  const wd = ['일','월','화','수','목','금','토'][end.getDay()];
+  const weekend = (end.getDay()===0||end.getDay()===6);
+  out.innerHTML = `만료일 <b>${end.getFullYear()}.${end.getMonth()+1}.${end.getDate()} (${wd})</b>` +
+    (weekend ? `<br/><span style="font-size:11.5px;color:var(--seal);">주말입니다 — 익영업일로 순연 여부 확인</span>` : '');
+}
+function calcStamp(){
+  const v = parseFloat(document.getElementById('cs-v').value)||0;
+  const out = document.getElementById('cs-out');
+  if(!v){ out.innerHTML='소가를 입력하세요.'; return; }
+  let amt;
+  if(v < 10000000) amt = v*0.005;
+  else if(v < 100000000) amt = v*0.0045 + 5000;
+  else if(v < 1000000000) amt = v*0.004 + 55000;
+  else amt = v*0.0035 + 555000;
+  amt = Math.floor(Math.round(amt)/1000)*1000; // 1,000원 미만 절사 (부동소수점 보정)
+  const efiling = Math.floor(Math.round(amt*0.9)/1000)*1000; // 전자소송 10% 감액 근사
+  out.innerHTML = `민사 1심 인지액 <b>${fmtWon(amt)}원</b><br/><span style="font-size:11.5px;color:var(--ink-soft);">전자소송 시 약 ${fmtWon(efiling)}원</span>`;
+}
+
+/* ── 복대리 등록 ── */
+function openProxyModal(){
+  document.getElementById('modal-proxy').classList.add('show');
+}
+function submitProxy(){
+  const court = document.getElementById('px-court').value.trim();
+  const date = document.getElementById('px-date').value;
+  if(!court || !date){ alert('법원·재판부와 기일 일시는 필수입니다.'); return; }
+  proxy.push({
+    id: Date.now(),
+    type: document.getElementById('px-type').value,
+    court,
+    caseType: document.getElementById('px-case').value,
+    date: new Date(date).toISOString(),
+    note: document.getElementById('px-note').value.trim(),
+    author: myAuthorName(),
+    created: new Date().toISOString()
+  });
+  store.set('bb-proxy', proxy);
+  ['px-court','px-date','px-note'].forEach(id=>document.getElementById(id).value='');
+  closeModal();
+  renderProxyWidget();
+  renderDigest();
+}
+
+/* ── 모달 ── */
+function openModal(){
+  const map = { home:'modal-proxy', jobs:'modal-job', firms:'modal-firm', info:'modal-post', news:'modal-news' };
+  document.getElementById(map[currentTab]).classList.add('show');
+}
+function openProfile(){
+  document.getElementById('pf-type').value = profile.type || '';
+  syncRoundOptions();
+  document.getElementById('pf-round').value = profile.round || '';
+  document.getElementById('pf-role').value = profile.role || '';
+  document.getElementById('pf-years').value = profile.years || '';
+  document.getElementById('modal-profile').classList.add('show');
+}
+function saveProfile(){
+  profile = {
+    type: document.getElementById('pf-type').value,
+    round: document.getElementById('pf-round').value,
+    role: document.getElementById('pf-role').value,
+    years: document.getElementById('pf-years').value
+  };
+  store.set('bb-profile', profile);
+  refreshProfileBtn();
+  closeModal();
+}
+function closeModal(){
+  document.querySelectorAll('.modal-back').forEach(m=>m.classList.remove('show'));
+}
+document.querySelectorAll('.modal-back').forEach(m=>{
+  m.addEventListener('click', e=>{ if(e.target===m) closeModal(); });
+});
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+
+function submitJob(){
+  const title = document.getElementById('j-title').value.trim();
+  const firm = document.getElementById('j-firm').value.trim();
+  if(!title || !firm){ alert('공고 제목과 사무소·기관명은 필수입니다.'); return; }
+  jobs.push({
+    id: Date.now(),
+    title, firm,
+    role: document.getElementById('j-role').value,
+    region: document.getElementById('j-region').value,
+    exp: document.getElementById('j-exp').value.trim(),
+    pay: document.getElementById('j-pay').value.trim(),
+    deadline: document.getElementById('j-deadline').value || null,
+    body: document.getElementById('j-body').value.trim(),
+    link:'', comments:[], seen:0,
+    created: new Date().toISOString()
+  });
+  store.set('bb-jobs', jobs);
+  closeModal(); renderJobs();
+  ['j-title','j-firm','j-exp','j-pay','j-deadline','j-body'].forEach(id=>document.getElementById(id).value='');
+}
+
+function submitPost(){
+  const title = document.getElementById('p-title').value.trim();
+  const body = document.getElementById('p-body').value.trim();
+  if(!title || !body){ alert('제목과 내용은 필수입니다.'); return; }
+  posts.push({
+    id: Date.now(),
+    board: document.getElementById('p-board').value,
+    topic: document.getElementById('p-topic').value,
+    title, body,
+    author: myAuthorName(), created:new Date().toISOString(), views:0
+  });
+  store.set('bb-posts', posts);
+  closeModal(); renderPosts();
+  ['p-title','p-body'].forEach(id=>document.getElementById(id).value='');
+}
+
+function submitNews(){
+  const title = document.getElementById('n-title').value.trim();
+  const body = document.getElementById('n-body').value.trim();
+  if(!title || !body){ alert('제목과 요지·요약은 필수입니다.'); return; }
+  news.push({
+    id: Date.now(),
+    type: document.getElementById('n-type').value,
+    title, body,
+    link: document.getElementById('n-link').value.trim(),
+    author: myAuthorName(), created:new Date().toISOString(), views:0
+  });
+  store.set('bb-news', news);
+  closeModal(); renderNews();
+  ['n-title','n-body','n-link'].forEach(id=>document.getElementById(id).value='');
+}
+
+/* ── 초기화 ── */
+document.getElementById('today-str').textContent =
+  new Date().toLocaleDateString('ko-KR', {year:'numeric', month:'long', day:'numeric', weekday:'short'});
+refreshProfileBtn();
+renderJobs();
+renderPosts();
+renderNews();
+renderFirms();
+renderHome();
+</script>
+</body>
+</html>
