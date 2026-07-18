@@ -987,11 +987,7 @@ const seedPosts = [
   {id:6, board:"공공", topic:"이직·연봉", title:"공공기관 임기제 만료 후 진로, 다들 어디로 가나요", body:"임기제 6급으로 들어와서 2년 곧 만료.\n\n주변 보면 ① 재계약 ② 로펌 이직 ③ 개업 ④ 다른 공공기관 순환 정도로 갈리는 듯. 공공 경력이 민간에서 얼마나 인정받는지가 관건인데, 실제 이직해보신 분들 경험이 궁금합니다.", author:"변 11회, 공공 2년차", created:daysAgo(8), views:329},
 ];
 
-const seedNews = [
-  {id:1, type:"판례공보", title:"[예시] 대법원 — 채권추심 시 연락제한 요청의 효력 범위", body:"[화면 구성용 예시 데이터입니다]\n\n개인채무자보호법상 채무자의 연락제한 요청이 있는 경우 추심자의 연락 가능 범위와 위반 시 효과에 관한 판시. 실제 운영 시 이 자리에 판례공보 요지를 정리해 올립니다.", link:"https://www.scourt.go.kr", author:"운영자", created:daysAgo(2), views:284},
-  {id:2, type:"판례공보", title:"[예시] 대법원 — 법무법인 구성원 탈퇴와 수임계약의 귀속", body:"[화면 구성용 예시 데이터입니다]\n\n구성원 변호사 탈퇴 시 기존 수임 사건의 처리와 보수 정산에 관한 법리. 개업·이직을 앞둔 변호사에게 실무상 의미가 큰 쟁점.", link:"https://www.scourt.go.kr", author:"운영자", created:daysAgo(5), views:412},
-  {id:3, type:"법조뉴스", title:"[예시] 변협, 광고규정 개정안 입법예고 — 온라인 플랫폼 광고 기준 정비", body:"[화면 구성용 예시 데이터입니다]\n\n한줄 요약과 원문 링크만 게시하는 방식의 예시입니다. 기사 본문은 저작권 문제로 옮기지 않습니다.", link:"https://www.lawtimes.co.kr", author:"운영자", created:daysAgo(1), views:530},
-];
+const seedNews = [  ];
 
 /* 회사별 근무조건 리뷰 시드 — 항목별 평가 + 사실 정보 구조 (key는 normFirm 기준) */
 const seedReviews = {
@@ -1372,7 +1368,7 @@ function renderNews(){
     return;
   }
   list.innerHTML = filtered.map(n=>`
-    <article class="post-item" id="news-${n.id}" onclick="toggleNews(${n.id})">
+    <article class="post-item" id="news-${n.id}" onclick="toggleNews('${n.id}')">
       <div class="post-top">
         <span class="post-cat" style="${n.type==='판례공보' ? 'border-color:var(--seal);color:var(--seal);' : ''}">${esc(n.type)}</span>
         ${isNew(n.created) ? '<span class="badge-new">NEW</span>' : ''}
