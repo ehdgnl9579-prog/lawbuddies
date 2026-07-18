@@ -29,7 +29,7 @@ jobs:
         env:
           LAW_OC: ${{ secrets.LAW_OC }}
           OUT_FILE: data/panrye.json
-        run: node scripts/fetch-panrye.js
+        run: node fetch-panrye.js
 
       - name: 변경분 커밋
         run: |
