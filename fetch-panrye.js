@@ -60,10 +60,48 @@ function dateToIso(s) {
   return new Date(Date.UTC(+y, +mo - 1, +d, 9)).toISOString();
 }
 
+async function fetchOnce(url, timeoutMs = 20000) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), timeoutMs);
+  try {
+    const res = await fetch(url, {
+      signal: ctrl.signal,
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (compatible; lawbuddies-panrye/1.0)',
+        'Accept': 'application/xml,text/xml,*/*',
+      },
+    });
+    const body = await res.text();
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status} — 응답앞부분: ${body.slice(0, 200)}`);
+    }
+    // IP 제한/거부 시 200인데 XML이 아니라 에러 안내 HTML이 오는 경우 감지
+    if (!body.includes('<') || /권한|허용되지|제한|차단|denied|forbidden/i.test(body.slice(0, 300))) {
+      throw new Error(`정상 XML 아님(권한/IP 제한 의심) — 앞부분: ${body.slice(0, 200)}`);
+    }
+    return body;
+  } finally {
+    clearTimeout(t);
+  }
+}
+
+// https 먼저, 실패하면 http 로도 시도. 각 3회 재시도. 실패 원인을 자세히 출력.
 async function get(url) {
-  const res = await fetch(url, { headers: { 'User-Agent': 'lawbuddies-panrye/1.0' } });
-  if (!res.ok) throw new Error(`API ${res.status}: ${url}`);
-  return res.text();
+  const candidates = [url, url.replace('https://', 'http://')];
+  let lastErr;
+  for (const cand of candidates) {
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      try {
+        return await fetchOnce(cand);
+      } catch (e) {
+        const code = e.cause?.code || e.code || e.name || '';
+        lastErr = e;
+        console.error(`  … 시도 실패 [${cand.startsWith('https') ? 'https' : 'http'} #${attempt}] ${code} ${e.message}`);
+        await sleep(1500 * attempt);
+      }
+    }
+  }
+  throw lastErr;
 }
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
