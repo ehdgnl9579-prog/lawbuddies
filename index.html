@@ -2084,148 +2084,21 @@ async function loadNews(){
   }catch(e){ /* 실패 시 기존 시드 유지 */ }
 }
 loadNews();
-  /*** 로버디스 판례 자동수집 (Google Apps Script) ***/
-/*  매일 대법원 판례를 법제처 API에서 받아 GitHub의 data/panrye.json 에 커밋함.
- *  실행 함수: updatePanrye  (트리거도 이 함수에 검)               */
-
-// ▼▼▼ 여기 값만 채우세요 ▼▼▼
-const LAW_OC   = 'test';               // 법제처 인증값(OC). 우선 'test'로 전체 확인 후, 마이페이지의 네 OC로 교체
-const GH_TOKEN = '여기에_깃허브_토큰_붙여넣기';   // ★ 화면 캡처할 땐 이 줄 가리기
-// ▲▲▲ 여기까지 ▲▲▲  (아래 아이디/저장소는 이미 맞춰뒀어요)
-
-const GH_OWNER = 'ehdgnl9579-prog';
-const GH_REPO  = 'lawbuddies';
-const GH_PATH  = 'data/panrye.json';
-
-const CONFIG = {
-  court: '대법원',
-  listCount: 20,
-  maxItems: 12,
-  includeFullText: true,
-  excludeNamePatterns: ['심리불속행'],  // 심리불속행 기각 제외
-};
-const BASE = 'https://www.law.go.kr/DRF';
-
-function updatePanrye() {
-  const items = collectPanrye();
-  const payload = {
-    generated: new Date().toISOString(),
-    source: 'law.go.kr-open-api',
-    court: CONFIG.court,
-    count: items.length,
-    items: items,
-  };
-  commitToGitHub(JSON.stringify(payload, null, 2) + '\n');
-  Logger.log('완료: 판례 ' + items.length + '건 커밋');
+  async function loadPanrye(){
+  try{
+    const res = await fetch('data/panrye.json', { cache:'no-store' });
+    if(!res.ok) return;
+    const { items } = await res.json();
+    if(items && items.length){
+      const manual = news.filter(n => !(typeof n.id==='string' && n.id.startsWith('prec-')));
+      news = [...items, ...manual];
+      store.set('bb-news', news);
+      renderNews();
+      renderHome();
+    }
+  }catch(e){}
 }
-
-function fetchText(url) {
-  for (var i = 1; i <= 3; i++) {
-    try {
-      var res = UrlFetchApp.fetch(url, { muteHttpExceptions: true, headers: { 'User-Agent': 'lawbuddies-panrye' } });
-      if (res.getResponseCode() === 200) return res.getContentText();
-      Logger.log('시도 ' + i + ' HTTP ' + res.getResponseCode());
-    } catch (e) { Logger.log('시도 ' + i + ' 에러 ' + e); }
-    Utilities.sleep(1500 * i);
-  }
-  throw new Error('fetch 실패: ' + url);
-}
-
-function pick(xml, tag) {
-  var m = xml.match(new RegExp('<' + tag + '>([\\s\\S]*?)</' + tag + '>'));
-  if (!m) return '';
-  var v = m[1].replace(/<!\[CDATA\[|\]\]>/g, '');
-  v = v.replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '');
-  return decodeEnt(v).replace(/\r/g, '').replace(/[ \t]+\n/g, '\n').trim();
-}
-function decodeEnt(s) {
-  return s.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"')
-          .replace(/&#39;/g, "'").replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ');
-}
-function dateToIso(s) {
-  s = (s || '').trim();
-  var m = s.match(/(\d{4})\.\s*(\d{1,2})\.\s*(\d{1,2})/) || s.match(/^(\d{4})(\d{2})(\d{2})$/);
-  if (!m) return new Date().toISOString();
-  return new Date(Date.UTC(+m[1], +m[2] - 1, +m[3], 9)).toISOString();
-}
-
-function collectPanrye() {
-  var listUrl = BASE + '/lawSearch.do?OC=' + encodeURIComponent(LAW_OC)
-    + '&target=prec&type=XML&display=' + CONFIG.listCount
-    + '&curt=' + encodeURIComponent(CONFIG.court) + '&query=*&sort=ddes';
-  var listXml = fetchText(listUrl);
-
-  var ids = [], re = /<prec[\s>][\s\S]*?<\/prec>/g, m;
-  while ((m = re.exec(listXml))) {
-    var id = (m[0].match(/<판례일련번호>(\d+)<\/판례일련번호>/) || [])[1];
-    if (id) ids.push(id);
-  }
-  Logger.log('목록 ' + ids.length + '건');
-
-  var items = [];
-  for (var k = 0; k < ids.length && items.length < CONFIG.maxItems; k++) {
-    var xml;
-    try {
-      xml = fetchText(BASE + '/lawService.do?OC=' + encodeURIComponent(LAW_OC) + '&target=prec&ID=' + ids[k] + '&type=XML');
-    } catch (e) { continue; }
-    Utilities.sleep(200);
-
-    var caseName = pick(xml, '사건명'), caseNo = pick(xml, '사건번호'),
-        court = pick(xml, '법원명') || '대법원', date = pick(xml, '선고일자'),
-        caseType = pick(xml, '사건종류명'), issue = pick(xml, '판시사항'),
-        summary = pick(xml, '판결요지'), refLaw = pick(xml, '참조조문'), fullText = pick(xml, '판례내용');
-
-    if (!issue && !summary) continue;
-    if (CONFIG.excludeNamePatterns.some(function (p) { return caseName.indexOf(p) >= 0; })) continue;
-
-    var parts = [];
-    if (issue) parts.push('【판시사항】\n' + issue);
-    if (summary) parts.push('【판결요지】\n' + summary);
-    if (refLaw) parts.push('【참조조문】 ' + refLaw);
-
-    var rec = {
-      id: 'prec-' + ids[k],
-      type: '판례공보',
-      title: court + ' ' + caseNo + (caseName ? ' · ' + caseName : ''),
-      body: parts.join('\n\n'),
-      link: 'https://www.law.go.kr/LSW/precInfoP.do?precSeq=' + ids[k],
-      author: court,
-      created: dateToIso(date),
-      views: 0,
-      caseType: caseType,
-    };
-    if (CONFIG.includeFullText && fullText) rec.fullText = fullText;
-    items.push(rec);
-  }
-  items.sort(function (a, b) { return new Date(b.created) - new Date(a.created); });
-  return items;
-}
-
-function commitToGitHub(content) {
-  var api = 'https://api.github.com/repos/' + GH_OWNER + '/' + GH_REPO + '/contents/' + GH_PATH;
-  var headers = { 'Authorization': 'Bearer ' + GH_TOKEN, 'Accept': 'application/vnd.github+json', 'User-Agent': 'lawbuddies-panrye' };
-
-  // 기존 파일 sha 조회 (있으면 갱신, 없으면 새로 생성)
-  var sha = null;
-  var getRes = UrlFetchApp.fetch(api, { method: 'get', headers: headers, muteHttpExceptions: true });
-  if (getRes.getResponseCode() === 200) sha = JSON.parse(getRes.getContentText()).sha;
-
-  var body = {
-    message: 'chore: 판례 갱신 ' + new Date().toISOString().slice(0, 10),
-    content: Utilities.base64Encode(content, Utilities.Charset.UTF_8),
-  };
-  if (sha) body.sha = sha;
-
-  var putRes = UrlFetchApp.fetch(api, {
-    method: 'put', headers: headers, contentType: 'application/json',
-    payload: JSON.stringify(body), muteHttpExceptions: true,
-  });
-  var code = putRes.getResponseCode();
-  if (code !== 200 && code !== 201) {
-    throw new Error('GitHub 커밋 실패 HTTP ' + code + ': ' + putRes.getContentText().slice(0, 300));
-  }
-  Logger.log('GitHub 커밋 성공 HTTP ' + code);
-}
+loadPanrye();
 </script>
 </body>
 </html>
