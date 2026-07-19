@@ -53,18 +53,31 @@ async function fetchPage(pageNo) {
   });
 
   const url = `${BASE_URL}/list?${params.toString()}`;
+  console.log(`[jobalio] 요청 URL (키 제외): ${url.replace(SERVICE_KEY, 'KEY_HIDDEN')}`);
   const res = await fetch(url);
   if (!res.ok) throw new Error(`API 오류: ${res.status} ${res.statusText}`);
 
-  const data = await res.json();
-  // 응답 구조: data.result.items (배열) 또는 data.result.totalCount
-  // 실제 응답 키는 처음 실행 시 로그로 확인 후 아래를 수정
-  const result = data?.result || data?.response?.body;
-  if (!result) throw new Error('응답 구조 예상과 다름: ' + JSON.stringify(data).slice(0, 200));
+  const text = await res.text();
+  // ★ 디버그: 응답 원문의 처음 1000자를 로그에 찍음
+  console.log(`[jobalio] 응답 원문 (첫 1000자):\n${text.slice(0, 1000)}`);
+
+  const data = JSON.parse(text);
+  // ★ 디버그: 최상위 키 확인
+  console.log(`[jobalio] 최상위 키: ${Object.keys(data)}`);
+
+  // 응답 구조를 유연하게 탐색
+  const result = data?.result || data?.response?.body || data?.body || data;
+  const items = result?.items || result?.item || result?.list || [];
+  const totalCount = result?.totalCount || result?.total || result?.totalCnt || (Array.isArray(items) ? items.length : 0);
+
+  console.log(`[jobalio] 파싱 결과: totalCount=${totalCount}, items 수=${Array.isArray(items) ? items.length : '배열아님'}`);
+
+  // items가 배열이 아니면 배열로 감싸기 (단건 응답 대응)
+  const itemArray = Array.isArray(items) ? items : (items ? [items] : []);
 
   return {
-    totalCount: result.totalCount || result.total || 0,
-    items: result.items || [],
+    totalCount,
+    items: itemArray,
   };
 }
 
