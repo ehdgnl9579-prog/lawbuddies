@@ -2096,6 +2096,43 @@ loadNews();
 }
 loadPanrye();
 
+/* ── 채용공고: jobs.json(잡알리오 자동) 병합 로드 ── */
+async function loadJobs(){
+  try{
+    const res = await fetch('data/jobs.json', { cache:'no-store' });
+    if(!res.ok) return;
+    const fetched = await res.json();
+    if(!fetched || !fetched.length) return;
+
+    // 자동수집(source:'jobalio') 공고와 수동 등록 공고를 분리해서 병합
+    const manual = jobs.filter(j => !j.source || j.source === 'manual');
+    const autoMap = new Map(fetched.map(j => [j.sourceId, j]));
+
+    // 기존 자동수집 공고 중 수동으로 댓글·seen이 쌓인 것은 보존
+    jobs.filter(j => j.source === 'jobalio').forEach(j => {
+      const fresh = autoMap.get(j.sourceId);
+      if(fresh){
+        autoMap.set(j.sourceId, {
+          ...fresh,
+          comments: j.comments?.length ? j.comments : fresh.comments,
+          seen: Math.max(j.seen || 0, fresh.seen || 0),
+        });
+      }
+    });
+
+    jobs = [...Array.from(autoMap.values()), ...manual]
+      .sort((a,b) => {
+        if(a.archived !== b.archived) return a.archived ? 1 : -1;
+        return new Date(b.created) - new Date(a.created);
+      });
+
+    store.set('bb-jobs', jobs);
+    renderJobs();
+    renderHome();
+  }catch(e){ /* 실패 시 기존 시드 유지 */ }
+}
+loadJobs();
+
 /* ── 변협·지방회 공지: notices.json(자동) + notices-seoul.json(수동) 병합 로드 ── */
 async function loadNotices(){
   let auto = [], manual = [];
