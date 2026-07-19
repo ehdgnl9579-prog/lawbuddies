@@ -2095,6 +2095,22 @@ loadNews();
   }catch(e){}
 }
 loadPanrye();
+
+/* ── 변협·지방회 공지: notices.json 자동 로드 ── */
+async function loadNotices(){
+  try{
+    const res = await fetch('data/notices.json', { cache:'no-store' });
+    if(!res.ok) return;
+    const { items } = await res.json();
+    if(items && items.length){
+      notices = items;
+      store.set('bb-notices', notices);
+      renderNotices();
+    }
+  }catch(e){ /* 실패 시 기존 시드 유지 */ }
+}
+loadNotices();
+
 </script>
 </body>
 </html>
