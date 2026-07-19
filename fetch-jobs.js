@@ -34,10 +34,12 @@ function matchesKeyword(text) {
   return KEYWORDS.some((kw) => text.includes(kw));
 }
 
-function parseKoreanDate(yyyymmdd) {
-  if (!yyyymmdd || yyyymmdd.length !== 10) return null;
-  // YYYY-MM-DD 형식으로 옴
-  return new Date(`${yyyymmdd}T00:00:00+09:00`).toISOString();
+function parseKoreanDate(raw) {
+  if (!raw) return null;
+  const s = String(raw).replace(/-/g, ''); // YYYY-MM-DD → YYYYMMDD
+  if (s.length !== 8) return null;
+  const y = s.slice(0, 4), m = s.slice(4, 6), d = s.slice(6, 8);
+  return new Date(`${y}-${m}-${d}T00:00:00+09:00`).toISOString();
 }
 
 // ───────────────────────────────
@@ -57,28 +59,18 @@ async function fetchPage(pageNo) {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`API 오류: ${res.status} ${res.statusText}`);
 
-  const text = await res.text();
-  // ★ 디버그: 응답 원문의 처음 1000자를 로그에 찍음
-  console.log(`[jobalio] 응답 원문 (첫 1000자):\n${text.slice(0, 1000)}`);
+  const data = await res.json();
 
-  const data = JSON.parse(text);
-  // ★ 디버그: 최상위 키 확인
-  console.log(`[jobalio] 최상위 키: ${Object.keys(data)}`);
+  // 실제 응답 구조 (2026-07-19 확인):
+  //   data.resultCode = 200
+  //   data.totalCount = 542   ← 총 건수
+  //   data.result = [...]     ← 아이템 배열 (바로 배열임, .items가 아님)
+  const totalCount = data.totalCount || 0;
+  const items = Array.isArray(data.result) ? data.result : [];
 
-  // 응답 구조를 유연하게 탐색
-  const result = data?.result || data?.response?.body || data?.body || data;
-  const items = result?.items || result?.item || result?.list || [];
-  const totalCount = result?.totalCount || result?.total || result?.totalCnt || (Array.isArray(items) ? items.length : 0);
+  console.log(`[jobalio] 파싱: totalCount=${totalCount}, items=${items.length}건`);
 
-  console.log(`[jobalio] 파싱 결과: totalCount=${totalCount}, items 수=${Array.isArray(items) ? items.length : '배열아님'}`);
-
-  // items가 배열이 아니면 배열로 감싸기 (단건 응답 대응)
-  const itemArray = Array.isArray(items) ? items : (items ? [items] : []);
-
-  return {
-    totalCount,
-    items: itemArray,
-  };
+  return { totalCount, items };
 }
 
 async function fetchAllJobalio() {
@@ -99,35 +91,53 @@ async function fetchAllJobalio() {
     allItems = allItems.concat(items);
   }
 
-  // 변호사/법무 관련만 필터링
-  const filtered = allItems.filter((item) =>
-    matchesKeyword(item.recrutPbancTtl || item.pbancContsSn || '')
-  );
+  // 변호사/법무 관련만 필터링 — 제목·자격요건·NCS직무명 모두에서 검색
+  const filtered = allItems.filter((item) => {
+    const searchText = [
+      item.recrutPbancTtl,  // 공시 제목
+      item.aplyQlfcCn,      // 자격요건 상세
+      item.ncsCdNmLst,      // NCS 직무명 (예: "법률")
+      item.recrutSeNm,      // 채용구분명
+    ].filter(Boolean).join(' ');
+    return matchesKeyword(searchText);
+  });
   console.log(`[jobalio] 키워드 필터 후: ${filtered.length}건 / 전체 ${allItems.length}건`);
+  if (filtered.length > 0) {
+    console.log(`[jobalio] 예시: ${filtered.slice(0, 3).map(i => i.recrutPbancTtl).join(' | ')}`);
+  }
 
   return filtered.map(normalizeItem);
 }
 
 function normalizeItem(item) {
-  // 응답 필드명: 첫 실행 후 실제 로그 보고 맞춰야 할 수 있음
-  // 아래는 코드정의서 기준 추정 필드명
+  // 실제 API 필드명 (2026-07-19 확인):
+  //   recrutPblntSn  — 공시 일련번호 (고유 ID)
+  //   recrutPbancTtl — 공시 제목
+  //   instNm         — 기관명
+  //   workRgnNmLst   — 근무지역명
+  //   pbancBgngYmd   — 공시 시작일 (YYYYMMDD)
+  //   pbancEndYmd    — 공시 마감일 (YYYYMMDD)
+  //   srcUrl         — 원문 URL
+  //   recrutNope     — 채용인원
+  //   hireTypeNmLst  — 고용유형명
+  //   aplyQlfcCn     — 자격요건
+
   const title = item.recrutPbancTtl || '';
-  const firm = item.instNm || item.pbIntInstCd || '';
-  const deadline = parseKoreanDate(item.pbancEndYmd);
+  const firm = item.instNm || '';
 
   return {
     source: 'jobalio',
-    sourceId: String(item.pbancId || item.recrutPbancId || item.pbancContsSn || ''),
+    sourceId: String(item.recrutPblntSn || ''),
     title,
     firm,
     firmKey: normFirm(firm),
     role: '공공',
     region: guessRegion(item.workRgnNmLst || ''),
-    exp: item.acbgCondNmLst || '',
+    exp: item.hireTypeNmLst || '',
     pay: '공고 참조',
-    deadline,
-    link: `https://job.alio.go.kr/recruit.do`, // 잡알리오 채용 홈 (상세 URL은 /detail API로 별도 조회)
-    body: `공공기관 채용공고 (잡알리오 자동수집)\n기관: ${firm}\n채용제목: ${title}\n\n원문 상세 및 자격요건은 아래 링크를 확인하세요.`,
+    deadline: parseKoreanDate(item.pbancEndYmd),
+    link: item.srcUrl || 'https://job.alio.go.kr',
+    body: `공공기관 채용공고 (잡알리오 자동수집)\n기관: ${firm}\n채용인원: ${item.recrutNope || '미정'}명\n고용유형: ${item.hireTypeNmLst || '미정'}\n\n※ 원문에서 상세 자격요건·전형절차를 확인하세요.`,
     created: parseKoreanDate(item.pbancBgngYmd) || new Date().toISOString(),
     archived: false,
     comments: [],
