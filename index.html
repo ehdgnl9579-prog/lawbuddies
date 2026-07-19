@@ -2096,18 +2096,23 @@ loadNews();
 }
 loadPanrye();
 
-/* ── 변협·지방회 공지: notices.json 자동 로드 ── */
+/* ── 변협·지방회 공지: notices.json(자동) + notices-seoul.json(수동) 병합 로드 ── */
 async function loadNotices(){
+  let auto = [], manual = [];
   try{
     const res = await fetch('data/notices.json', { cache:'no-store' });
-    if(!res.ok) return;
-    const { items } = await res.json();
-    if(items && items.length){
-      notices = items;
-      store.set('bb-notices', notices);
-      renderNotices();
-    }
-  }catch(e){ /* 실패 시 기존 시드 유지 */ }
+    if(res.ok){ const j = await res.json(); auto = j.items || []; }
+  }catch(e){}
+  try{
+    const res2 = await fetch('data/notices-seoul.json', { cache:'no-store' });
+    if(res2.ok){ const j2 = await res2.json(); manual = j2.items || []; }
+  }catch(e){}
+  const merged = [...auto, ...manual];
+  if(merged.length){
+    notices = merged;
+    store.set('bb-notices', notices);
+    renderNotices();
+  }
 }
 loadNotices();
 
