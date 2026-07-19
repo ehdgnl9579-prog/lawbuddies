@@ -6,6 +6,9 @@ on:
     - cron: '10 21 * * *'
   workflow_dispatch: {} # 수동 실행 버튼 (첫 테스트용)
 
+permissions:
+  contents: write
+
 jobs:
   fetch-jobs:
     runs-on: ubuntu-latest
