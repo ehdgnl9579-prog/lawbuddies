@@ -1,82 +1,85 @@
 /**
  * fetch-legal-jobs.js
- * 로버디스 — 민간 변호사 채용공고 자동 수집 (Tier A-2: 채용 SaaS 플랫폼 검색)
+ * 로버디스 — 민간 변호사 채용공고 수집 (채용 SaaS 플랫폼 직접 수집 방식)
  *
- * 원리:
- *   greetinghr / recruiter.co.kr / recruiter.im / ninehire 등 채용 SaaS는
- *   각 회사 채용페이지를 구글에 색인시킴. 이 페이지들은 회사가 지원자 유치를
- *   위해 스스로 공개한 것 → "site:도메인 변호사" 검색으로 크로스-컴퍼니 수집 가능.
+ * 왜 이 방식인가:
+ *   구글 Custom Search JSON API는 2026년부터 신규 사용자에게 제공되지 않음(403).
+ *   대신 greetinghr / recruiter.co.kr / ninehire 등 채용 SaaS는 회사마다
+ *   같은 HTML 템플릿을 쓰므로, 플랫폼당 파서 1개로 수십~수백 개 회사를 커버 가능.
+ *   → 검색 API 불필요, 비용 0원, 쿼리 한도 없음.
  *
- *   Google Programmable Search Engine(PSE) API 사용.
- *   하루 100 쿼리 무료. 쿼리당 최대 10건, start 파라미터로 페이지네이션.
+ * robots.txt 확인 결과 (2026-07-23):
+ *   greetinghr : Content-Signal: search=yes, ai-train=no, use=reference
+ *                User-agent: * → Allow: / (단 /apply, /m/, /a/ 는 Disallow)
+ *                → "링크 + 짧은 발췌 + 원문참조" 용도는 명시적 허용
+ *   ninehire   : User-agent: * → Allow (관리/로그인 경로만 Disallow)
+ *   recruiter  : 회사별 상이. /app* 를 막는 곳이 있어 /career/jobs/ 경로만 사용
  *
- * 저작권 안전:
- *   - 회사가 공개한 자사 채용페이지 (취정센 같은 무단사용금지 사이트 아님)
- *   - 저장하는 건 "제목 + 회사 + 링크 + 스니펫 일부" = 사실정보 + 원문링크
- *   - 본문 전문 복제 안 함
+ * 수집 원칙 (제품원칙 준수):
+ *   - 사실 필드(회사·직무·경력·고용형태·근무지)만 추출, 본문 전문 복제 금지
+ *   - 원문 링크로 유도
+ *   - 요청 간 1초 간격, 식별 가능한 User-Agent
  *
- * 실행 주기: GitHub Actions legal-jobs.yml (매일 KST 06:20)
  * 출력: data/jobs.json 에 병합 (source: 'saas')
  */
 
 const fs = require('fs');
 const path = require('path');
 
-// ───────────────────────────────
-// CONFIG
-// ───────────────────────────────
-const GOOGLE_API_KEY = process.env.GOOGLE_SEARCH_API_KEY;
-const GOOGLE_CX = process.env.GOOGLE_SEARCH_CX; // Programmable Search Engine ID
 const OUTPUT_PATH = path.join(__dirname, 'data', 'jobs.json');
+const UA = 'lawbuddies-bot/1.0 (legal job aggregator)';
+const DELAY_MS = 1000;         // 요청 간 예의 간격
+const MAX_DETAIL_PER_RUN = 60; // 1회 실행당 상세조회 상한
 
-// 검색엔진 자체가 이미 4개 도메인(greetinghr/recruiter.co.kr/recruiter.im/ninehire)으로
-// 제한돼 있으므로(구글이 2026년 신규 엔진의 "전체 웹 검색"을 폐지 → 대신 도메인 등록 방식),
-// site: 연산자 없이 키워드만 검색하면 됩니다.
-const SEARCH_QUERIES = [
-  '변호사',
-  '사내변호사',
-  '변호사 채용',
-  'Legal Counsel',
-  'In-house Counsel',
-  '법무팀',
-  '법무 담당',
-  '법무 경력',
-  '컴플라이언스',
-  '준법지원',
+// ───────────────────────────────
+// 수집 대상 회사 목록
+//   새 회사를 발견하면 여기에 한 줄만 추가하면 됩니다.
+// ───────────────────────────────
+const COMPANIES = [
+  // ── greetinghr ──
+  { sub: 'kakaomobility',  platform: 'greeting', name: '카카오모빌리티' },
+  { sub: 'jipyong',        platform: 'greeting', name: '법무법인 지평' },
+  { sub: 'nice',           platform: 'greeting', name: 'NICE평가정보' },
+  { sub: 'daoudata',       platform: 'greeting', name: '다우데이타' },
+  { sub: 'peoplefund',     platform: 'greeting', name: '피플펀드' },
+  { sub: 'finda',          platform: 'greeting', name: '핀다' },
+  { sub: 'bucketplace',    platform: 'greeting', name: '오늘의집' },
+  { sub: 'vunohire',       platform: 'greeting', name: '뷰노' },
+  { sub: 'inspireresorts', platform: 'greeting', name: '인스파이어리조트' },
+  { sub: 'amwaykorea',     platform: 'greeting', name: '한국암웨이' },
+  { sub: 'bhsn',           platform: 'greeting', name: 'BHSN' },
+  { sub: 'carelabs',       platform: 'greeting', name: '케어랩스' },
+  { sub: 'lawcompany',     platform: 'greeting', name: '로앤컴퍼니' },
+
+  // ── recruiter.co.kr ──
+  { sub: 'koreanair',        platform: 'recruiter', name: '대한항공' },
+  { sub: 'koreanaircnd',     platform: 'recruiter', name: '대한항공씨앤디서비스' },
+  { sub: 'pulmuone',         platform: 'recruiter', name: '풀무원' },
+  { sub: 'hankooktire',      platform: 'recruiter', name: '한국타이어앤테크놀로지' },
+  { sub: 'gwss',             platform: 'recruiter', name: '고운세상코스메틱' },
+  { sub: 'donga',            platform: 'recruiter', name: '동아쏘시오홀딩스' },
+  { sub: 'hlcompany',        platform: 'recruiter', name: 'HL만도' },
+  { sub: 'ls-sec',           platform: 'recruiter', name: 'LS증권' },
+  { sub: 'yg-entertainment', platform: 'recruiter', name: 'YG엔터테인먼트' },
+  { sub: 'cosmax',           platform: 'recruiter', name: '코스맥스' },
+  { sub: 'hyosung',          platform: 'recruiter', name: '효성' },
+  { sub: 'kukdo',            platform: 'recruiter', name: '국도화학' },
+  { sub: 'hdc-labs',         platform: 'recruiter', name: 'HDC랩스' },
+
+  // ── ninehire ──
+  { sub: 'draju', platform: 'ninehire', name: '법무법인 대륙아주' },
 ];
 
-// 회사명 추출: greetinghr는 서브도메인, recruiter는 서브도메인
-// 예: kakaomobility.career.greetinghr.com → kakaomobility
-//     koreanair.recruiter.co.kr → koreanair
-const SUBDOMAIN_TO_FIRM = {
-  // 필요시 수동 매핑 보강 (자동추출이 부정확한 경우만)
-  kakaomobility: '카카오모빌리티',
-  koreanair: '대한항공',
-  koreanaircnd: '대한항공씨앤디서비스',
-  pulmuone: '풀무원',
-  hankooktire: '한국타이어앤테크놀로지',
-  hlcompany: 'HL만도',
-  donga: '동아쏘시오홀딩스',
-  'ls-sec': 'LS증권',
-  'yg-entertainment': 'YG엔터테인먼트',
-  gwss: '고운세상코스메틱',
-  peoplefund: '피플펀드',
-  finda: '핀다',
-  bucketplace: '오늘의집',
-  vunohire: '뷰노',
-  nice: 'NICE평가정보',
-  daoudata: '다우데이타',
-  carelabs: '케어랩스',
-  jipyong: '법무법인 지평',
-  lawcompany: '로앤컴퍼니',
-  amwaykorea: '한국암웨이',
-  inspireresorts: '인스파이어리조트',
-  bhsn: 'BHSN',
-};
+const KEYWORDS = [
+  '변호사', '법무', '법제', '준법', '컴플라이언스',
+  'Legal', 'Counsel', 'Compliance', 'Attorney',
+];
 
 // ───────────────────────────────
 // 유틸
 // ───────────────────────────────
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
 function normFirm(name) {
   return (name || '')
     .replace(/\(주\)|주식회사|\(유\)|유한회사|법무법인|\(유한\)/g, '')
@@ -85,124 +88,94 @@ function normFirm(name) {
     .toLowerCase();
 }
 
-// URL에서 회사 서브도메인 추출
-function extractFirmFromUrl(url) {
-  try {
-    const host = new URL(url).hostname;
-    // greetinghr: {sub}.career.greetinghr.com  또는  {sub}.greetinghr.com
-    // recruiter:  {sub}.recruiter.co.kr / .recruiter.im
-    // ninehire:   {sub}.ninehire.site
-    let sub = '';
-    if (host.includes('greetinghr.com')) {
-      sub = host.split('.career.greetinghr.com')[0].split('.greetinghr.com')[0];
-    } else if (host.includes('recruiter.co.kr')) {
-      sub = host.split('.recruiter.co.kr')[0];
-    } else if (host.includes('recruiter.im')) {
-      sub = host.split('.recruiter.im')[0];
-    } else if (host.includes('ninehire.site')) {
-      sub = host.split('.ninehire.site')[0];
-    }
-    sub = sub.replace(/^https?:\/\//, '');
-    // 매핑 테이블에 있으면 한글 회사명, 없으면 서브도메인 그대로
-    return SUBDOMAIN_TO_FIRM[sub] || sub || '(회사미상)';
-  } catch (e) {
-    return '(회사미상)';
-  }
+function matchesKeyword(text) {
+  if (!text) return false;
+  const lower = text.toLowerCase();
+  return KEYWORDS.some((kw) => lower.includes(kw.toLowerCase()));
 }
 
-function guessRegionFromText(text) {
+function stripTags(html) {
+  return (html || '')
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/\u200b/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+async function get(url) {
+  const res = await fetch(url, { headers: { 'User-Agent': UA } });
+  if (res.status === 404) return { notFound: true, text: '' };
+  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+  return { notFound: false, text: await res.text() };
+}
+
+// ───────────────────────────────
+// 사이트 필터 라벨과 동일한 값 반환
+// (사이트 직군 값: 송무 / 자문 / 사내변호사 / 공공 / 기타)
+// ───────────────────────────────
+function guessRole(text, firmName) {
+  const t = `${text || ''} ${firmName || ''}`;
+  if (/법무법인|법률사무소|로펌/.test(firmName || '')) return '송무';
+  if (/사내\s*변호사|사내변|Legal\s*Counsel|In-?house|기업\s*법무|법무\s*팀|법무\s*담당|준법|컴플라이언스|Compliance|법무/i.test(t)) return '사내변호사';
+  if (/공사|공단|공공기관|재단|진흥원|연구원/.test(t)) return '공공';
+  if (/자문|Advisory/i.test(t)) return '자문';
+  return '기타';
+}
+
+function guessRegion(text) {
   const t = text || '';
-  if (/서울|강남|서초|판교라인|여의도|종로|중구/.test(t)) return '서울';
-  if (/경기|인천|판교|성남|수원|용인|송도/.test(t)) return '경기·인천';
-  if (/부산|대구|대전|광주|울산|세종|충청|전라|경상|강원|제주|나주|천안/.test(t)) return '지방';
+  if (/서울|강남|서초|여의도|종로|중구|용산|마포/.test(t)) return '서울';
+  if (/경기|인천|판교|성남|수원|용인|송도|안양|화성/.test(t)) return '경기·인천';
+  if (/부산|대구|대전|광주|울산|세종|충청|충남|충북|전라|전남|전북|경상|경남|경북|강원|제주|나주|천안|청주/.test(t)) return '지방';
   return '미기재';
 }
+
 function guessExp(text) {
   const t = text || '';
-  const m = t.match(/(\d+)\s*년\s*(이상|이하|~|-)/);
-  if (m) return m[0];
+  const m = t.match(/경력\s*\d+\s*[년~\-–]\s*\d*\s*년?|경력\s*\d+\s*년\s*(이상|이하)|\d+\s*년\s*(이상|이하)/);
+  if (m) return m[0].replace(/\s+/g, ' ').trim();
+  if (/경력\s*무관/.test(t)) return '경력무관';
   if (/신입/.test(t)) return '신입';
   if (/경력/.test(t)) return '경력';
   return '';
 }
 
-// 사이트 필터 버튼과 동일한 라벨을 반환해야 필터링이 동작함
-// (사이트 직군 값: 송무 / 자문 / 사내변호사 / 공공 / 기타)
-function guessRole(text) {
+// 급여: 대부분 공고에 없음. 있으면 뽑고, 없으면 "미기재"로 명시
+function extractPay(text) {
   const t = text || '';
-  if (/사내변|Legal Counsel|법무담당|법무 담당|기업법무|기업 법무|준법|컴플라이언스|Compliance|법무팀|In-house/i.test(t)) return '사내변호사';
-  if (/공사|공단|공공기관|재단|진흥원|연구원/.test(t)) return '공공';
-  if (/법무법인|로펌|어쏘|송무|소송/.test(t)) return '송무';
-  if (/자문|Advisory/i.test(t)) return '자문';
-  return '기타';
-}
-
-// ───────────────────────────────
-// Google PSE 검색
-// ───────────────────────────────
-async function googleSearch(query, start = 1) {
-  // 표준 Custom Search JSON API (하루 100쿼리 무료)
-  // ※ siterestrict 엔드포인트는 구글이 서비스 종료를 예고한 API라 사용하지 않음
-  const url = `https://www.googleapis.com/customsearch/v1?key=${GOOGLE_API_KEY}&cx=${GOOGLE_CX}&q=${encodeURIComponent(query)}&start=${start}&num=10`;
-  const res = await fetch(url);
-  if (!res.ok) {
-    const body = await res.text();
-    throw new Error(`Google API ${res.status}: ${body.slice(0, 300)}`);
+  const m = t.match(/(연봉|급여|보수|처우)\s*[:：]\s*([^\n·]{1,40})/);
+  if (m) {
+    const v = m[2].trim();
+    if (v && !/이력서|기재되어|기재된/.test(v)) return `${m[1]}: ${v}`;
   }
-  return res.json();
+  const won = t.match(/\d[\d,]{2,}\s*만\s*원/);
+  if (won) return won[0];
+  if (/내규에?\s*따름|회사\s*내규/.test(t)) return '내규에 따름';
+  return '미기재';
 }
 
-async function collectFromQuery(query) {
-  const results = [];
-  // 최대 3페이지(30건)까지. 대부분 쿼리는 1~2페이지면 충분
-  for (let start = 1; start <= 21; start += 10) {
-    let data;
-    try {
-      data = await googleSearch(query, start);
-    } catch (e) {
-      console.error(`  [검색실패] "${query}" start=${start}: ${e.message}`);
-      break;
-    }
-    const items = data.items || [];
-    if (items.length === 0) break;
-
-    for (const it of items) {
-      results.push(normalizeSearchItem(it, query));
-    }
-    // 다음 페이지가 없으면 중단
-    if (!data.queries?.nextPage) break;
-  }
-  return results;
-}
-
-function normalizeSearchItem(item, query) {
-  const title = item.title || '';
-  const link = item.link || '';
-  const snippet = item.snippet || '';
-  const firm = extractFirmFromUrl(link);
-
-  // 플랫폼 식별
-  let platform = 'saas';
-  if (link.includes('greetinghr')) platform = 'greeting';
-  else if (link.includes('recruiter.co.kr') || link.includes('recruiter.im')) platform = 'recruiter';
-  else if (link.includes('ninehire')) platform = 'ninehire';
-
-  const combined = `${title} ${snippet}`;
-
+function makeJob({ platform, url, title, company, role, region, exp, pay, facts }) {
   return {
     source: 'saas',
     platform,
-    sourceId: link, // 링크 자체를 고유 ID로 (플랫폼별 공고 URL은 유니크)
-    title: title.replace(/\s*[-|·]\s*.*(채용|공고|Careers?).*$/i, '').trim() || title,
-    firm,
-    firmKey: normFirm(firm),
-    role: guessRole(combined),
-    region: guessRegionFromText(combined),
-    exp: guessExp(combined),
-    pay: '공고 참조',
-    deadline: null,   // 스니펫에 D-day 있으면 후처리 가능하나 불안정 → 원문 유도
-    link,
-    body: `${firm} 채용공고\n\n${snippet}\n\n※ 자격요건·마감일·전형절차는 원문 링크에서 확인하세요.`,
+    sourceId: url,
+    title: title || '(제목 없음)',
+    firm: company.name,
+    firmKey: normFirm(company.name),
+    role,
+    region,
+    exp,
+    pay,
+    deadline: null,
+    link: url,
+    body: `${company.name} 채용공고\n\n${facts || ''}\n\n※ 상세 자격요건·전형절차·마감일은 원문 링크에서 확인하세요.`.replace(/\n{3,}/g, '\n\n'),
     created: new Date().toISOString(),
     archived: false,
     comments: [],
@@ -211,15 +184,205 @@ function normalizeSearchItem(item, query) {
 }
 
 // ───────────────────────────────
-// 병합 (기존 jobs.json 과)
+// greetinghr
+//   목록: /ko/guide   상세: /ko/o/{id}
+// ───────────────────────────────
+async function collectGreeting(company, budget) {
+  const base = `https://${company.sub}.career.greetinghr.com`;
+  const results = [];
+
+  let listHtml;
+  try {
+    const r = await get(`${base}/ko/guide`);
+    if (r.notFound) return results;
+    listHtml = r.text;
+  } catch (e) {
+    console.error(`  [${company.name}] 목록 실패: ${e.message}`);
+    return results;
+  }
+
+  const chunks = listHtml.split(/href="\/ko\/o\//).slice(1);
+  const candidates = [];
+  for (const chunk of chunks) {
+    const idMatch = chunk.match(/^(\d+)/);
+    if (!idMatch) continue;
+    const id = idMatch[1];
+    if (candidates.some((c) => c.id === id)) continue;
+    // data-variant="title-01" 은 해시되지 않는 의미 속성이라 비교적 안정적
+    const titleMatch = chunk.match(/data-variant="title-01"[^>]*>([^<]+)</);
+    const title = titleMatch ? stripTags(titleMatch[1]) : '';
+    const around = stripTags(chunk.slice(0, 1200));
+    if (!matchesKeyword(`${title} ${around}`)) continue;
+    candidates.push({ id, title });
+  }
+
+  for (const c of candidates) {
+    if (budget.used >= MAX_DETAIL_PER_RUN) break;
+    const url = `${base}/ko/o/${c.id}`;
+    await sleep(DELAY_MS);
+    budget.used++;
+    try {
+      const r = await get(url);
+      if (r.notFound) continue; // 마감된 공고
+      results.push(parseGreetingDetail(r.text, url, company, c.title));
+    } catch (e) {
+      console.error(`  [${company.name}] 상세 실패 ${c.id}: ${e.message}`);
+    }
+  }
+  return results;
+}
+
+function parseGreetingDetail(html, url, company, fallbackTitle) {
+  const text = stripTags(html);
+
+  // 상세 페이지는 "구분 / 직군 / 직무 / 경력사항 / 고용형태 / 근무지" 라벨 구조
+  const pick = (label) => {
+    const re = new RegExp(`${label}\\s+(.{1,60}?)\\s+(?:구분|직군|직무|경력사항|고용형태|근무지|합류|이런|영입|지원|공유)`);
+    const m = text.match(re);
+    return m ? m[1].trim() : '';
+  };
+
+  const rawTitle = fallbackTitle || (html.match(/<title>([^<]+)<\/title>/) || [])[1] || '';
+  const title = stripTags(rawTitle).replace(/\s*[-|]\s*.*$/, '').trim();
+  const duty = pick('직무');
+  const exp = pick('경력사항') || guessExp(text);
+  const employ = pick('고용형태');
+  const place = pick('근무지');
+
+  const facts = [
+    duty && `직무: ${duty}`,
+    exp && `경력: ${exp}`,
+    employ && `고용형태: ${employ}`,
+    place && `근무지: ${place}`,
+  ].filter(Boolean).join('\n');
+
+  return makeJob({
+    platform: 'greeting',
+    url,
+    title,
+    company,
+    role: guessRole(`${title} ${duty}`, company.name),
+    region: guessRegion(`${place} ${text.slice(0, 1500)}`),
+    exp,
+    pay: extractPay(text),
+    facts,
+  });
+}
+
+// ───────────────────────────────
+// recruiter.co.kr
+//   sitemap.xml → /career/jobs/{id} 만 사용
+// ───────────────────────────────
+async function collectRecruiter(company, budget, knownUrls) {
+  const base = `https://${company.sub}.recruiter.co.kr`;
+  const results = [];
+
+  let xml;
+  try {
+    const r = await get(`${base}/sitemap.xml`);
+    if (r.notFound) return results;
+    xml = r.text;
+  } catch (e) {
+    console.error(`  [${company.name}] 사이트맵 실패: ${e.message}`);
+    return results;
+  }
+
+  const urls = Array.from(xml.matchAll(/<loc>([^<]+)<\/loc>/g))
+    .map((m) => m[1].trim())
+    .filter((u) => /\/career\/jobs\/\d+/.test(u));
+
+  for (const url of urls) {
+    if (budget.used >= MAX_DETAIL_PER_RUN) break;
+    await sleep(DELAY_MS);
+    budget.used++;
+    try {
+      const r = await get(url);
+      if (r.notFound) continue;
+      const text = stripTags(r.text);
+      const head = text.slice(0, 3000);
+      const titleMatch = r.text.match(/<title>([^<]+)<\/title>/);
+      const rawTitle = titleMatch ? stripTags(titleMatch[1]) : '';
+      if (!matchesKeyword(`${rawTitle} ${head}`)) continue;
+
+      results.push(makeJob({
+        platform: 'recruiter',
+        url,
+        title: rawTitle.replace(/^[^|]*\|\s*/, '').trim(),
+        company,
+        role: guessRole(`${rawTitle} ${head}`, company.name),
+        region: guessRegion(head),
+        exp: guessExp(head),
+        pay: extractPay(head),
+        facts: '',
+      }));
+    } catch (e) {
+      console.error(`  [${company.name}] 상세 실패: ${e.message}`);
+    }
+  }
+  return results;
+}
+
+// ───────────────────────────────
+// ninehire
+// ───────────────────────────────
+async function collectNinehire(company, budget) {
+  const base = `https://${company.sub}.ninehire.site`;
+  const results = [];
+
+  let html;
+  try {
+    const r = await get(`${base}/`);
+    if (r.notFound) return results;
+    html = r.text;
+  } catch (e) {
+    console.error(`  [${company.name}] 목록 실패: ${e.message}`);
+    return results;
+  }
+
+  const ids = Array.from(new Set(
+    Array.from(html.matchAll(/\/job_posting\/([A-Za-z0-9]+)/g)).map((m) => m[1])
+  ));
+
+  for (const id of ids) {
+    if (budget.used >= MAX_DETAIL_PER_RUN) break;
+    const url = `${base}/job_posting/${id}`;
+    await sleep(DELAY_MS);
+    budget.used++;
+    try {
+      const r = await get(url);
+      if (r.notFound) continue;
+      const text = stripTags(r.text);
+      const head = text.slice(0, 3000);
+      const titleMatch = r.text.match(/<title>([^<]+)<\/title>/);
+      const rawTitle = titleMatch ? stripTags(titleMatch[1]) : '';
+      if (!matchesKeyword(`${rawTitle} ${head}`)) continue;
+
+      results.push(makeJob({
+        platform: 'ninehire',
+        url,
+        title: rawTitle.replace(/\s*\|.*$/, '').trim(),
+        company,
+        role: guessRole(`${rawTitle} ${head}`, company.name),
+        region: guessRegion(head),
+        exp: guessExp(head),
+        pay: extractPay(head),
+        facts: '',
+      }));
+    } catch (e) {
+      console.error(`  [${company.name}] 상세 실패 ${id}: ${e.message}`);
+    }
+  }
+  return results;
+}
+
+// ───────────────────────────────
+// 병합
 // ───────────────────────────────
 function mergeJobs(newJobs, existingJobs) {
   const map = new Map();
 
   existingJobs.forEach((j) => {
-    const key = j.sourceId
-      ? `${j.source}:${j.sourceId}`
-      : `manual:${j.id}`;
+    const key = j.sourceId ? `${j.source}:${j.sourceId}` : `manual:${j.id}`;
     map.set(key, j);
   });
 
@@ -229,15 +392,20 @@ function mergeJobs(newJobs, existingJobs) {
     seenKeys.add(key);
     const prev = map.get(key);
     if (prev) {
-      // 기존 것 유지 (댓글·조회수 보존), 재노출됐으니 archived 해제
-      map.set(key, { ...prev, archived: false });
+      // 댓글·조회수는 보존, 사실 필드만 갱신
+      map.set(key, {
+        ...prev,
+        title: j.title, role: j.role, region: j.region,
+        exp: j.exp, pay: j.pay, body: j.body,
+        archived: false,
+      });
     } else {
       const maxId = Math.max(0, ...Array.from(map.values()).map((x) => x.id || 0));
       map.set(key, { ...j, id: maxId + 1 });
     }
   });
 
-  // 이번 검색에서 안 나온 saas 공고 → archived (마감됐거나 색인 빠짐)
+  // 이번에 안 잡힌 saas 공고 → 아카이브 (삭제 아님, 공고빈도 카운터 보존)
   map.forEach((job, key) => {
     if (job.source === 'saas' && !seenKeys.has(key) && !job.archived) {
       job.archived = true;
@@ -255,25 +423,7 @@ function mergeJobs(newJobs, existingJobs) {
 // ───────────────────────────────
 async function main() {
   console.log('=== fetch-legal-jobs.js 시작 ===', new Date().toISOString());
-
-  if (!GOOGLE_API_KEY || !GOOGLE_CX) {
-    console.error('GOOGLE_SEARCH_API_KEY 또는 GOOGLE_SEARCH_CX 없음 — 스킵');
-    process.exit(0);
-  }
-
-  const all = [];
-  for (const q of SEARCH_QUERIES) {
-    console.log(`[검색] ${q}`);
-    const r = await collectFromQuery(q);
-    console.log(`  → ${r.length}건`);
-    all.push(...r);
-  }
-
-  // 링크 기준 중복 제거
-  const dedup = new Map();
-  all.forEach((j) => dedup.set(j.sourceId, j));
-  const newJobs = Array.from(dedup.values());
-  console.log(`수집 총 ${all.length}건 → 중복제거 후 ${newJobs.length}건`);
+  console.log(`대상 회사 ${COMPANIES.length}곳`);
 
   let existingJobs = [];
   if (fs.existsSync(OUTPUT_PATH)) {
@@ -283,6 +433,35 @@ async function main() {
       console.warn('기존 jobs.json 파싱 실패, 새로 시작');
     }
   }
+  const knownUrls = new Set(
+    existingJobs.filter((j) => j.source === 'saas').map((j) => j.sourceId)
+  );
+
+  const budget = { used: 0 };
+  const all = [];
+
+  for (const c of COMPANIES) {
+    if (budget.used >= MAX_DETAIL_PER_RUN) {
+      console.log('상세조회 상한 도달 — 나머지는 다음 실행에서 처리');
+      break;
+    }
+    let r = [];
+    try {
+      if (c.platform === 'greeting') r = await collectGreeting(c, budget);
+      else if (c.platform === 'recruiter') r = await collectRecruiter(c, budget, knownUrls);
+      else if (c.platform === 'ninehire') r = await collectNinehire(c, budget);
+    } catch (e) {
+      console.error(`[${c.name}] 수집 오류: ${e.message}`);
+    }
+    if (r.length) console.log(`[${c.name}] ${r.length}건`);
+    all.push(...r);
+    await sleep(DELAY_MS);
+  }
+
+  const dedup = new Map();
+  all.forEach((j) => dedup.set(j.sourceId, j));
+  const newJobs = Array.from(dedup.values());
+  console.log(`수집 ${all.length}건 → 중복제거 ${newJobs.length}건 (상세조회 ${budget.used}회)`);
 
   const merged = mergeJobs(newJobs, existingJobs);
   fs.mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
