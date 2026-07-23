@@ -50,24 +50,22 @@ const COMPANIES = [
   { sub: 'bhsn',           platform: 'greeting', name: 'BHSN' },
   { sub: 'carelabs',       platform: 'greeting', name: '케어랩스' },
   { sub: 'lawcompany',     platform: 'greeting', name: '로앤컴퍼니' },
+  { sub: 'interxlab',      platform: 'greeting', name: '인터엑스랩' },
 
-  // ── recruiter.co.kr ──
-  { sub: 'koreanair',        platform: 'recruiter', name: '대한항공' },
-  { sub: 'koreanaircnd',     platform: 'recruiter', name: '대한항공씨앤디서비스' },
-  { sub: 'pulmuone',         platform: 'recruiter', name: '풀무원' },
-  { sub: 'hankooktire',      platform: 'recruiter', name: '한국타이어앤테크놀로지' },
-  { sub: 'gwss',             platform: 'recruiter', name: '고운세상코스메틱' },
-  { sub: 'donga',            platform: 'recruiter', name: '동아쏘시오홀딩스' },
-  { sub: 'hlcompany',        platform: 'recruiter', name: 'HL만도' },
-  { sub: 'ls-sec',           platform: 'recruiter', name: 'LS증권' },
-  { sub: 'yg-entertainment', platform: 'recruiter', name: 'YG엔터테인먼트' },
-  { sub: 'cosmax',           platform: 'recruiter', name: '코스맥스' },
-  { sub: 'hyosung',          platform: 'recruiter', name: '효성' },
-  { sub: 'kukdo',            platform: 'recruiter', name: '국도화학' },
-  { sub: 'hdc-labs',         platform: 'recruiter', name: 'HDC랩스' },
-
-  // ── ninehire ──
-  { sub: 'draju', platform: 'ninehire', name: '법무법인 대륙아주' },
+  // ── 아래는 현재 자동수집 불가 (2026-07-23 확인) ──
+  // recruiter.co.kr / ninehire 는 Next.js SPA 구조라 서버 HTML에 공고가 없고,
+  // 사이트맵도 대부분 미제공(500). 공고 ID를 열거할 방법이 없어 비활성화.
+  // 해당 플랫폼 공고는 수동 등록 또는 제보로 채웁니다.
+  // 추후 사이트맵/API가 열리면 아래 주석을 해제하면 됩니다.
+  //
+  // { sub: 'koreanair',        platform: 'recruiter', name: '대한항공' },
+  // { sub: 'pulmuone',         platform: 'recruiter', name: '풀무원' },
+  // { sub: 'hankooktire',      platform: 'recruiter', name: '한국타이어앤테크놀로지' },
+  // { sub: 'hlcompany',        platform: 'recruiter', name: 'HL만도' },
+  // { sub: 'cosmax',           platform: 'recruiter', name: '코스맥스' },
+  // { sub: 'kukdo',            platform: 'recruiter', name: '국도화학' },
+  // { sub: 'hdc-labs',         platform: 'recruiter', name: 'HDC랩스' },
+  // { sub: 'draju',            platform: 'ninehire',  name: '법무법인 대륙아주' },
 ];
 
 const KEYWORDS = [
