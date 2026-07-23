@@ -1,0 +1,36 @@
+name: Fetch Legal Jobs
+
+on:
+  schedule:
+    # 매일 KST 06:20 (UTC 21:20 전날) — 다른 파이프라인과 시간 분산
+    - cron: '20 21 * * *'
+  workflow_dispatch: {} # 수동 실행 버튼
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-legal-jobs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Node.js 설치
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 채용공고 검색수집 실행
+        env:
+          GOOGLE_SEARCH_API_KEY: ${{ secrets.GOOGLE_SEARCH_API_KEY }}
+          GOOGLE_SEARCH_CX: ${{ secrets.GOOGLE_SEARCH_CX }}
+        run: node fetch-legal-jobs.js
+
+      - name: 변경사항 커밋
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/jobs.json
+          git diff --staged --quiet || git commit -m "chore: 민간 채용공고 자동 업데이트 $(date +'%Y-%m-%d')"
+          git push
