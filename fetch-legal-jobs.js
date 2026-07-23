@@ -35,10 +35,14 @@ const OUTPUT_PATH = path.join(__dirname, 'data', 'jobs.json');
 const SEARCH_QUERIES = [
   '변호사',
   '사내변호사',
+  '변호사 채용',
   'Legal Counsel',
+  'In-house Counsel',
   '법무팀',
   '법무 담당',
-  '컴플라이언스 변호사',
+  '법무 경력',
+  '컴플라이언스',
+  '준법지원',
 ];
 
 // 회사명 추출: greetinghr는 서브도메인, recruiter는 서브도메인
@@ -106,7 +110,13 @@ function extractFirmFromUrl(url) {
   }
 }
 
-// 제목에서 연차/직무 힌트 추출
+function guessRegionFromText(text) {
+  const t = text || '';
+  if (/서울|강남|서초|판교라인|여의도|종로|중구/.test(t)) return '서울';
+  if (/경기|인천|판교|성남|수원|용인|송도/.test(t)) return '경기·인천';
+  if (/부산|대구|대전|광주|울산|세종|충청|전라|경상|강원|제주|나주|천안/.test(t)) return '지방';
+  return '미기재';
+}
 function guessExp(text) {
   const t = text || '';
   const m = t.match(/(\d+)\s*년\s*(이상|이하|~|-)/);
@@ -116,20 +126,24 @@ function guessExp(text) {
   return '';
 }
 
+// 사이트 필터 버튼과 동일한 라벨을 반환해야 필터링이 동작함
+// (사이트 직군 값: 송무 / 자문 / 사내변호사 / 공공 / 기타)
 function guessRole(text) {
   const t = text || '';
-  if (/사내변|Legal Counsel|법무담당|기업법무|준법|컴플라이언스|Compliance/i.test(t)) return '사내변';
-  if (/법무법인|로펌|어쏘|송무|자문/.test(t)) return '로펌';
-  return '변호사';
+  if (/사내변|Legal Counsel|법무담당|법무 담당|기업법무|기업 법무|준법|컴플라이언스|Compliance|법무팀|In-house/i.test(t)) return '사내변호사';
+  if (/공사|공단|공공기관|재단|진흥원|연구원/.test(t)) return '공공';
+  if (/법무법인|로펌|어쏘|송무|소송/.test(t)) return '송무';
+  if (/자문|Advisory/i.test(t)) return '자문';
+  return '기타';
 }
 
 // ───────────────────────────────
 // Google PSE 검색
 // ───────────────────────────────
 async function googleSearch(query, start = 1) {
-  // 검색엔진이 4개 도메인 이하로 제한돼 있으므로(2026 정책 변경으로 "전체 웹 검색" 대신
-  // 이 방식 채택), 일일 쿼리 한도가 없는 siterestrict 엔드포인트 사용
-  const url = `https://www.googleapis.com/customsearch/v1/siterestrict?key=${GOOGLE_API_KEY}&cx=${GOOGLE_CX}&q=${encodeURIComponent(query)}&start=${start}&num=10&lr=lang_ko`;
+  // 표준 Custom Search JSON API (하루 100쿼리 무료)
+  // ※ siterestrict 엔드포인트는 구글이 서비스 종료를 예고한 API라 사용하지 않음
+  const url = `https://www.googleapis.com/customsearch/v1?key=${GOOGLE_API_KEY}&cx=${GOOGLE_CX}&q=${encodeURIComponent(query)}&start=${start}&num=10`;
   const res = await fetch(url);
   if (!res.ok) {
     const body = await res.text();
@@ -183,7 +197,7 @@ function normalizeSearchItem(item, query) {
     firm,
     firmKey: normFirm(firm),
     role: guessRole(combined),
-    region: '',       // 검색 스니펫에 지역 정보 부족 → 원문 확인 유도
+    region: guessRegionFromText(combined),
     exp: guessExp(combined),
     pay: '공고 참조',
     deadline: null,   // 스니펫에 D-day 있으면 후처리 가능하나 불안정 → 원문 유도
