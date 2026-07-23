@@ -12,6 +12,7 @@ permissions:
 jobs:
   fetch-legal-jobs:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: 저장소 체크아웃
         uses: actions/checkout@v4
@@ -21,10 +22,7 @@ jobs:
         with:
           node-version: '20'
 
-      - name: 채용공고 검색수집 실행
-        env:
-          GOOGLE_SEARCH_API_KEY: ${{ secrets.GOOGLE_SEARCH_API_KEY }}
-          GOOGLE_SEARCH_CX: ${{ secrets.GOOGLE_SEARCH_CX }}
+      - name: 민간 채용공고 수집 실행
         run: node fetch-legal-jobs.js
 
       - name: 변경사항 커밋
