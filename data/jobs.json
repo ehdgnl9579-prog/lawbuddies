@@ -141,6 +141,25 @@
   },
   {
     "source": "jobalio",
+    "sourceId": "303046",
+    "title": "2026년 하반기 전남대학교병원 직원(수습직) 공개채용 공고",
+    "firm": "전남대학교병원",
+    "firmKey": "전남대학교병원",
+    "role": "공공",
+    "region": "지방",
+    "exp": "정규직",
+    "pay": "공고 참조",
+    "deadline": "2026-08-06T15:00:00.000Z",
+    "link": "https://cnuh.recruiter.co.kr/app/jobnotice/view?systemKindCode=MRS2&jobnoticeSn=261107",
+    "body": "공공기관 채용공고 (잡알리오 자동수집)\n기관: 전남대학교병원\n채용인원: 14명\n고용유형: 정규직\n\n※ 원문에서 상세 자격요건·전형절차를 확인하세요.",
+    "created": "2026-07-23T15:00:00.000Z",
+    "archived": false,
+    "comments": [],
+    "seen": 0,
+    "id": 20
+  },
+  {
+    "source": "jobalio",
     "sourceId": "303011",
     "title": "한국형사·법무정책연구원 2026년도 제12차 채용공고[인턴연구원]",
     "firm": "한국형사·법무정책연구원",
@@ -305,7 +324,7 @@
     "link": "https://www.kicj.re.kr/board.es?mid=a10305000000&bid=0015&act=view&list_no=18421",
     "body": "공공기관 채용공고 (잡알리오 자동수집)\n기관: 한국형사·법무정책연구원\n채용인원: 4명\n고용유형: 정규직\n\n※ 원문에서 상세 자격요건·전형절차를 확인하세요.",
     "created": "2026-07-09T15:00:00.000Z",
-    "archived": false,
+    "archived": true,
     "comments": [],
     "seen": 0,
     "id": 5
@@ -324,7 +343,7 @@
     "link": "https://recruit.incruit.com/koreha",
     "body": "공공기관 채용공고 (잡알리오 자동수집)\n기관: 한국법무보호복지공단\n채용인원: 1명\n고용유형: 비정규직\n\n※ 원문에서 상세 자격요건·전형절차를 확인하세요.",
     "created": "2026-07-07T15:00:00.000Z",
-    "archived": false,
+    "archived": true,
     "comments": [],
     "seen": 0,
     "id": 6
