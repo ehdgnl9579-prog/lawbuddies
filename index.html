@@ -228,7 +228,24 @@ main{max-width:1040px;margin:0 auto;padding:28px 20px 80px;}
   font-size:11.5px;font-weight:600;color:var(--ink-soft);
   letter-spacing:.02em;
 }
+.post-kind{font-size:11px;font-weight:700;border-radius:3px;padding:1px 7px;letter-spacing:.03em;}
+.post-kind.q{color:#fff;background:var(--seal);}
+.q-toggle{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;
+  color:var(--ink-soft);cursor:pointer;user-select:none;white-space:nowrap;}
+.q-toggle input{accent-color:var(--seal);width:15px;height:15px;cursor:pointer;}
+.lounge-select{font-family:inherit;font-size:12.5px;color:var(--ink);background:#fff;
+  border:1px solid var(--line);border-radius:6px;padding:5px 9px;cursor:pointer;}
+.q-check{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--seal);
+  background:var(--seal-soft);border-radius:6px;padding:9px 12px;cursor:pointer;}
+.q-check input{accent-color:var(--seal);width:16px;height:16px;cursor:pointer;}
 .post-title{font-size:15.5px;font-weight:600;}
+.wonder-btn{display:inline-flex;align-items:center;gap:5px;font-family:inherit;cursor:pointer;
+  font-size:12px;font-weight:700;color:var(--seal);background:var(--seal-soft);
+  border:1px solid transparent;border-radius:20px;padding:3px 11px;transition:all .12s;}
+.wonder-btn:hover{border-color:var(--seal);}
+.wonder-btn.on{background:var(--seal);color:#fff;}
+.wonder-btn .wc{font-variant-numeric:tabular-nums;}
+.post-answers{font-size:12px;color:#9aa1ab;}
 .post-preview{font-size:13px;color:var(--ink-soft);margin-top:4px;
   overflow:hidden;text-overflow:ellipsis;display:-webkit-box;
   -webkit-line-clamp:1;-webkit-box-orient:vertical;}
@@ -521,15 +538,6 @@ footer{
     <p class="page-desc">출근하면 여기부터. 오늘 챙겨야 할 것들을 한 화면에 모았습니다.</p>
     <div class="dash">
 
-      <!-- 복대리 (킬러) -->
-      <div class="wg wg-hero full">
-        <div class="wg-h">
-          <span class="wg-title"><span class="ic">⚖</span>복대리 현황</span>
-          <button class="wg-more" onclick="openProxyModal()">+ 복대리 등록</button>
-        </div>
-        <div class="wg-b tight"><div class="wg-list" id="proxy-list"></div></div>
-      </div>
-
       <!-- 일간 스크랩 -->
       <div class="wg">
         <div class="wg-h">
@@ -600,16 +608,24 @@ footer{
         <div class="wg-b"><div class="qlinks" id="qlinks"></div></div>
       </div>
 
-      <!-- 법령 개정·시행 -->
-      <div class="wg">
-        <div class="wg-h"><span class="wg-title"><span class="ic">▤</span>법령 개정·시행</span></div>
-        <div class="wg-b"><div class="wg-list" id="law-list"></div></div>
-      </div>
-
       <!-- 변협·지방회 공지 -->
       <div class="wg">
         <div class="wg-h"><span class="wg-title"><span class="ic">◇</span>변협·지방회 공지</span></div>
         <div class="wg-b"><div class="wg-list" id="notice-list"></div></div>
+      </div>
+
+      <!-- 복대리 현황 (축소 · 최하단으로 이동) -->
+      <div class="wg">
+        <div class="wg-h">
+          <span class="wg-title"><span class="ic">⚖</span>복대리 현황</span>
+          <button class="wg-more" onclick="openProxyModal()">+ 등록</button>
+        </div>
+        <div class="wg-b tight"><div class="wg-list" id="proxy-list"></div></div>
+      </div>
+
+      <!-- 광고/제휴 배너 슬롯 (평소 숨김 · 배너 채워지면 노출) -->
+      <div class="wg full" id="partner-slot" style="display:none;">
+        <div class="wg-b" style="padding:0;"><div id="partner-banner"></div></div>
       </div>
 
     </div>
@@ -656,25 +672,33 @@ footer{
   <!-- ══ 게시판 ══ -->
   <section id="view-info" style="display:none;">
     <h1 class="page-title">게시판 <span class="count" id="info-count"></span></h1>
-    <p class="page-desc">개업·이직·실무. 카더라가 아니라 겪은 사람의 기록.</p>
+    <p class="page-desc">오픈채팅에서 흘러가버린 질문들을 여기선 검색할 수 있습니다. 궁금하면 '나도 궁금'을, 아는 건 답변을.</p>
 
     <div class="filter-bar">
-      <div class="filter-group" id="filter-board">
-        <span class="filter-label">라운지</span>
-        <button class="chip on" data-v="전체">전체</button>
-        <button class="chip" data-v="개업">개업</button>
-        <button class="chip" data-v="사내변">사내변</button>
-        <button class="chip" data-v="송무·로펌">송무·로펌</button>
-        <button class="chip" data-v="공공">공공</button>
-      </div>
-      <div class="filter-divider"></div>
       <div class="filter-group" id="filter-topic">
         <span class="filter-label">주제</span>
         <button class="chip on" data-v="전체">전체</button>
-        <button class="chip" data-v="이직·연봉">이직·연봉</button>
+        <button class="chip" data-v="이직·채용">이직·채용</button>
         <button class="chip" data-v="실무·판례">실무·판례</button>
+        <button class="chip" data-v="개업·운영">개업·운영</button>
+        <button class="chip" data-v="재테크">재테크</button>
         <button class="chip" data-v="자유">자유</button>
       </div>
+      <div class="filter-divider"></div>
+      <label class="q-toggle"><input type="checkbox" id="only-q" onchange="postFilter.onlyQ=this.checked; renderPosts();" /> 질문만 보기</label>
+      <div class="filter-divider"></div>
+      <div class="filter-group" id="filter-postsort">
+        <span class="filter-label">정렬</span>
+        <button class="chip on" data-v="latest">최신순</button>
+        <button class="chip" data-v="wonder">관심순</button>
+      </div>
+      <select class="lounge-select" id="filter-board" onchange="postFilter.board=this.value; renderPosts();">
+        <option value="전체">라운지 전체</option>
+        <option value="개업">개업</option>
+        <option value="사내변">사내변</option>
+        <option value="송무·로펌">송무·로펌</option>
+        <option value="공공">공공</option>
+      </select>
       <input class="search-input" id="post-search" type="search" placeholder="제목·내용 검색" oninput="renderPosts()" />
     </div>
 
@@ -738,17 +762,18 @@ footer{
 <!-- ══ 정보글 작성 모달 ══ -->
 <div class="modal-back" id="modal-post">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-post-title">
-    <h2 id="modal-post-title">정보글 작성</h2>
-    <p class="sub">겪은 것, 아는 것, 확인한 것. 출처가 있으면 함께 적어주세요.</p>
+    <h2 id="modal-post-title">글 작성</h2>
+    <p class="sub">편하게 남겨주세요. 답변받고 싶은 질문이면 아래 '질문입니다'를 체크하면 됩니다. 특정 개인·사무소가 식별되지 않게 써주세요.</p>
     <div class="form-grid">
+      <div class="field"><label>주제 *</label>
+        <select id="p-topic"><option>이직·채용</option><option>실무·판례</option><option>개업·운영</option><option>재테크</option><option>자유</option></select>
+      </div>
       <div class="field"><label>라운지 *</label>
         <select id="p-board"><option>개업</option><option>사내변</option><option>송무·로펌</option><option>공공</option></select>
       </div>
-      <div class="field"><label>주제 *</label>
-        <select id="p-topic"><option>이직·연봉</option><option>실무·판례</option><option>자유</option></select>
-      </div>
-      <div class="field full"><label>제목 *</label><input id="p-title" placeholder="예: 개업 6개월차 고정비 정리해봄" /></div>
-      <div class="field full"><label>내용 *</label><textarea id="p-body" rows="7" placeholder="구체적인 숫자와 경험 위주로. 특정 개인·사무소가 식별되지 않게 써주세요."></textarea></div>
+      <div class="field full"><label class="q-check"><input type="checkbox" id="p-isq" /> 질문입니다 — 답변과 '나도 궁금'을 받고 싶어요</label></div>
+      <div class="field full"><label>제목 *</label><input id="p-title" placeholder="예: 개업 자금 사업자대출 한도 얼마나 나오나요" /></div>
+      <div class="field full"><label>내용 *</label><textarea id="p-body" rows="7" placeholder="구체적인 상황과 숫자 위주로. 특정 개인·사무소가 식별되지 않게 써주세요."></textarea></div>
     </div>
     <div class="modal-actions">
       <button class="btn-ghost" onclick="closeModal()">취소</button>
@@ -974,17 +999,29 @@ const seedJobs = [
 ];
 
 const seedPosts = [
-  {id:1, board:"개업", topic:"자유", title:"개업 6개월차, 고정비 얼마나 드는지 정리해봄", body:"보증금 제외 월 기준.\n\n· 임대료(서초, 전용 12평): 220\n· 직원 1인 급여: 250\n· 광고비(블로그 대행+키워드): 150\n· 협회비·보험·기타: 40\n\n합계 월 660. 손익분기 넘기는 데 4개월 걸림. 광고비는 첫 3개월엔 더 썼는데 효율 낮은 채널 끊고 이 수준으로 정리함.", author:"변 8회, 개업 1년차", created:daysAgo(3), views:412, comments:[
+  {id:1, board:"개업", topic:"개업·운영", isQ:false, wonder:0, title:"개업 6개월차, 고정비 얼마나 드는지 정리해봄", body:"보증금 제외 월 기준.\n\n· 임대료(서초, 전용 12평): 220\n· 직원 1인 급여: 250\n· 광고비(블로그 대행+키워드): 150\n· 협회비·보험·기타: 40\n\n합계 월 660. 손익분기 넘기는 데 4개월 걸림. 광고비는 첫 3개월엔 더 썼는데 효율 낮은 채널 끊고 이 수준으로 정리함.", author:"변 8회, 개업 1년차", created:daysAgo(3), views:412, comments:[
     {author:"변 10회, 개업 6개월차", text:"광고비 비중 비슷함. 블로그 대행은 효율 안 나와서 저도 접었어요.", created:daysAgo(2)},
     {author:"사법 44기, 개업 4년차", text:"직원 급여에 4대보험·퇴직충당까지 넣으면 실제론 더 나갈 거예요.", created:daysAgo(1)},
   ]},
-  {id:2, board:"사내변", topic:"이직·연봉", title:"중소펌 → 인하우스 이직 후기 (연봉 협상 포함)", body:"송무 4년차에 제조업 대기업 법무팀으로 이직.\n\n· 전 직장: 계약연봉 7,800 (세전)\n· 이직 후: 8,600 + 성과급 별도\n\n협상 팁: 현재 연봉 원천징수영수증 기준으로 얘기하되, 인센티브 포함 총액으로 제시할 것. 워라밸은 확실히 좋아졌는데 소송 감각 잃는 건 감수해야 함.", author:"변 10회, 사내변 1년차", created:daysAgo(6), views:891, comments:[
+  {id:2, board:"사내변", topic:"이직·채용", isQ:false, wonder:0, title:"중소펌 → 인하우스 이직 후기 (연봉 협상 포함)", body:"송무 4년차에 제조업 대기업 법무팀으로 이직.\n\n· 전 직장: 계약연봉 7,800 (세전)\n· 이직 후: 8,600 + 성과급 별도\n\n협상 팁: 현재 연봉 원천징수영수증 기준으로 얘기하되, 인센티브 포함 총액으로 제시할 것. 워라밸은 확실히 좋아졌는데 소송 감각 잃는 건 감수해야 함.", author:"변 10회, 사내변 1년차", created:daysAgo(6), views:891, comments:[
     {author:"변 11회, 송무 4년차", text:"원천징수영수증 기준 제시 팁 유용하네요. 저도 이직 준비 중인데 참고하겠습니다.", created:daysAgo(4)},
   ]},
-  {id:3, board:"개업", topic:"실무·판례", title:"변호사 광고규정 개정 이후 주의할 것들", body:"올해 광고 심사 걸린 사례 몇 개 공유.\n\n1. '전문' 표기 — 변협 전문분야 등록 없이 쓰면 안 됨\n2. 승소율·성공사례 구체적 수치 광고 제한\n3. 포털 CPC 광고는 규정 변동이 잦으니 집행 전 최신 규정 확인 필수\n\n대행사가 알아서 해준다고 믿지 말고 본인이 최종 확인해야 함. 징계는 본인이 받는다.", author:"사법 45기, 개업 3년차", created:daysAgo(10), views:1204},
-  {id:4, board:"송무·로펌", topic:"실무·판례", title:"개인채무자보호법 시행 후 추심 실무 변화 체감", body:"채권추심 수임 사건에서 체감되는 변화:\n\n· 추심총량제·연락제한 위반 다툼이 새로운 쟁점으로 등장\n· 채무조정 요청권 행사 시 추심 중지 관련 분쟁 증가\n\n금융회사 상대 사건 수임 시 개보법 위반 여부를 먼저 체크하는 게 루틴이 됨.", author:"변 7회, 송무 5년차", created:daysAgo(14), views:673},
-  {id:5, board:"사내변", topic:"자유", title:"사내변 3년차, 로펌 복귀 고민되는 이유", body:"워라밸 보고 인하우스 왔는데 3년쯤 되니 딜레마.\n\n· 장점: 정시 퇴근, 예측 가능한 삶\n· 고민: 전문성 정체되는 느낌, 연봉 상승폭이 로펌보다 완만\n\n같은 고민 하신 분들 어떻게 결정하셨는지 궁금. 특히 사내→로펌 복귀해보신 분 있으면 후기 부탁.", author:"변 9회, 사내변 3년차", created:daysAgo(4), views:558},
-  {id:6, board:"공공", topic:"이직·연봉", title:"공공기관 임기제 만료 후 진로, 다들 어디로 가나요", body:"임기제 6급으로 들어와서 2년 곧 만료.\n\n주변 보면 ① 재계약 ② 로펌 이직 ③ 개업 ④ 다른 공공기관 순환 정도로 갈리는 듯. 공공 경력이 민간에서 얼마나 인정받는지가 관건인데, 실제 이직해보신 분들 경험이 궁금합니다.", author:"변 11회, 공공 2년차", created:daysAgo(8), views:329},
+  {id:3, board:"개업", topic:"실무·판례", isQ:false, wonder:0, title:"변호사 광고규정 개정 이후 주의할 것들", body:"올해 광고 심사 걸린 사례 몇 개 공유.\n\n1. '전문' 표기 — 변협 전문분야 등록 없이 쓰면 안 됨\n2. 승소율·성공사례 구체적 수치 광고 제한\n3. 포털 CPC 광고는 규정 변동이 잦으니 집행 전 최신 규정 확인 필수\n\n대행사가 알아서 해준다고 믿지 말고 본인이 최종 확인해야 함. 징계는 본인이 받는다.", author:"사법 45기, 개업 3년차", created:daysAgo(10), views:1204},
+  {id:4, board:"송무·로펌", topic:"실무·판례", isQ:false, wonder:0, title:"개인채무자보호법 시행 후 추심 실무 변화 체감", body:"채권추심 수임 사건에서 체감되는 변화:\n\n· 추심총량제·연락제한 위반 다툼이 새로운 쟁점으로 등장\n· 채무조정 요청권 행사 시 추심 중지 관련 분쟁 증가\n\n금융회사 상대 사건 수임 시 개보법 위반 여부를 먼저 체크하는 게 루틴이 됨.", author:"변 7회, 송무 5년차", created:daysAgo(14), views:673},
+  {id:5, board:"사내변", topic:"이직·채용", isQ:true, wonder:34, title:"사내변 3년차, 로펌 복귀 고민되는 이유", body:"워라밸 보고 인하우스 왔는데 3년쯤 되니 딜레마.\n\n· 장점: 정시 퇴근, 예측 가능한 삶\n· 고민: 전문성 정체되는 느낌, 연봉 상승폭이 로펌보다 완만\n\n같은 고민 하신 분들 어떻게 결정하셨는지 궁금. 특히 사내→로펌 복귀해보신 분 있으면 후기 부탁.", author:"변 9회, 사내변 3년차", created:daysAgo(4), views:558},
+  {id:6, board:"공공", topic:"이직·채용", isQ:true, wonder:21, title:"공공기관 임기제 만료 후 진로, 다들 어디로 가나요", body:"임기제 6급으로 들어와서 2년 곧 만료.\n\n주변 보면 ① 재계약 ② 로펌 이직 ③ 개업 ④ 다른 공공기관 순환 정도로 갈리는 듯. 공공 경력이 민간에서 얼마나 인정받는지가 관건인데, 실제 이직해보신 분들 경험이 궁금합니다.", author:"변 11회, 공공 2년차", created:daysAgo(8), views:329},
+  /* ── 씨앗 질문: 오픈채팅방에서 반복되던 것들. 답이 없어도 '나도 궁금'이 답변을 부른다 ── */
+  {id:7, board:"개업", topic:"재테크", isQ:true, wonder:52, title:"개업 자금 사업자대출, 실제 한도 얼마나 나오나요", body:"개업 준비 중인데 사업자대출 알아보니 생각보다 한도가 짜네요. 전문직 신용대출이랑 사업자대출 중 뭐부터 알아보셨는지, 은행별로 변호사 우대가 실제로 있는지 경험담 부탁드립니다.", author:"변 13회, 개업 예정", created:daysAgo(2), views:301, comments:[]},
+  {id:8, board:"개업", topic:"실무·판례", isQ:true, wonder:47, title:"전자소송 항소장 제출 시 피항소인 체크가 안 되는데", body:"항소장을 전자소송으로 넣으려는데 피항소인 지정 화면에서 상대방이 안 잡힙니다. 1심 대리인이 아니어서 그런 건지, 사건 연계를 먼저 해야 하는 건지 겪어보신 분 계신가요.", author:"변 12회, 송무 1년차", created:daysAgo(1), views:288, comments:[]},
+  {id:9, board:"개업", topic:"개업·운영", isQ:true, wonder:61, title:"직장 내 괴롭힘 진정사건, 착수금 보통 얼마 받으시나요", body:"가해행위 3~4개 정도 되는 직장 내 괴롭힘 진정 대리 문의가 들어왔는데 시세 감이 안 옵니다. 착수금만 받는지 성공보수를 거는지, 진정 단계와 이후 소송 단계를 나눠 받는지 궁금합니다.", author:"변 10회, 개업 2년차", created:daysAgo(3), views:412, comments:[]},
+  {id:10, board:"개업", topic:"개업·운영", isQ:true, wonder:38, title:"상가 명도+원상회복+부당이득 병합, 착수금 어떻게 잡나요", body:"청구가 세 개 병합된 사건인데 착수금을 소가 기준으로 잡아야 할지 사건 난이도로 잡아야 할지 고민입니다. 병합 사건 수임 경험 있으신 분들 어떻게 산정하시는지.", author:"변 9회, 개업 3년차", created:daysAgo(5), views:227, comments:[]},
+  {id:11, board:"사내변", topic:"이직·채용", isQ:true, wonder:44, title:"인하우스 이직 시 연봉 협상, 원천징수영수증 꼭 제출해야 하나요", body:"이직 제안받았는데 현재 연봉 증빙을 요구하네요. 원천징수영수증을 그대로 내면 협상 여지가 없어질 것 같은데, 다들 어떻게 대응하셨는지 궁금합니다.", author:"변 11회, 송무 4년차", created:daysAgo(2), views:356, comments:[]},
+  {id:12, board:"개업", topic:"개업·운영", isQ:true, wonder:29, title:"협의이혼 합의서만 작성해주는 경우 보수 어떻게 받으세요", body:"소송까지 안 가고 재산분할·양육 합의서 작성 및 검토만 요청받는 케이스가 종종 있는데, 이걸 자문료로 받는지 문서작성료로 받는지 기준이 궁금합니다.", author:"변 8회, 개업 1년차", created:daysAgo(6), views:198, comments:[]},
+  {id:13, board:"사내변", topic:"재테크", isQ:true, wonder:33, title:"전문직 마이너스통장, 개업하면 금리 오르거나 회수되나요", body:"사내변으로 있을 때 뚫어둔 마통이 있는데 개업하면 소득 구조가 바뀌잖아요. 갱신 시 금리가 오르거나 한도가 줄었던 경험 있으신지, 개업 전에 미리 조정해두는 게 나은지 궁금합니다.", author:"변 12회, 사내변 2년차", created:daysAgo(4), views:264, comments:[]},
+  {id:14, board:"송무·로펌", topic:"실무·판례", isQ:true, wonder:41, title:"형사 전자소송에서 변호인의견서 전자제출하면 검사한테 전자송달 되나요", body:"형사 전자소송으로 변호인의견서를 넣으려는데, 상대인 검사에게 전자로 송달되는 건지 아니면 종이로 별도 제출해야 하는지 확실치 않습니다. 형사 전자소송 써보신 분 답변 부탁드립니다.", author:"변 10회, 송무 3년차", created:daysAgo(3), views:233, comments:[]},
+  {id:15, board:"공공", topic:"이직·채용", isQ:true, wonder:26, title:"공공기관 사내변 초봉, 어느 정도로 형성되어 있나요", body:"공공기관 법무직 지원 고민 중인데 처우 정보가 거의 없습니다. 임기제/정규직 여부에 따라 초봉이 어떻게 갈리는지, 로펌 대비 어느 정도 차이인지 재직자분들 대략이라도 알려주시면 감사하겠습니다.", author:"로스쿨 3학년", created:daysAgo(2), views:319, comments:[]},
+  {id:16, board:"사내변", topic:"자유", isQ:false, wonder:0, title:"다들 점심시간에 사무실에서 뭐 하고 보내세요", body:"사내변으로 오니 점심 이후 애매한 시간이 생기는데, 다들 어떻게 보내시나 궁금해서요. 산책하는지, 낮잠 자는지, 자기계발 하는지. 소소하게 공유해요.", author:"변 12회, 사내변 1년차", created:daysAgo(1), views:143, comments:[]},
+  {id:17, board:"개업", topic:"자유", isQ:false, wonder:0, title:"개업하고 나서 생긴 소소한 습관 있으신가요", body:"저는 개업하고부터 아침에 커피 내리면서 그날 기일 한 번 훑는 게 루틴이 됐어요. 다들 개업 전엔 없었는데 생긴 습관 같은 거 있으면 나눠봐요.", author:"변 9회, 개업 2년차", created:daysAgo(3), views:207, comments:[]},
 ];
 
 const seedNews = [  ];
@@ -1081,7 +1118,7 @@ const quickLinks = [
 ];
 
 /* ── 상태 ── */
-const DATA_VER = 7;
+const DATA_VER = 9;
 if(store.get('bb-ver') !== DATA_VER){
   store.set('bb-jobs', seedJobs);
   store.set('bb-posts', seedPosts);
@@ -1106,6 +1143,7 @@ let scrap = store.get('bb-scrap') || seedScrap;
 let laws = store.get('bb-laws') || seedLaws;
 let notices = store.get('bb-notices') || seedNotices;
 let profile = store.get('bb-profile') || { type:'', round:'', role:'', years:'' };
+let wonderSeen = store.get('bb-wonder-seen') || {};
 if(!store.get('bb-jobs')) store.set('bb-jobs', jobs);
 if(!store.get('bb-posts')) store.set('bb-posts', posts);
 if(!store.get('bb-news')) store.set('bb-news', news);
@@ -1114,7 +1152,7 @@ if(!store.get('bb-proxy')) store.set('bb-proxy', proxy);
 
 let currentTab = 'home';
 let jobFilter = { role:'전체', region:'전체' };
-let postFilter = { board:'전체', topic:'전체' };
+let postFilter = { topic:'전체', onlyQ:false, board:'전체', sort:'latest' };
 let newsFilter = { type:'전체' };
 let openFirms = new Set();   // 펼쳐진 회사 카드(정규화 key)
 let scrapFilter = store.get('bb-interest') || '전체';
@@ -1174,8 +1212,8 @@ function bindChips(groupId, onPick){
 }
 bindChips('filter-role', v=>{ jobFilter.role=v; renderJobs(); });
 bindChips('filter-region', v=>{ jobFilter.region=v; renderJobs(); });
-bindChips('filter-board', v=>{ postFilter.board=v; renderPosts(); });
 bindChips('filter-topic', v=>{ postFilter.topic=v; renderPosts(); });
+bindChips('filter-postsort', v=>{ postFilter.sort=v; renderPosts(); });
 bindChips('filter-news', v=>{ newsFilter.type=v; renderNews(); });
 
 /* ── 렌더: 채용 ── */
@@ -1296,26 +1334,37 @@ function timeAgo(iso){
   if(days<30) return Math.floor(days/7)+'주 전';
   return Math.floor(days/30)+'개월 전';
 }
+function wonderCount(p){ return (p.wonder||0) + (wonderSeen[p.id] ? 1 : 0); }
 function renderPosts(){
   const list = document.getElementById('post-list');
   const q = (document.getElementById('post-search').value||'').trim().toLowerCase();
-  const filtered = posts.filter(p =>
-    (postFilter.board==='전체' || p.board===postFilter.board) &&
+  let filtered = posts.filter(p =>
     (postFilter.topic==='전체' || p.topic===postFilter.topic) &&
+    (postFilter.board==='전체' || p.board===postFilter.board) &&
+    (!postFilter.onlyQ || p.isQ===true) &&
     (!q || p.title.toLowerCase().includes(q) || p.body.toLowerCase().includes(q))
-  ).sort((a,b)=> new Date(b.created)-new Date(a.created));
+  );
+  if(postFilter.sort==='wonder'){
+    filtered.sort((a,b)=> wonderCount(b)-wonderCount(a) || new Date(b.created)-new Date(a.created));
+  } else {
+    filtered.sort((a,b)=> new Date(b.created)-new Date(a.created));
+  }
 
   document.getElementById('info-count').textContent = filtered.length + '건';
 
   if(!filtered.length){
-    list.innerHTML = `<div class="empty"><div class="seal-empty">空</div>아직 글이 없습니다. 첫 기록을 남겨보세요.</div>`;
+    list.innerHTML = `<div class="empty"><div class="seal-empty">空</div>해당 조건의 글이 없습니다. 첫 글을 남겨보세요.</div>`;
     return;
   }
   list.innerHTML = filtered.map(p=>{
     const cmts = p.comments || [];
+    const isQ = p.isQ===true;
+    const wc = wonderCount(p);
+    const on = wonderSeen[p.id] ? 'on' : '';
     return `
     <article class="post-item" id="post-${p.id}" onclick="togglePost(${p.id})">
       <div class="post-top">
+        ${isQ ? '<span class="post-kind q">질문</span>' : ''}
         <span class="post-cat">${esc(p.board)}</span>
         ${p.topic ? `<span class="post-topic">#${esc(p.topic)}</span>` : ''}
         ${isNew(p.created) ? '<span class="badge-new">NEW</span>' : ''}
@@ -1327,18 +1376,33 @@ function renderPosts(){
         <span class="author-badge"><span class="v">辯</span>${esc(p.author)}</span>
         <span>${timeAgo(p.created)}</span>
         <span>조회 ${p.views||0}</span>
-        <span>댓글 ${cmts.length}</span>
+        ${isQ
+          ? `<span class="post-answers">답변 ${cmts.length}</span>
+             <button class="wonder-btn ${on}" onclick="event.stopPropagation(); toggleWonder(${p.id})">👀 나도 궁금 <span class="wc">${wc}</span></button>`
+          : `<span>댓글 ${cmts.length}</span>`}
       </div>
       <div class="post-comments" onclick="event.stopPropagation();">
-        <div class="comments-title">댓글 (${cmts.length})</div>
+        <div class="comments-title">${isQ?'답변':'댓글'} (${cmts.length})</div>
         ${cmts.map(c=>`<div class="comment"><span class="c-author">辯 ${esc(c.author)}</span>${esc(c.text)}<span class="c-time">${timeAgo(c.created)}</span></div>`).join('')}
         <div class="comment-form">
-          <input id="pcmt-${p.id}" placeholder="댓글 남기기 (특정 개인 비방 금지)" />
+          <input id="pcmt-${p.id}" placeholder="${isQ?'답변 남기기 (특정 개인 비방 금지)':'댓글 남기기 (특정 개인 비방 금지)'}" />
           <button onclick="addPostComment(${p.id})">등록</button>
         </div>
       </div>
     </article>
   `;}).join('');
+}
+/* 나도 궁금: 프로필(배지) 설정만 필요, 등급 무관 — 학생도 가능. 계정당 1회. */
+function toggleWonder(id){
+  const p = posts.find(x=>x.id===id);
+  if(!p) return;
+  const named = store.get('bb-profile') && store.get('bb-profile').type;
+  if(!named){ alert('프로필(인증 배지)을 먼저 설정하면 참여할 수 있습니다.'); return; }
+  if(wonderSeen[id]){ delete wonderSeen[id]; } else { wonderSeen[id] = true; }
+  store.set('bb-wonder-seen', wonderSeen);
+  renderPosts();
+  const el = document.getElementById('post-'+id);
+  if(el) el.classList.remove('open');
 }
 function addPostComment(id){
   const input = document.getElementById('pcmt-'+id);
@@ -1766,10 +1830,19 @@ function renderHome(){
   renderScrapWidget();
   renderHomeNews();
   renderDigest();
-  renderLaws();
   renderNotices();
   renderQuickLinks();
+  renderPartnerBanner();
   calcInterest(); calcPeriod(); calcStamp();
+}
+/* 배너가 채워지면 슬롯 노출, 없으면 숨김. 나중에 bb-partner-banner에 {html:'...'}만 넣으면 됨. */
+function renderPartnerBanner(){
+  const slot = document.getElementById('partner-slot');
+  const el = document.getElementById('partner-banner');
+  if(!slot || !el) return;
+  const banner = store.get('bb-partner-banner');
+  if(banner && banner.html){ el.innerHTML = banner.html; slot.style.display = ''; }
+  else { slot.style.display = 'none'; }
 }
 
 function renderProxyWidget(){
@@ -1779,7 +1852,7 @@ function renderProxyWidget(){
     .filter(p=>!p.h.past)
     .sort((a,b)=> new Date(a.date)-new Date(b.date))
     .slice(0,5);
-  if(!upcoming.length){ el.innerHTML = `<div style="padding:14px 0;color:var(--ink-soft);font-size:13px;">예정된 복대리 요청이 없습니다. 상단 <b>+ 복대리 등록</b>으로 남겨보세요.</div>`; return; }
+  if(!upcoming.length){ el.innerHTML = `<div style="padding:14px 0;color:var(--ink-soft);font-size:13px;">예정된 복대리 요청이 없습니다. 상단 <b>+ 복대리 등록</b> 버튼으로 남겨보세요.</div>`; return; }
   el.innerHTML = upcoming.map(p=>`
     <div class="proxy-row">
       <span class="proxy-tag ${p.type==='구인'?'need':'offer'}">${p.type}</span>
@@ -1862,6 +1935,7 @@ function renderDigest(){
 
 function renderLaws(){
   const el = document.getElementById('law-list');
+  if(!el) return; // 법령 위젯 제거됨
   const items = laws.slice().sort((a,b)=> new Date(a.effective)-new Date(b.effective));
   el.innerHTML = items.map(l=>{
     const diff = Math.ceil((new Date(l.effective)-new Date().setHours(0,0,0,0))/86400000);
@@ -2031,12 +2105,15 @@ function submitPost(){
     id: Date.now(),
     board: document.getElementById('p-board').value,
     topic: document.getElementById('p-topic').value,
+    isQ: document.getElementById('p-isq').checked,
+    wonder: 0,
     title, body,
-    author: myAuthorName(), created:new Date().toISOString(), views:0
+    author: myAuthorName(), created:new Date().toISOString(), views:0, comments:[]
   });
   store.set('bb-posts', posts);
   closeModal(); renderPosts();
   ['p-title','p-body'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('p-isq').checked = false;
 }
 
 function submitNews(){
