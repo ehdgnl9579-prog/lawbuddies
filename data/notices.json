@@ -1,9 +1,17 @@
 {
-  "updated": "2026-07-29T00:15:03.551Z",
+  "updated": "2026-07-30T06:44:01.121Z",
   "source": "대한변협 공지사항",
   "items": [
     {
       "id": 1,
+      "org": "대한변협",
+      "title": "[기획팀] 2026년 신탁아카데미 신청 안내",
+      "deadline": null,
+      "link": "https://www.koreanbar.or.kr/pages/news/view.asp?teamcode=&category=&page=1&seq=15471&types=1&searchtype=&searchstr=",
+      "created": "2026-07-29"
+    },
+    {
+      "id": 2,
       "org": "대한변협",
       "title": "2026년 대한변호사협회 학술대회 개최 안내(신청 안내 포함)",
       "deadline": null,
@@ -11,7 +19,7 @@
       "created": "2026-07-03"
     },
     {
-      "id": 2,
+      "id": 3,
       "org": "대한변협",
       "title": "[대한변협] 제34회 우수변호사상 수상 후보자 추천 안내",
       "deadline": null,
@@ -19,7 +27,7 @@
       "created": "2026-07-01"
     },
     {
-      "id": 3,
+      "id": 4,
       "org": "대한변협",
       "title": "[연수팀] 제511기 「2025년 주요판례해설_광주」 특별연수 신청안내",
       "deadline": null,
@@ -27,20 +35,12 @@
       "created": "2026-06-29"
     },
     {
-      "id": 4,
+      "id": 5,
       "org": "대한변협",
       "title": "제57회 한국법률문화상 수상후보 추천 의뢰",
       "deadline": null,
       "link": "https://www.koreanbar.or.kr/pages/news/view.asp?teamcode=&category=&page=1&seq=15431&types=1&searchtype=&searchstr=",
       "created": "2026-06-26"
-    },
-    {
-      "id": 5,
-      "org": "대한변협",
-      "title": "공영방송(한국방송공사·방송문화진흥회) 이사 후보자 추천 최종 심사결과 공고",
-      "deadline": null,
-      "link": "https://www.koreanbar.or.kr/pages/news/view.asp?teamcode=&category=&page=1&seq=15429&types=1&searchtype=&searchstr=",
-      "created": "2026-06-25"
     },
     {
       "id": 6,
