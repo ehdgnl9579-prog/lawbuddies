@@ -1,9 +1,17 @@
 {
-  "updated": "2026-08-05T06:45:14.722Z",
+  "updated": "2026-08-06T07:28:10.067Z",
   "source": "대한변협 공지사항",
   "items": [
     {
       "id": 1,
+      "org": "대한변협",
+      "title": "[기획팀] 2026년 세무아카데미 신청 안내",
+      "deadline": null,
+      "link": "https://www.koreanbar.or.kr/pages/news/view.asp?teamcode=&category=&page=1&seq=15490&types=1&searchtype=&searchstr=",
+      "created": "2026-08-06"
+    },
+    {
+      "id": 2,
       "org": "대한변협",
       "title": "일과 가정 양립 노하우 수집을 위한 공모전 안내",
       "deadline": null,
@@ -11,7 +19,7 @@
       "created": "2026-08-05"
     },
     {
-      "id": 2,
+      "id": 3,
       "org": "대한변협",
       "title": "[기획팀] 2026년 신탁아카데미 신청 안내",
       "deadline": null,
@@ -19,7 +27,7 @@
       "created": "2026-07-29"
     },
     {
-      "id": 3,
+      "id": 4,
       "org": "대한변협",
       "title": "2026년 대한변호사협회 학술대회 개최 안내(신청 안내 포함)",
       "deadline": null,
@@ -27,20 +35,12 @@
       "created": "2026-07-03"
     },
     {
-      "id": 4,
+      "id": 5,
       "org": "대한변협",
       "title": "[대한변협] 제34회 우수변호사상 수상 후보자 추천 안내",
       "deadline": null,
       "link": "https://www.koreanbar.or.kr/pages/news/view.asp?teamcode=&category=&page=1&seq=15435&types=1&searchtype=&searchstr=",
       "created": "2026-07-01"
-    },
-    {
-      "id": 5,
-      "org": "대한변협",
-      "title": "[연수팀] 제511기 「2025년 주요판례해설_광주」 특별연수 신청안내",
-      "deadline": null,
-      "link": "https://www.koreanbar.or.kr/pages/news/view.asp?teamcode=&category=&page=1&seq=15432&types=1&searchtype=&searchstr=",
-      "created": "2026-06-29"
     },
     {
       "id": 6,
