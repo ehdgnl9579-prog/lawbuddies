@@ -1,9 +1,25 @@
 {
-  "updated": "2026-08-10T23:18:24.270Z",
+  "updated": "2026-08-11T23:24:24.033Z",
   "source": "대한변협 공지사항",
   "items": [
     {
       "id": 1,
+      "org": "대한변협",
+      "title": "제57회 한국법률문화상 수상자 발표 공고",
+      "deadline": null,
+      "link": "https://www.koreanbar.or.kr/pages/news/view.asp?teamcode=&category=&page=1&seq=15497&types=1&searchtype=&searchstr=",
+      "created": "2026-08-11"
+    },
+    {
+      "id": 2,
+      "org": "대한변협",
+      "title": "2026년 대한변협 학술상 수상자 공고",
+      "deadline": null,
+      "link": "https://www.koreanbar.or.kr/pages/news/view.asp?teamcode=&category=&page=1&seq=15496&types=1&searchtype=&searchstr=",
+      "created": "2026-08-11"
+    },
+    {
+      "id": 3,
       "org": "대한변협",
       "title": "[연수팀] 「제34회 법의 지배를 위한 변호사대회」 개최 안내",
       "deadline": null,
@@ -11,7 +27,7 @@
       "created": "2026-08-10"
     },
     {
-      "id": 2,
+      "id": 4,
       "org": "대한변협",
       "title": "[기획팀] 2026년 세무아카데미 신청 안내",
       "deadline": null,
@@ -19,7 +35,7 @@
       "created": "2026-08-06"
     },
     {
-      "id": 3,
+      "id": 5,
       "org": "대한변협",
       "title": "일과 가정 양립 노하우 수집을 위한 공모전 안내",
       "deadline": null,
@@ -27,28 +43,12 @@
       "created": "2026-08-05"
     },
     {
-      "id": 4,
+      "id": 6,
       "org": "대한변협",
       "title": "[기획팀] 2026년 신탁아카데미 신청 안내",
       "deadline": null,
       "link": "https://www.koreanbar.or.kr/pages/news/view.asp?teamcode=&category=&page=1&seq=15471&types=1&searchtype=&searchstr=",
       "created": "2026-07-29"
-    },
-    {
-      "id": 5,
-      "org": "대한변협",
-      "title": "2026년 대한변호사협회 학술대회 개최 안내(신청 안내 포함)",
-      "deadline": null,
-      "link": "https://www.koreanbar.or.kr/pages/news/view.asp?teamcode=&category=&page=1&seq=15439&types=1&searchtype=&searchstr=",
-      "created": "2026-07-03"
-    },
-    {
-      "id": 6,
-      "org": "대한변협",
-      "title": "영문등록증명서 명칭 변경 안내 (2026. 6. 22. 시행)",
-      "deadline": null,
-      "link": "https://www.koreanbar.or.kr/pages/news/view.asp?teamcode=&category=&page=1&seq=15415&types=1&searchtype=&searchstr=",
-      "created": "2026-06-22"
     }
   ]
 }
