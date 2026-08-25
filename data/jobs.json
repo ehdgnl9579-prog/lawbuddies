@@ -1,5 +1,25 @@
 [
   {
+    "source": "saas",
+    "platform": "greeting",
+    "sourceId": "https://jipyong.career.greetinghr.com/ko/o/234267",
+    "title": "M&A·Corp그룹 경력변호사 모집",
+    "firm": "법무법인 지평",
+    "firmKey": "지평",
+    "role": "송무",
+    "region": "서울",
+    "exp": "경력 3년 이상",
+    "pay": "미기재",
+    "deadline": null,
+    "link": "https://jipyong.career.greetinghr.com/ko/o/234267",
+    "body": "법무법인 지평 채용공고\n\n경력: 경력 3년 이상\n고용형태: 정규직\n근무지: 법무법인(유한) 지평 서울특별시 중구 세종대로 14, 그랜드센트럴 A동 26층 (우)04527\n\n※ 상세 자격요건·전형절차·마감일은 원문 링크에서 확인하세요.",
+    "created": "2026-08-25T21:46:11.716Z",
+    "archived": false,
+    "comments": [],
+    "seen": 0,
+    "id": 40
+  },
+  {
     "source": "jobalio",
     "sourceId": "304230",
     "title": "2026년 하반기 중소벤처기업진흥공단 일반직(신입·경력) 채용 공고",
