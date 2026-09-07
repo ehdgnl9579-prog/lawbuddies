@@ -1,6 +1,25 @@
 [
   {
     "source": "jobalio",
+    "sourceId": "304697",
+    "title": "2026년 제5차 직원채용 공고",
+    "firm": "(재)한국보건의료정보원",
+    "firmKey": "(재)한국보건의료정보원",
+    "role": "공공",
+    "region": "서울",
+    "exp": "비정규직",
+    "pay": "공고 참조",
+    "deadline": "2026-09-20T15:00:00.000Z",
+    "link": "https://khis.ai-recruit.kr",
+    "body": "공공기관 채용공고 (잡알리오 자동수집)\n기관: (재)한국보건의료정보원\n채용인원: 20명\n고용유형: 비정규직\n\n※ 원문에서 상세 자격요건·전형절차를 확인하세요.",
+    "created": "2026-09-06T15:00:00.000Z",
+    "archived": false,
+    "comments": [],
+    "seen": 0,
+    "id": 52
+  },
+  {
+    "source": "jobalio",
     "sourceId": "304362",
     "title": "IBK기업은행 전문계약직(보이스피싱 모니터링) 채용공고",
     "firm": "중소기업은행",
