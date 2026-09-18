@@ -228,25 +228,6 @@
     "id": 51
   },
   {
-    "source": "jobalio",
-    "sourceId": "304622",
-    "title": "[한국지식재산보호원] 2026년도 제9차 인력채용",
-    "firm": "한국지식재산보호원",
-    "firmKey": "한국지식재산보호원",
-    "role": "공공",
-    "region": "서울",
-    "exp": "정규직,비정규직,청년인턴(채용형)",
-    "pay": "공고 참조",
-    "deadline": "2026-09-17T15:00:00.000Z",
-    "link": "https://koipa.recruiter.co.kr/",
-    "body": "공공기관 채용공고 (잡알리오 자동수집)\n기관: 한국지식재산보호원\n채용인원: 13명\n고용유형: 정규직,비정규직,청년인턴(채용형)\n\n※ 원문에서 상세 자격요건·전형절차를 확인하세요.",
-    "created": "2026-09-02T15:00:00.000Z",
-    "archived": false,
-    "comments": [],
-    "seen": 0,
-    "id": 48
-  },
-  {
     "source": "saas",
     "platform": "greeting",
     "sourceId": "https://jipyong.career.greetinghr.com/ko/o/121272",
@@ -385,6 +366,25 @@
     "comments": [],
     "seen": 0,
     "id": 13
+  },
+  {
+    "source": "jobalio",
+    "sourceId": "304622",
+    "title": "[한국지식재산보호원] 2026년도 제9차 인력채용",
+    "firm": "한국지식재산보호원",
+    "firmKey": "한국지식재산보호원",
+    "role": "공공",
+    "region": "서울",
+    "exp": "정규직,비정규직,청년인턴(채용형)",
+    "pay": "공고 참조",
+    "deadline": "2026-09-17T15:00:00.000Z",
+    "link": "https://koipa.recruiter.co.kr/",
+    "body": "공공기관 채용공고 (잡알리오 자동수집)\n기관: 한국지식재산보호원\n채용인원: 13명\n고용유형: 정규직,비정규직,청년인턴(채용형)\n\n※ 원문에서 상세 자격요건·전형절차를 확인하세요.",
+    "created": "2026-09-02T15:00:00.000Z",
+    "archived": true,
+    "comments": [],
+    "seen": 0,
+    "id": 48
   },
   {
     "source": "jobalio",
