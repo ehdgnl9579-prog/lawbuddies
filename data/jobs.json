@@ -1,5 +1,25 @@
 [
   {
+    "source": "saas",
+    "platform": "greeting",
+    "sourceId": "https://jipyong.career.greetinghr.com/ko/o/238639",
+    "title": "공정거래그룹 경력변호사 모집",
+    "firm": "법무법인 지평",
+    "firmKey": "지평",
+    "role": "송무",
+    "region": "서울",
+    "exp": "경력 1~2년",
+    "pay": "미기재",
+    "deadline": null,
+    "link": "https://jipyong.career.greetinghr.com/ko/o/238639",
+    "body": "법무법인 지평 채용공고\n\n경력: 경력 1~2년\n고용형태: 정규직\n근무지: 법무법인(유한) 지평 서울특별시 중구 세종대로 14, 그랜드센트럴 A동 26층 (우)04527\n\n※ 상세 자격요건·전형절차·마감일은 원문 링크에서 확인하세요.",
+    "created": "2026-09-29T01:01:34.049Z",
+    "archived": false,
+    "comments": [],
+    "seen": 0,
+    "id": 71
+  },
+  {
     "source": "jobalio",
     "sourceId": "305341",
     "title": "2026년 한국법무보호복지공단 울산지부 심리상담직(육아휴직대체직) 경력경쟁채용시험 공고",
