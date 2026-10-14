@@ -1,5 +1,25 @@
 [
   {
+    "source": "saas",
+    "platform": "greeting",
+    "sourceId": "https://jipyong.career.greetinghr.com/ko/o/240229",
+    "title": "건설.부동산그룹 경력변호사 모집",
+    "firm": "법무법인 지평",
+    "firmKey": "지평",
+    "role": "송무",
+    "region": "서울",
+    "exp": "경력 1~4년",
+    "pay": "미기재",
+    "deadline": null,
+    "link": "https://jipyong.career.greetinghr.com/ko/o/240229",
+    "body": "법무법인 지평 채용공고\n\n경력: 경력 1~4년\n고용형태: 정규직\n근무지: 법무법인(유한) 지평 서울특별시 중구 세종대로 14, 그랜드센트럴 A동 26층 (우)04527\n\n※ 상세 자격요건·전형절차·마감일은 원문 링크에서 확인하세요.",
+    "created": "2026-10-14T00:19:58.547Z",
+    "archived": false,
+    "comments": [],
+    "seen": 0,
+    "id": 77
+  },
+  {
     "source": "jobalio",
     "sourceId": "305759",
     "title": "2026년 정보통신기획평가원 직원채용(위촉직, 전문위원(변호사)) 공고",
