@@ -1,763 +1,833 @@
 {
-  "generated": "2026-10-21T23:55:33.042Z",
+  "generated": "2026-10-22T23:54:32.555Z",
   "source": "naver-search-api",
   "count": 120,
   "items": [
     {
       "cat": "법조",
-      "title": "'北어민 강제북송' 文정부 안보인사 2심 집행유예…형 무거워져",
-      "source": "kbsm.net",
-      "link": "https://www.kbsm.net/news/view.php?idx=538595",
-      "created": "2026-10-21T23:54:00.000Z"
-    },
-    {
-      "cat": "금융",
-      "title": "국내증시 전망, 금통위·美기술주 훈풍…코스피 5800 재도전",
-      "source": "topstarnews.net",
-      "link": "https://www.topstarnews.net/news/articleView.html?idxno=16254483",
-      "created": "2026-10-21T23:54:00.000Z"
-    },
-    {
-      "cat": "금융",
-      "title": "강성후 회장 “가상자산 과세 2년 유예해야”…투자자 보호·과세체계 ...",
-      "source": "g-enews.com",
-      "link": "https://www.g-enews.com/view.php?ud=20261022084935701e207547429_1",
-      "created": "2026-10-21T23:54:00.000Z"
-    },
-    {
-      "cat": "금융",
-      "title": "Npay 우리 체크카드 출시 \"전월실적 없이 최대 1.3% 적립 머니 통장은 시...",
-      "source": "econovill.com",
-      "link": "https://www.econovill.com/news/articleView.html?idxno=754482",
-      "created": "2026-10-21T23:52:00.000Z"
-    },
-    {
-      "cat": "금융",
-      "title": "[이슈국감] 증권사 금융사고 10년간 2953억…신한투자증권만 1525",
-      "source": "hansbiz.co.kr",
-      "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=874985",
-      "created": "2026-10-21T23:52:00.000Z"
-    },
-    {
-      "cat": "금융",
-      "title": "GA 관리 잘한 보험사, 킥스 운영위액 최대 30% 경감",
-      "source": "news.einfomax.co.kr",
-      "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4440476",
-      "created": "2026-10-21T23:50:00.000Z"
+      "title": "김민석 \"오세훈 항소심 유죄에 무게…서울시장 선거 마음의 준비\"",
+      "source": "news.sbs.co.kr",
+      "link": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008811416&plink=ORI&cooper=NAVER",
+      "created": "2026-10-22T23:52:00.000Z"
     },
     {
       "cat": "형사",
-      "title": "나나 자택 침입범, 징역 7년에 반성 없는 태도...오늘(22일) 항소심 선고...",
-      "source": "조선일보",
-      "link": "https://www.sportschosun.com/entertainment/2026-10-22/202610220100139940009125",
-      "created": "2026-10-21T23:50:00.000Z"
-    },
-    {
-      "cat": "IP·개인정보",
-      "title": "조정훈 의원, 공공기관 개인정보 유출 배상책임 강조…사이버보험 의무...",
-      "source": "dailysecu.com",
-      "link": "https://www.dailysecu.com/news/articleView.html?idxno=208982",
-      "created": "2026-10-21T23:50:00.000Z"
-    },
-    {
-      "cat": "형사",
-      "title": "남태현, 오늘(22일) '집유 중 음주운전' 항소심 첫 공판…1심서 징역 1년",
-      "source": "celuvmedia.com",
-      "link": "http://www.celuvmedia.com/article.php?aid=1792626438529627006",
-      "created": "2026-10-21T23:48:00.000Z"
+      "title": "16명 살해한 탈북 흉악범 북송했다고 유죄? 이 판결 괜찮나!",
+      "source": "newsclaim.co.kr",
+      "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3079803",
+      "created": "2026-10-22T23:52:00.000Z"
     },
     {
       "cat": "금융",
-      "title": "경실련, 구글·게임사 5곳 조세포탈 의혹 제기…국세청 조사 촉구",
-      "source": "segye.com",
-      "link": "https://www.segye.com/newsView/20261022505235?OutUrl=naver",
-      "created": "2026-10-21T23:46:00.000Z"
-    },
-    {
-      "cat": "IP·개인정보",
-      "title": "구글, 데이터센터 비밀유지계약 중단…AI 인프라, 지역사회 신뢰가 변수...",
-      "source": "dt.co.kr",
-      "link": "https://www.dt.co.kr/article/12090553?ref=naver",
-      "created": "2026-10-21T23:45:00.000Z"
-    },
-    {
-      "cat": "금융",
-      "title": "iM증권 \"코스피 5800선 저항 돌파 중요.. 차익 실현 유의\"",
-      "source": "g-enews.com",
-      "link": "https://www.g-enews.com/view.php?ud=20261022083302277544093b5d4e_1",
-      "created": "2026-10-21T23:44:00.000Z"
-    },
-    {
-      "cat": "금융",
-      "title": "\"코스피, 차익실현에 약세 출발 전망…반도체 업황은 긍정적\"<iM證>",
-      "source": "news2day.co.kr",
-      "link": "https://www.news2day.co.kr/article/20261022500022",
-      "created": "2026-10-21T23:44:00.000Z"
-    },
-    {
-      "cat": "금융",
-      "title": "네이버·두나무 결합 독점 우려에...금융위, 안전장치 검토",
-      "source": "youthdaily.co.kr",
-      "link": "https://www.youthdaily.co.kr/news/article.html?no=228685",
-      "created": "2026-10-21T23:44:00.000Z"
-    },
-    {
-      "cat": "형사",
-      "title": "황운하 의원 \"대법원장 1억 원대 유용 의혹에, 성역 없는 수사 촉구\"",
-      "source": "breaknews.com",
-      "link": "http://www.breaknews.com/1244726",
-      "created": "2026-10-21T23:44:00.000Z"
-    },
-    {
-      "cat": "금융",
-      "title": "오늘 법사위·과방위 등 10개 상임위 국감…'공소 취소' '이진숙' 쟁점",
-      "source": "shinailbo.co.kr",
-      "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5074593",
-      "created": "2026-10-21T23:42:00.000Z"
-    },
-    {
-      "cat": "노동",
-      "title": "조선공산당, 사회주의운동의 전환을 꾀하다",
-      "source": "한겨레",
-      "link": "https://h21.hani.co.kr/arti/society/society_general/60039.html",
-      "created": "2026-10-21T23:42:00.000Z"
-    },
-    {
-      "cat": "M&A",
-      "title": "마켓워치 \"테슬라·스페이스X 합병에 회의적인 이유\"",
-      "source": "연합뉴스",
-      "link": "https://www.yna.co.kr/view/AKR20261022024500009?input=1195m",
-      "created": "2026-10-21T23:42:00.000Z"
-    },
-    {
-      "cat": "IP·개인정보",
-      "title": "강준현 의원, 개인정보 유출 조사 전 자료 은닉·폐기 '제재 공백' 지적",
-      "source": "dailysecu.com",
-      "link": "https://www.dailysecu.com/news/articleView.html?idxno=208981",
-      "created": "2026-10-21T23:42:00.000Z"
-    },
-    {
-      "cat": "법조",
-      "title": "박충권 국민의힘 수석대변인 “이재명 정부, 독립수사 파괴·보복 외교...",
-      "source": "breaknews.com",
-      "link": "http://www.breaknews.com/1244811",
-      "created": "2026-10-21T23:40:00.000Z"
-    },
-    {
-      "cat": "법조",
-      "title": "국민의힘 장동혁·정점식 “정부 무책임과 실정 즉각 시정해야”",
-      "source": "breaknews.com",
-      "link": "http://www.breaknews.com/1244810",
-      "created": "2026-10-21T23:40:00.000Z"
-    },
-    {
-      "cat": "M&A",
-      "title": "[경남 브리핑 모음(10월22일)] 진주시, 국제 우주산업 콘퍼런스 개최…...",
-      "source": "dnews.co.kr",
-      "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202610211756456640607",
-      "created": "2026-10-21T23:40:00.000Z"
-    },
-    {
-      "cat": "금융",
-      "title": "스페이스X가 이끈 위험선호…8.4만달러대 반등[코인 모닝콜]",
-      "source": "이데일리",
-      "link": "https://www.edaily.co.kr/News/Read?newsId=02791286645615544&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
-      "created": "2026-10-21T23:39:00.000Z"
-    },
-    {
-      "cat": "금융",
-      "title": "신용정보법 과징금 대수술…위반 정도 따라 부과율 1~100% 차등화",
-      "source": "joseilbo.com",
-      "link": "http://www.joseilbo.com/news/news_read.php?uid=577906&class=18&grp=",
-      "created": "2026-10-21T23:38:00.000Z"
-    },
-    {
-      "cat": "M&A",
-      "title": "브이에스팜텍, 아산나눔재단 마루SF•UC 버클리 베이커랩 동시 선정",
-      "source": "yakup.com",
-      "link": "https://www.yakup.com/news/index.html?mode=view&cat=12&nid=334095",
-      "created": "2026-10-21T23:36:00.000Z"
-    },
-    {
-      "cat": "형사",
-      "title": "'역삼 연쇄 방화' 70대 구속영장...살인미수 혐의 검토",
-      "source": "ytn.co.kr",
-      "link": "https://www.ytn.co.kr/_ln/0103_202610220835012808",
-      "created": "2026-10-21T23:35:00.000Z"
-    },
-    {
-      "cat": "법조",
-      "title": "억대 관리비 체납 '3년 소멸시효' 적용? 법원 \"권리남용\" 철퇴",
-      "source": "hapt.co.kr",
-      "link": "https://www.hapt.co.kr/news/articleView.html?idxno=169765",
-      "created": "2026-10-21T23:30:00.000Z"
-    },
-    {
-      "cat": "조세",
-      "title": "[전문가 칼럼] 300억 임대부동산, 상속세는 어떻게 '준비'를 하지?",
-      "source": "junggi.co.kr",
-      "link": "https://www.junggi.co.kr/news/articleView.html?idxno=38180",
-      "created": "2026-10-21T23:30:00.000Z"
-    },
-    {
-      "cat": "IP·개인정보",
-      "title": "앤트로픽, 알아서 일하는 AI 비서 '클로드 듀엣' 전격 공개",
-      "source": "digitaltoday.co.kr",
-      "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=709007",
-      "created": "2026-10-21T23:28:00.000Z"
-    },
-    {
-      "cat": "형사",
-      "title": "캄보디아인이 동포를 흉기로 살해…출국 직전 공항에서 긴급체포",
-      "source": "조선일보",
-      "link": "https://news.tvchosun.com/site/data/html_dir/2026/10/22/2026102290045.html",
-      "created": "2026-10-21T23:27:00.000Z"
-    },
-    {
-      "cat": "법조",
-      "title": "에코프로HN의 애매한 '무상증자 검토 중' 공시, 그런 뒤 내부자 거래는...",
-      "source": "ilemonde.com",
-      "link": "https://www.ilemonde.com/news/articleView.html?idxno=30823",
-      "created": "2026-10-21T23:24:00.000Z"
-    },
-    {
-      "cat": "형사",
-      "title": "나나 모녀 강도 상해범, 범행 후 역고소…오늘(22일) 항소심 판결",
-      "source": "stoo.com",
-      "link": "http://www.stoo.com/article.php?aid=109478466573",
-      "created": "2026-10-21T23:24:00.000Z"
-    },
-    {
-      "cat": "IP·개인정보",
-      "title": "[국감 2026] 티빙 사태에 CJ, 보상 카드…증거 인멸 처벌법 뜬다",
-      "source": "financialpost.co.kr",
-      "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=281829",
-      "created": "2026-10-21T23:22:00.000Z"
-    },
-    {
-      "cat": "시사",
-      "title": "[뉴욕마켓워치] 美 국무부 걸프 전역 대피 명령 해프닝…주식↑채권·달...",
-      "source": "news.einfomax.co.kr",
-      "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4440462",
-      "created": "2026-10-21T23:20:00.000Z"
-    },
-    {
-      "cat": "형사",
-      "title": "고창군수 금품수수 의혹 연루…전직 공무원 구속",
-      "source": "연합뉴스",
-      "link": "https://www.yna.co.kr/view/AKR20261022024200055?input=1195m",
-      "created": "2026-10-21T23:14:00.000Z"
+      "title": "바이비트, 두바이 VARA 현물 거래소 서비스 승인 획득 보도",
+      "source": "tokenpost.kr",
+      "link": "https://www.tokenpost.kr/news/breaking/426093",
+      "created": "2026-10-22T23:50:00.000Z"
     },
     {
       "cat": "공정거래",
-      "title": "하나증권 \"대상 3분기 실적 주춤…내년 기저효과 기대\"",
+      "title": "[삼성물산 건설 인사 전망] 이재용 체제 오세철 내년 임기 만료… 사망...",
+      "source": "newsclaim.co.kr",
+      "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3079787",
+      "created": "2026-10-22T23:50:00.000Z"
+    },
+    {
+      "cat": "형사",
+      "title": "'인보사 의혹' 前코오롱생명 대표 무죄에 4000만원 형사보상",
+      "source": "newsis.com",
+      "link": "https://www.newsis.com/view/NISX20261023_0003837889",
+      "created": "2026-10-22T23:49:00.000Z"
+    },
+    {
+      "cat": "법조",
+      "title": "오세훈 2심 선고...여 \"서울시장선거 준비\" 야 \"합리적 무죄 판결\"",
       "source": "jasm.co.kr",
-      "link": "https://www.jasm.co.kr/news/view/322465/?sc=Naver",
-      "created": "2026-10-21T23:12:00.000Z"
+      "link": "https://www.jasm.co.kr/news/view/322665/?sc=Naver",
+      "created": "2026-10-22T23:48:00.000Z"
     },
     {
       "cat": "법조",
-      "title": "법원, \"돌려차기男 영치금 10만원 허가 정당\"…항고 기각",
-      "source": "newsis.com",
-      "link": "https://www.newsis.com/view/NISX20261022_0003835944",
-      "created": "2026-10-21T23:11:00.000Z"
-    },
-    {
-      "cat": "IP·개인정보",
-      "title": "납품대금 연동제 늘리고 상생결제 33% 확대…KOMSA, 협력사 안전망 구축",
-      "source": "dailian.co.kr",
-      "link": "https://www.dailian.co.kr/news/view/1704397/?sc=Naver",
-      "created": "2026-10-21T23:09:00.000Z"
-    },
-    {
-      "cat": "M&A",
-      "title": "핀다, 저축은행 품었다···대출 중개 넘어 직접 금융",
-      "source": "hansbiz.co.kr",
-      "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=874962",
-      "created": "2026-10-21T23:08:00.000Z"
-    },
-    {
-      "cat": "M&A",
-      "title": "센코라, 아메리칸 온콜로지 네트워크 24억 달러에 인수",
-      "source": "mdtoday.co.kr",
-      "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=620140",
-      "created": "2026-10-21T23:08:00.000Z"
-    },
-    {
-      "cat": "시사",
-      "title": "경남교육청, '국회 방문' 지방교육재정 개편안 우려 전달…2027 중등 교...",
-      "source": "pointe.co.kr",
-      "link": "https://www.pointe.co.kr/news/articleView.html?idxno=86406",
-      "created": "2026-10-21T23:06:00.000Z"
-    },
-    {
-      "cat": "형사",
-      "title": "층간소음 갈등 끝 50대 이웃 살해한 20대, 재판서 '징역 25년'",
-      "source": "wikitree.co.kr",
-      "link": "https://www.wikitree.co.kr/articles/1168167",
-      "created": "2026-10-21T23:02:00.000Z"
-    },
-    {
-      "cat": "형사",
-      "title": "삼성 합병 '2조 시너지' 조작이 결정타…엘리엇 ISDS 판정문 뜯어보니",
-      "source": "news.einfomax.co.kr",
-      "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4440456",
-      "created": "2026-10-21T23:02:00.000Z"
-    },
-    {
-      "cat": "형사",
-      "title": "정부 패소 ISDS 판정문 공개…\"삼성 합병, 조작 알았다면 국민연금 반대...",
-      "source": "news.einfomax.co.kr",
-      "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4440455",
-      "created": "2026-10-21T23:02:00.000Z"
-    },
-    {
-      "cat": "형사",
-      "title": "특경법 사기, 단순 사기죄와 무엇이 다른가",
-      "source": "thebigdata.co.kr",
-      "link": "https://www.thebigdata.co.kr/view.php?ud=20261021095922103237600e7ec7_23",
-      "created": "2026-10-21T23:02:00.000Z"
-    },
-    {
-      "cat": "노동",
-      "title": "[경남도정]-경찰 입맛따라 브리핑...기준은?",
-      "source": "news.knn.co.kr",
-      "link": "https://news.knn.co.kr/news/article/193477",
-      "created": "2026-10-21T23:02:00.000Z"
-    },
-    {
-      "cat": "법조",
-      "title": "김종혁 \"욕설 녹취 장동혁, 처참한 수준…올공 북은 왜 쳤나?\"[한판승부...",
-      "source": "nocutnews.co.kr",
-      "link": "https://www.nocutnews.co.kr/news/6595186?utm_source=naver&utm_medium=article&utm_campaign=20261022080020",
-      "created": "2026-10-21T23:01:00.000Z"
-    },
-    {
-      "cat": "노동",
-      "title": "[손병관의 뉴스프레소] 중수청장 배석 논란, 진보진영도 '수사 중립성 의...",
-      "source": "ohmynews.com",
-      "link": "https://www.ohmynews.com/NWS_Web/View/at_pg.aspx?CNTN_CD=A0003277584&CMPT_CD=P0010&utm_source=naver&utm_medium=newsearch&utm_campaign=naver_news",
-      "created": "2026-10-21T23:01:00.000Z"
-    },
-    {
-      "cat": "법조",
-      "title": "[동그라미 만평] 내란마저 할인하는 사법부",
-      "source": "goodmorningcc.com",
-      "link": "https://www.goodmorningcc.com/news/articleView.html?idxno=454442",
-      "created": "2026-10-21T23:00:00.000Z"
-    },
-    {
-      "cat": "법조",
-      "title": "최태원 회장님, 한국인도 좋은 것 좀 씁시다",
-      "source": "globale.co.kr",
-      "link": "https://www.globale.co.kr/news/articleView.html?idxno=41154",
-      "created": "2026-10-21T23:00:00.000Z"
-    },
-    {
-      "cat": "형사",
-      "title": "[기자수첩] 검찰청 폐지와 수사·기소 분리…중수청 '구멍'은 누구의 몫...",
-      "source": "youthdaily.co.kr",
-      "link": "https://www.youthdaily.co.kr/news/article.html?no=228643",
-      "created": "2026-10-21T23:00:00.000Z"
-    },
-    {
-      "cat": "노동",
-      "title": "[주간 미디어동향] KBS 사장 최종 후보에 이태현 전 웨이브 대표 外",
-      "source": "banronbodo.com",
-      "link": "https://www.banronbodo.com/news/articleView.html?idxno=33218",
-      "created": "2026-10-21T23:00:00.000Z"
-    },
-    {
-      "cat": "M&A",
-      "title": "​[HRSG 삼국지]① 넴에너지 품은 미코…미리캐피탈과 리레이팅 방정식",
-      "source": "bloter.net",
-      "link": "https://www.bloter.net/news/articleView.html?idxno=676299",
-      "created": "2026-10-21T23:00:00.000Z"
-    },
-    {
-      "cat": "M&A",
-      "title": "[2026국감]금융당국, 네이버·두나무 결합 독점 우려에 안전장치 계획",
-      "source": "view.asiae.co.kr",
-      "link": "https://view.asiae.co.kr/article/2026102207592440891",
-      "created": "2026-10-21T22:59:00.000Z"
-    },
-    {
-      "cat": "시사",
-      "title": "[더벨][thebell Forum | Capital Market Forum 2026] \"오너 중심서 주주가치...",
-      "source": "thebell.co.kr",
-      "link": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202610201353454120104313",
-      "created": "2026-10-21T22:58:00.000Z"
-    },
-    {
-      "cat": "M&A",
-      "title": "글로벌 진단기업 키아젠, 108억달러에 팔린다",
-      "source": "medipana.com",
-      "link": "https://www.medipana.com/news/articleView.html?idxno=419813",
-      "created": "2026-10-21T22:56:00.000Z"
-    },
-    {
-      "cat": "법조",
-      "title": "與 문조털래유, '뉴이재명 민주당' 떠나 조국당으로? … 좌초됐던 합당...",
-      "source": "newdaily.co.kr",
-      "link": "https://www.newdaily.co.kr/site/data/html/2026/10/22/2026102200019.html",
-      "created": "2026-10-21T22:54:00.000Z"
-    },
-    {
-      "cat": "시사",
-      "title": "'국감 제척' 이진숙, 오늘 국정감사 참여 가능…헌재, 가처분 일부 인용",
-      "source": "조선일보",
-      "link": "https://news.tvchosun.com/site/data/html_dir/2026/10/22/2026102290013.html",
-      "created": "2026-10-21T22:50:00.000Z"
-    },
-    {
-      "cat": "시사",
-      "title": "[오늘의 신문] 트럼프 중간선거 개입 우려·중동 원유 수출 회복·비정규...",
-      "source": "kor.theasian.asia",
-      "link": "http://kor.theasian.asia/archives/419365",
-      "created": "2026-10-21T22:50:00.000Z"
-    },
-    {
-      "cat": "법조",
-      "title": "'강제북송' 정의용·서훈 2심 징역형…\"법 위반 명백, 처벌 대상\"",
-      "source": "조선일보",
-      "link": "https://news.tvchosun.com/site/data/html_dir/2026/10/22/2026102290015.html",
-      "created": "2026-10-21T22:48:00.000Z"
-    },
-    {
-      "cat": "시사",
-      "title": "결혼해도 국민연금 가입자로…전업주부·무소득 청년 편입 추진",
-      "source": "segye.com",
-      "link": "https://www.segye.com/newsView/20261022504431?OutUrl=naver",
-      "created": "2026-10-21T22:48:00.000Z"
-    },
-    {
-      "cat": "법조",
-      "title": "\"대구만 오면 무죄\" 국감서 '5·18 폭동' 표현 무죄 판결 질타",
-      "source": "kjmbc.co.kr",
-      "link": "https://kjmbc.co.kr/NewsArticle/1542142",
-      "created": "2026-10-21T22:45:00.000Z"
-    },
-    {
-      "cat": "M&A",
-      "title": "AI에 돈 쏟아붓는 메타, 현금흐름 적자…의결권 없는 주식으로 ‘실탄’...",
-      "source": "매일경제",
-      "link": "https://www.mk.co.kr/article/12182407",
-      "created": "2026-10-21T22:40:00.000Z"
-    },
-    {
-      "cat": "조세",
-      "title": "\"세무조사 칼끝 무뎌지나\"…국세청 조사공무원 비위·중징계 '급증'",
-      "source": "pointe.co.kr",
-      "link": "https://www.pointe.co.kr/news/articleView.html?idxno=86384",
-      "created": "2026-10-21T22:36:00.000Z"
-    },
-    {
-      "cat": "M&A",
-      "title": "생산적금융 향해 달리는 우리금융…런던인맥 총력전",
-      "source": "dealsite.co.kr",
-      "link": "https://dealsite.co.kr/articles/171048",
-      "created": "2026-10-21T22:36:00.000Z"
-    },
-    {
-      "cat": "시사",
-      "title": "[뉴욕채권] 국채가 하락…막판 중동 불안감 자극 소식에 약세 압력↑",
-      "source": "news.einfomax.co.kr",
-      "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4440449",
-      "created": "2026-10-21T22:36:00.000Z"
-    },
-    {
-      "cat": "시사",
-      "title": "개미들 털리자마자 세력들 뭉칫돈 유입... 비트코인 강세장 재개되나",
-      "source": "pinpointnews.co.kr",
-      "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=497423",
-      "created": "2026-10-21T22:36:00.000Z"
-    },
-    {
-      "cat": "시사",
-      "title": "[생활정보] 가족 달력에 '이것' 한 줄 적어보세요…11월 3일의 대화가 남...",
-      "source": "wikitree.co.kr",
-      "link": "https://www.wikitree.co.kr/articles/1168164",
-      "created": "2026-10-21T22:30:00.000Z"
-    },
-    {
-      "cat": "M&A",
-      "title": "네이버파이낸셜과 두나무 결합, 독점 우려 속 금융당국의 안전장치 계획...",
-      "source": "gokorea.kr",
-      "link": "https://www.gokorea.kr/news/articleView.html?idxno=882326",
-      "created": "2026-10-21T22:28:00.000Z"
-    },
-    {
-      "cat": "조세",
-      "title": "삼성 방계 알머스 '김상용 대표', 베트남 도피성 출국…8년 만 귀국 왜?",
-      "source": "job-post.co.kr",
-      "link": "https://www.job-post.co.kr/news/articleView.html?idxno=233772",
-      "created": "2026-10-21T22:16:00.000Z"
-    },
-    {
-      "cat": "M&A",
-      "title": "청년이 제안한 탄소중립 해법, 기업 현장과 만나다…넷제로프렌즈 8개 ...",
-      "source": "dailyt.co.kr",
-      "link": "https://www.dailyt.co.kr/newsView/dlt202610220009",
-      "created": "2026-10-21T22:14:00.000Z"
-    },
-    {
-      "cat": "시사",
-      "title": "의무공개매수 반대 청원 엿새 만에 5만명…금투세·공매도보다 빨랐다",
-      "source": "news.einfomax.co.kr",
-      "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4440445",
-      "created": "2026-10-21T22:14:00.000Z"
-    },
-    {
-      "cat": "시사",
-      "title": "PUMP 토큰 변동성 폭발... 기술적 저항대 앞두고 세력 간 공방전",
-      "source": "pinpointnews.co.kr",
-      "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=497417",
-      "created": "2026-10-21T22:14:00.000Z"
-    },
-    {
-      "cat": "IP·개인정보",
-      "title": "로그 지우고 서버 없애고…자료 훼손에 막힌 통신사 유출 조사",
-      "source": "srtimes.kr",
-      "link": "http://www.srtimes.kr/news/articleView.html?idxno=215462",
-      "created": "2026-10-21T22:12:00.000Z"
-    },
-    {
-      "cat": "노동",
-      "title": "[오늘의 주요일정·22일] 헌법재판소, 존속살해 규정 헌법소원 선고",
-      "source": "safetimes.co.kr",
-      "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=246706",
-      "created": "2026-10-21T22:06:00.000Z"
-    },
-    {
-      "cat": "노동",
-      "title": "“대통령 공소 취소‧김정은에 맞춰진 정부 정책 바로잡겠다”",
-      "source": "동아일보",
-      "link": "https://shindonga.donga.com/3/all/13/6427537/1",
-      "created": "2026-10-21T22:02:00.000Z"
-    },
-    {
-      "cat": "노동",
-      "title": "[한진 톺아보기] 노란봉투법·사망사고 겹악재…떠났던 '노무통' 다시 불...",
-      "source": "dealsite.co.kr",
-      "link": "https://dealsite.co.kr/articles/170859",
-      "created": "2026-10-21T22:02:00.000Z"
-    },
-    {
-      "cat": "시사",
-      "title": "[오늘 재경부 등 경제부처 일정]",
-      "source": "news.einfomax.co.kr",
-      "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4440444",
-      "created": "2026-10-21T22:02:00.000Z"
-    },
-    {
-      "cat": "IP·개인정보",
-      "title": "[Who Is ?] 최택원 SSG닷컴 대표이사",
-      "source": "businesspost.co.kr",
-      "link": "https://www.businesspost.co.kr/BP?command=article_view&num=447602",
-      "created": "2026-10-21T22:00:00.000Z"
-    },
-    {
-      "cat": "공정거래",
-      "title": "이진숙 \"구글 인앱결제 수수료 8조원·망 이용대가 책임 국감서 따질 것...",
-      "source": "ebn.co.kr",
-      "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1728692",
-      "created": "2026-10-21T21:54:00.000Z"
-    },
-    {
-      "cat": "노동",
-      "title": "금속노조 \"한화오션, 호황 이익 나누고 원청교섭 해야\"",
-      "source": "labortoday.co.kr",
-      "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237326",
-      "created": "2026-10-21T21:34:00.000Z"
-    },
-    {
-      "cat": "노동",
-      "title": "LS전선 노조탄압 '논란' 김준영 위원장 단식 돌입",
-      "source": "labortoday.co.kr",
-      "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237328",
-      "created": "2026-10-21T21:34:00.000Z"
-    },
-    {
-      "cat": "노동",
-      "title": "[단독] 정부, 업무상 질병 '추정 원칙' 입법 추진",
-      "source": "labortoday.co.kr",
-      "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237336",
-      "created": "2026-10-21T21:34:00.000Z"
-    },
-    {
-      "cat": "노동",
-      "title": "[단독] '모범사용자' 돼야 할 공공부문 노동교육 2년 연속 목표 미달",
-      "source": "labortoday.co.kr",
-      "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237344",
-      "created": "2026-10-21T21:34:00.000Z"
-    },
-    {
-      "cat": "노동",
-      "title": "지방정부 노동감독 권한으로 산재 제대로 예방하려면",
-      "source": "labortoday.co.kr",
-      "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237348",
-      "created": "2026-10-21T21:34:00.000Z"
-    },
-    {
-      "cat": "공정거래",
-      "title": "공정위, 美기업 ‘차별’ 논란 속 싱크탱크와 진흙탕 싸움… 반박에 재...",
-      "source": "조선일보",
-      "link": "https://www.chosun.com/international/us/2026/10/22/UHGT24VR3VDFXDWCOLUJP4L4MY/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
-      "created": "2026-10-21T21:25:00.000Z"
-    },
-    {
-      "cat": "IP·개인정보",
-      "title": "'톡신'... 중국은 '넘겨받겠다'는데 한국은 '협력'이라 읽었다",
-      "source": "hitnews.co.kr",
-      "link": "https://www.hitnews.co.kr/news/articleView.html?idxno=79958",
-      "created": "2026-10-21T21:12:00.000Z"
-    },
-    {
-      "cat": "공정거래",
-      "title": "산안법 개정에 전문업계, '기대반 우려반'",
-      "source": "kmecnews.co.kr",
-      "link": "https://www.kmecnews.co.kr/news/articleView.html?idxno=52420",
-      "created": "2026-10-21T21:06:00.000Z"
-    },
-    {
-      "cat": "조세",
-      "title": "론스타 정부·서울시 상대 '1682억 세금 반환' 소송…오늘 파기환송심 선...",
-      "source": "newsis.com",
-      "link": "https://www.newsis.com/view/NISX20261021_0003835654",
-      "created": "2026-10-21T21:00:00.000Z"
-    },
-    {
-      "cat": "IP·개인정보",
-      "title": "메타, 33조 벌금 폭탄…美 법원 \"개인정보 유출·소비자 기만\"",
-      "source": "news1.kr",
-      "link": "https://www.news1.kr/world/international-economy/6327881",
-      "created": "2026-10-21T19:31:00.000Z"
-    },
-    {
-      "cat": "조세",
-      "title": "'1,682억 세금 반환' 론스타 파기환송심 오늘 선고",
+      "title": "예방접종 후 장애 판정...대법 \"미지급 진료비 줘야\"",
       "source": "ytn.co.kr",
-      "link": "https://www.ytn.co.kr/_ln/0103_202610220019547104",
-      "created": "2026-10-21T15:19:00.000Z"
+      "link": "https://www.ytn.co.kr/_ln/0103_202610230848409479",
+      "created": "2026-10-22T23:48:00.000Z"
     },
     {
-      "cat": "IP·개인정보",
-      "title": "CJ \"티빙 개인정보 유출 엄중히 받아들여…보상 등 지원검토\"(종합)",
-      "source": "연합뉴스",
-      "link": "https://www.yna.co.kr/view/AKR20261021146951530?input=1195m",
-      "created": "2026-10-21T14:03:00.000Z"
+      "cat": "금융",
+      "title": "[단독] 포용금융 성적 따라 은행 출연금 20% 가감…우수 은행은 과징금...",
+      "source": "매일경제",
+      "link": "https://www.mk.co.kr/article/12183784",
+      "created": "2026-10-22T23:48:00.000Z"
     },
     {
-      "cat": "IP·개인정보",
-      "title": "[열린마당] 개인정보보호 기틀 위 실천·혁신 더해야",
-      "source": "segye.com",
-      "link": "https://www.segye.com/newsView/20261021518340?OutUrl=naver",
-      "created": "2026-10-21T14:01:00.000Z"
+      "cat": "금융",
+      "title": "부동산대출 조이고 렌탈 빗장 푼다…카드·캐피탈사 ‘체질 전환’",
+      "source": "sentv.co.kr",
+      "link": "https://www.sentv.co.kr/article/view/sentv202610230015",
+      "created": "2026-10-22T23:48:00.000Z"
     },
     {
-      "cat": "조세",
-      "title": "국세청 조사공무원 5년여간 31명 징계",
-      "source": "gnmaeil.com",
-      "link": "http://www.gnmaeil.com/news/articleView.html?idxno=597024",
-      "created": "2026-10-21T13:56:00.000Z"
+      "cat": "형사",
+      "title": "국민의힘 \"오세훈 사필귀정 무죄 판결 기대\"",
+      "source": "jasm.co.kr",
+      "link": "https://www.jasm.co.kr/news/view/322663/?sc=Naver",
+      "created": "2026-10-22T23:48:00.000Z"
     },
     {
-      "cat": "공정거래",
-      "title": "공정위 미국 기업 과징금 차별 논란 일축 \"관련 매출액 기준 법 집행\"",
-      "source": "intn.co.kr",
-      "link": "http://www.intn.co.kr/news/articleView.html?idxno=2054221",
-      "created": "2026-10-21T11:54:00.000Z"
+      "cat": "형사",
+      "title": "전세사기 친 집주인 파산해도 보증금 돌려받을까",
+      "source": "lawtalknews.co.kr",
+      "link": "https://lawtalknews.co.kr/article/C3OVRP8W1XPH",
+      "created": "2026-10-22T23:48:00.000Z"
     },
     {
-      "cat": "조세",
-      "title": "AI시대 국세청 세무조사 대응법?…세무사회가 알려준다",
-      "source": "taxtimes.co.kr",
-      "link": "https://www.taxtimes.co.kr/news/article.html?no=277407",
-      "created": "2026-10-21T11:46:00.000Z"
-    },
-    {
-      "cat": "공정거래",
-      "title": "[2026 국감] 담합 주도 한솔제지, '리니언시'로 1426억 면제···국감서 ...",
-      "source": "pointdaily.co.kr",
-      "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=323170",
-      "created": "2026-10-21T10:54:00.000Z"
-    },
-    {
-      "cat": "공정거래",
-      "title": "주병기, '재벌 착취' 발언 사과…한화 조사정보 유출 의혹엔 \"검토 중\"(...",
-      "source": "newsis.com",
-      "link": "https://www.newsis.com/view/NISX20261021_0003835762",
-      "created": "2026-10-21T10:19:00.000Z"
-    },
-    {
-      "cat": "공정거래",
-      "title": "주병기 “상장 자·손자회사 의무지분율 50%로…중복상장 유인 줄어들 ...",
+      "cat": "M&A",
+      "title": "37세 ‘토스뱅크 설립 주역’ 박연현, 핀다저축은행 수장 됐다",
       "source": "이데일리",
-      "link": "https://www.edaily.co.kr/News/Read?newsId=05441526645615216&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
-      "created": "2026-10-21T10:17:00.000Z"
+      "link": "https://www.edaily.co.kr/News/Read?newsId=02978246645615872&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+      "created": "2026-10-22T23:48:00.000Z"
     },
     {
-      "cat": "조세",
-      "title": "베트남으로 '도피성 출국' 8년, 삼성 방계 알머스 대표 귀국했다",
+      "cat": "법조",
+      "title": "헌재 \"일반 살인보다 무겁게 처벌하는 존속살해죄 합헌\" 판결",
+      "source": "kbsm.net",
+      "link": "https://www.kbsm.net/news/view.php?idx=538771",
+      "created": "2026-10-22T23:46:00.000Z"
+    },
+    {
+      "cat": "금융",
+      "title": "캐피탈사 렌터카 사업 확대 길 열려…금융위, 한도 규제 손질",
+      "source": "financialpost.co.kr",
+      "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=282108",
+      "created": "2026-10-22T23:46:00.000Z"
+    },
+    {
+      "cat": "금융",
+      "title": "SK하이닉스, 기술주 한파·규제 우려에 솔리다임 IPO 결국 중단...\"시장 ...",
+      "source": "livebiz.today",
+      "link": "https://www.livebiz.today/news/articleView.html?idxno=205857",
+      "created": "2026-10-22T23:46:00.000Z"
+    },
+    {
+      "cat": "형사",
+      "title": "경찰, '친모 살해' 40대 딸 구속영장",
+      "source": "news.tf.co.kr",
+      "link": "https://news.tf.co.kr/read/life/2379793.htm",
+      "created": "2026-10-22T23:46:00.000Z"
+    },
+    {
+      "cat": "노동",
+      "title": "[손병관의 뉴스프레소] '무늬만 국가직' 소방관 인건비, 전액 국비지원...",
       "source": "ohmynews.com",
-      "link": "https://www.ohmynews.com/NWS_Web/View/at_pg.aspx?CNTN_CD=A0003277326&CMPT_CD=P0010&utm_source=naver&utm_medium=newsearch&utm_campaign=naver_news",
-      "created": "2026-10-21T09:56:00.000Z"
+      "link": "https://www.ohmynews.com/NWS_Web/View/at_pg.aspx?CNTN_CD=A0003277923&CMPT_CD=P0010&utm_source=naver&utm_medium=newsearch&utm_campaign=naver_news",
+      "created": "2026-10-22T23:46:00.000Z"
+    },
+    {
+      "cat": "법조",
+      "title": "오세훈, 오늘 '운명의 날'…시장직 걸린 2심 선고",
+      "source": "sisajournal.com",
+      "link": "https://www.sisajournal.com/news/articleView.html?idxno=391431",
+      "created": "2026-10-22T23:45:00.000Z"
+    },
+    {
+      "cat": "금융",
+      "title": "\"살던 집은 낡아가는데 새집은 없다\"…세종 청약 몰린 이유",
+      "source": "한국경제",
+      "link": "https://www.hankyung.com/article/2026102302206",
+      "created": "2026-10-22T23:45:00.000Z"
+    },
+    {
+      "cat": "형사",
+      "title": "김민석 \"오세훈 2심 선고…서울시장 재선거 가능성 높아, 마음의 준비\"",
+      "source": "mt.co.kr",
+      "link": "https://www.mt.co.kr/politics/2026/10/23/2026102308244262899",
+      "created": "2026-10-22T23:45:00.000Z"
+    },
+    {
+      "cat": "형사",
+      "title": "경찰, '강서 친모 살해' 40대 딸 구속영장 신청…존속살해 혐의",
+      "source": "dailian.co.kr",
+      "link": "https://www.dailian.co.kr/news/view/1705033/?sc=Naver",
+      "created": "2026-10-22T23:45:00.000Z"
+    },
+    {
+      "cat": "법조",
+      "title": "김민석 “오세훈 항소심 유죄에 무게…서울시장 선거 마음의 준비”",
+      "source": "조선일보",
+      "link": "https://www.chosun.com/politics/assembly/2026/10/23/EX25GUIBBNHD5D762KPYV755FE/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
+      "created": "2026-10-22T23:44:00.000Z"
     },
     {
       "cat": "조세",
-      "title": "주병기 \"대기업 역할 부정 아냐\"…한화 조사정보 유출 의혹엔 \"감찰해야...",
-      "source": "news1.kr",
-      "link": "https://www.news1.kr/economy/trend/6327794",
-      "created": "2026-10-21T09:53:00.000Z"
+      "title": "[법원] 16년간 부동산 개발 돕고 받은 31억…법원 \"전액 과세 정당\"",
+      "source": "sejungilbo.com",
+      "link": "https://www.sejungilbo.com/news/articleView.html?idxno=60737",
+      "created": "2026-10-22T23:44:00.000Z"
     },
     {
-      "cat": "공정거래",
-      "title": "공정위, 美기업 과징금 차별 반박…\"쿠팡 2%, 카카오 3%\"",
-      "source": "4th.kr",
-      "link": "http://www.4th.kr/news/articleView.html?idxno=2120175",
-      "created": "2026-10-21T09:48:00.000Z"
+      "cat": "형사",
+      "title": "국민의힘 \"오세훈, 사필귀정 무죄 확신\"",
+      "source": "이데일리",
+      "link": "https://www.edaily.co.kr/News/Read?newsId=02965126645615872&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+      "created": "2026-10-22T23:44:00.000Z"
     },
     {
-      "cat": "공정거래",
-      "title": "[사설] 범람하는 불법·허위·과장광고, 왜 방치하나",
-      "source": "fnnews.com",
-      "link": "https://www.fnnews.com/news/202610211838501850",
-      "created": "2026-10-21T09:40:00.000Z"
-    },
-    {
-      "cat": "공정거래",
-      "title": "주병기 \"상장 자·손자회사 지분율 50%로…자금조달 어려워도 불가피\"",
+      "cat": "금융",
+      "title": "신협, 자산관리회사 설립 금융위 출자 승인",
       "source": "newsis.com",
-      "link": "https://www.newsis.com/view/NISX20261021_0003835723",
-      "created": "2026-10-21T09:38:00.000Z"
+      "link": "https://www.newsis.com/view/NISX20261023_0003837894",
+      "created": "2026-10-22T23:43:00.000Z"
+    },
+    {
+      "cat": "조세",
+      "title": "국세청 “빗썸 블랙카드 업무추진비 해당”…“탈루 확인되면 엄정 조사...",
+      "source": "news.kbs.co.kr",
+      "link": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=8693319&ref=A",
+      "created": "2026-10-22T23:43:00.000Z"
+    },
+    {
+      "cat": "법조",
+      "title": "오세훈 오늘 '운명의 항소심'...서울시정 분수령",
+      "source": "fnnews.com",
+      "link": "https://www.fnnews.com/news/202610230819088443",
+      "created": "2026-10-22T23:42:00.000Z"
+    },
+    {
+      "cat": "법조",
+      "title": "죽변해안스카이레일, 법원 강제집행으로 1년 만에 울진군 품으로",
+      "source": "getnews.co.kr",
+      "link": "https://www.getnews.co.kr/news/articleView.html?idxno=884512",
+      "created": "2026-10-22T23:42:00.000Z"
+    },
+    {
+      "cat": "금융",
+      "title": "SK하이닉스, 솔리다임 IPO 검토 중단...이억원 \"해외상장도 가이드라인...",
+      "source": "wolyo.co.kr",
+      "link": "https://www.wolyo.co.kr/news/articleView.html?idxno=319468",
+      "created": "2026-10-22T23:42:00.000Z"
+    },
+    {
+      "cat": "금융",
+      "title": "로빈후드, 두바이서 비트코인 직접 보관까지…2027년 중동 공략",
+      "source": "digitaltoday.co.kr",
+      "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=709410",
+      "created": "2026-10-22T23:42:00.000Z"
     },
     {
       "cat": "공정거래",
-      "title": "[국감] 네이버·두나무 '규제 특혜'부터 사이버보험까지…정부 감독 실...",
-      "source": "pinpointnews.co.kr",
-      "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=497392",
-      "created": "2026-10-21T09:24:00.000Z"
+      "title": "[식품업계 담합 제재 후폭풍] 사조, 과징금 부담 4천억 육박…푸디스트...",
+      "source": "dealsite.co.kr",
+      "link": "https://dealsite.co.kr/articles/171078",
+      "created": "2026-10-22T23:42:00.000Z"
+    },
+    {
+      "cat": "형사",
+      "title": "오세훈 오늘 운명의 날…무죄든 유죄든 차기 권력구도 ‘요동’",
+      "source": "매일경제",
+      "link": "https://www.mk.co.kr/article/12183774",
+      "created": "2026-10-22T23:42:00.000Z"
+    },
+    {
+      "cat": "형사",
+      "title": "경찰, 서울 강서구 자택서 모친 살해한 40대 딸 구속영장 신청",
+      "source": "ajunews.com",
+      "link": "https://www.ajunews.com/view/20261023082540035",
+      "created": "2026-10-22T23:42:00.000Z"
+    },
+    {
+      "cat": "법조",
+      "title": "김민석 \"서울시장 선거 마음의 준비\"…오세훈 항소심 선고 앞두고 선거...",
+      "source": "imaeil.com",
+      "link": "https://www.imaeil.com/page/view/2026102308173545841",
+      "created": "2026-10-22T23:41:00.000Z"
+    },
+    {
+      "cat": "형사",
+      "title": "서울 강서구서 모친 살해 40대 여성… 경찰, 구속영장 신청",
+      "source": "hankookilbo.com",
+      "link": "https://www.hankookilbo.com/news/article/A2026102308050003559?did=NA",
+      "created": "2026-10-22T23:41:00.000Z"
+    },
+    {
+      "cat": "금융",
+      "title": "[2026 국감] 8개 상임위 종합감사…미래대응기금·K팝 상표권 쟁점",
+      "source": "youthdaily.co.kr",
+      "link": "https://www.youthdaily.co.kr/news/article.html?no=228749",
+      "created": "2026-10-22T23:40:00.000Z"
+    },
+    {
+      "cat": "형사",
+      "title": "오세훈 '운명의 날'…명태균 여론조사 대납 2심 선고 생중계",
+      "source": "youthdaily.co.kr",
+      "link": "https://www.youthdaily.co.kr/news/article.html?no=228748",
+      "created": "2026-10-22T23:40:00.000Z"
+    },
+    {
+      "cat": "M&A",
+      "title": "가비아, 신규 최상위도메인 '.HAN' 신청…운영권 확보 추진",
+      "source": "epnc.co.kr",
+      "link": "https://www.epnc.co.kr/news/articleView.html?idxno=408625",
+      "created": "2026-10-22T23:40:00.000Z"
+    },
+    {
+      "cat": "법조",
+      "title": "주현철, \"선관위 특검 중단 없이 진행돼야… 오세훈 재판 여파로 정치권...",
+      "source": "fntoday.co.kr",
+      "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=396043",
+      "created": "2026-10-22T23:38:00.000Z"
+    },
+    {
+      "cat": "금융",
+      "title": "[외환] 안전 선호 분위기 속 1,320원 중반대",
+      "source": "news.einfomax.co.kr",
+      "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4440749",
+      "created": "2026-10-22T23:38:00.000Z"
+    },
+    {
+      "cat": "금융",
+      "title": "신협, 자산관리회사 설립 본격화…부실자산 관리 전문성 강화",
+      "source": "newsway.co.kr",
+      "link": "https://www.newsway.co.kr/news/view?ud=2026102308342059772",
+      "created": "2026-10-22T23:38:00.000Z"
+    },
+    {
+      "cat": "시사",
+      "title": "구미시의회 유승헌 의원, 지방의회법 제정 대비 선제적 대응 촉구",
+      "source": "m-i.kr",
+      "link": "https://www.m-i.kr/news/articleView.html?idxno=2009380",
+      "created": "2026-10-22T23:38:00.000Z"
+    },
+    {
+      "cat": "법조",
+      "title": "박수홍, 친형 부부와 5년 법정 공방 어떤 결론 날까…오늘 손배소 선고",
+      "source": "경향신문",
+      "link": "https://sports.khan.co.kr/article/202610230835003?pt=nv",
+      "created": "2026-10-22T23:36:00.000Z"
+    },
+    {
+      "cat": "M&A",
+      "title": "핀다저축은행 신임 대표에 박연현 전 토스뱅크 부문장",
+      "source": "ajunews.com",
+      "link": "https://www.ajunews.com/view/20261023083220059",
+      "created": "2026-10-22T23:36:00.000Z"
+    },
+    {
+      "cat": "법조",
+      "title": "김민석 \"오세훈 항소심 '유죄'에 무게…서울시장선거 마음의 준비\"",
+      "source": "yonhapnewstv.co.kr",
+      "link": "http://www.yonhapnewstv.co.kr/news/AKR202610230834425VN",
+      "created": "2026-10-22T23:35:00.000Z"
     },
     {
       "cat": "조세",
-      "title": "[세무, 아! 그렇군] 부모 전세보증금은 ‘대출’ 아닌 ‘임차권’",
-      "source": "bigtanews.co.kr",
-      "link": "https://www.bigtanews.co.kr/article/view/big202610200020",
-      "created": "2026-10-21T09:20:00.000Z"
+      "title": "누가 대통령에게 'NO'를 외치나…李 '만기친람'의 함정",
+      "source": "sisajournal.com",
+      "link": "https://www.sisajournal.com/news/articleView.html?idxno=391193",
+      "created": "2026-10-22T23:35:00.000Z"
     },
     {
       "cat": "조세",
-      "title": "강민국 의원, 세무조사 공무원 징계 31명 \"공평과세 무너진다\"",
-      "source": "gndomin.com",
-      "link": "http://www.gndomin.com/news/articleView.html?idxno=493666",
-      "created": "2026-10-21T09:10:00.000Z"
+      "title": "국세청 4국, 신세계인터·신세계디에프 특별 세무조사 착수",
+      "source": "ftoday.co.kr",
+      "link": "http://www.ftoday.co.kr/news/articleView.html?idxno=367903",
+      "created": "2026-10-22T23:32:00.000Z"
+    },
+    {
+      "cat": "노동",
+      "title": "[뉴스분석] 남북 일촉즉발에 '사망설'까지 번지는데...김정은 어디 있나",
+      "source": "newspim.com",
+      "link": "https://www.newspim.com/news/view/20261023000109",
+      "created": "2026-10-22T23:31:00.000Z"
+    },
+    {
+      "cat": "M&A",
+      "title": "핀다, 저축은행 첫 수장에 박연현 전 토스뱅크 부문장 선임",
+      "source": "sentv.co.kr",
+      "link": "https://www.sentv.co.kr/article/view/sentv202610230010",
+      "created": "2026-10-22T23:28:00.000Z"
+    },
+    {
+      "cat": "노동",
+      "title": "가뜩이나 바쁜 영농철에 '김정은 노작' 원문 통달 내몰린 농장",
+      "source": "dailynk.com",
+      "link": "https://www.dailynk.com/20261023-1",
+      "created": "2026-10-22T23:26:00.000Z"
+    },
+    {
+      "cat": "M&A",
+      "title": "[더벨][상폐규제기업 거버넌스 점검] 이사회는 재건보다 자금조달에 매...",
+      "source": "thebell.co.kr",
+      "link": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202610201432542720109476",
+      "created": "2026-10-22T23:18:00.000Z"
+    },
+    {
+      "cat": "노동",
+      "title": "동아리 활동, 그 잃어버린 날개를 찾아서!",
+      "source": "jejusori.net",
+      "link": "https://www.jejusori.net/news/articleView.html?idxno=507617",
+      "created": "2026-10-22T23:14:00.000Z"
+    },
+    {
+      "cat": "IP·개인정보",
+      "title": "핵심 원전 도면 5년 방치 한국전력기술, 김태균 책임론",
+      "source": "lkp.news",
+      "link": "http://www.lkp.news/news/articleView.html?idxno=85331",
+      "created": "2026-10-22T23:14:00.000Z"
+    },
+    {
+      "cat": "노동",
+      "title": "해방둥이 기자의 짧은 회고록 〈15〉고문과 조작을 1980년대의 主題로 ...",
+      "source": "조선일보",
+      "link": "https://monthly.chosun.com/news/articleView.html?idxno=71762",
+      "created": "2026-10-22T23:10:00.000Z"
+    },
+    {
+      "cat": "M&A",
+      "title": "ISDS 판정문에 드러난 삼성물산·제일모직 합병 찬성의 전모",
+      "source": "news.einfomax.co.kr",
+      "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4440733",
+      "created": "2026-10-22T23:06:00.000Z"
+    },
+    {
+      "cat": "시사",
+      "title": "\"제명에도 모르쇠\"…임오경 의원 침묵 속 공천 책임론 확산",
+      "source": "joygm.com",
+      "link": "http://www.joygm.com/news/articleView.html?idxno=215554",
+      "created": "2026-10-22T23:04:00.000Z"
     },
     {
       "cat": "조세",
-      "title": "[핫이슈] 경실련 \"구글 프로젝트 허그 탈세·회계부정 의혹 규명해야\"",
-      "source": "newswatch.kr",
-      "link": "http://www.newswatch.kr/news/articleView.html?idxno=81597",
-      "created": "2026-10-21T08:48:00.000Z"
+      "title": "국세청, 딜로이트안진 신창환 회계사 초빙 '글로벌 최저한세' 강연 연다",
+      "source": "sejungilbo.com",
+      "link": "https://www.sejungilbo.com/news/articleView.html?idxno=60766",
+      "created": "2026-10-22T23:02:00.000Z"
+    },
+    {
+      "cat": "M&A",
+      "title": "[부산 브리핑 모음(10월23일)] 부산항만공사, 협력업체 근로환경 개선 지...",
+      "source": "dnews.co.kr",
+      "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202610221812590720817",
+      "created": "2026-10-22T23:02:00.000Z"
+    },
+    {
+      "cat": "M&A",
+      "title": "[경남 브리핑 모음(10월23일)] 진주시 하대지구 도시재생사업 선정…83억...",
+      "source": "dnews.co.kr",
+      "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202610222251286990826",
+      "created": "2026-10-22T23:02:00.000Z"
+    },
+    {
+      "cat": "M&A",
+      "title": "알츠하이머, 치료 넘어 예방으로…美 FDA 규제 새판 짠다",
+      "source": "medipana.com",
+      "link": "https://www.medipana.com/news/articleView.html?idxno=419895",
+      "created": "2026-10-22T23:02:00.000Z"
+    },
+    {
+      "cat": "조세",
+      "title": "[클라세] 세무사회장이 국세청장이 되는 발칙한 상상",
+      "source": "sejungilbo.com",
+      "link": "https://www.sejungilbo.com/news/articleView.html?idxno=60748",
+      "created": "2026-10-22T23:00:00.000Z"
+    },
+    {
+      "cat": "공정거래",
+      "title": "하도급사 15%는 계약서도 못받고 일한다",
+      "source": "koscaj.com",
+      "link": "https://www.koscaj.com/news/articleView.html?idxno=327067",
+      "created": "2026-10-22T23:00:00.000Z"
+    },
+    {
+      "cat": "공정거래",
+      "title": "\"실제 공사 안해도 재하도급 계약만으로 계약 해지 사유\"",
+      "source": "koscaj.com",
+      "link": "https://www.koscaj.com/news/articleView.html?idxno=327092",
+      "created": "2026-10-22T23:00:00.000Z"
+    },
+    {
+      "cat": "공정거래",
+      "title": "중대재해 양형, '사고전 의무이행 기록'이 가른다",
+      "source": "koscaj.com",
+      "link": "https://www.koscaj.com/news/articleView.html?idxno=327070",
+      "created": "2026-10-22T23:00:00.000Z"
+    },
+    {
+      "cat": "M&A",
+      "title": "진옥동의 신한금융, 글로벌·비은행 두 축으로 성장…롯데손보 인수로 ...",
+      "source": "e-science.co.kr",
+      "link": "https://www.e-science.co.kr/news/articleView.html?idxno=137867",
+      "created": "2026-10-22T23:00:00.000Z"
+    },
+    {
+      "cat": "M&A",
+      "title": "AI 투자비 우려에 나스닥 2.6%↓…반도체주 또 ‘와르르’[뉴스새벽배송...",
+      "source": "이데일리",
+      "link": "https://www.edaily.co.kr/News/Read?newsId=02830646645615872&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+      "created": "2026-10-22T22:58:00.000Z"
+    },
+    {
+      "cat": "M&A",
+      "title": "iM증권 “테슬라·스페이스X 합병 논의 본격화…머스크 지배력 확대 주...",
+      "source": "etoday.co.kr",
+      "link": "https://www.etoday.co.kr/news/view/2639170",
+      "created": "2026-10-22T22:50:00.000Z"
+    },
+    {
+      "cat": "부동산·건설",
+      "title": "\"절차 하자·주민 배제 '345kV 신정읍-신계룡 송전선로', 깜깜이 입지 선...",
+      "source": "jbsori.com",
+      "link": "http://www.jbsori.com/news/articleView.html?idxno=18083",
+      "created": "2026-10-22T22:40:00.000Z"
+    },
+    {
+      "cat": "공정거래",
+      "title": "고객 개인정보 276만건 유출 할리스…과거 데이터 관리 부실 논란",
+      "source": "조선일보",
+      "link": "https://www.sportschosun.com/life/2026-10-23/202610220100140880009193",
+      "created": "2026-10-22T22:31:00.000Z"
+    },
+    {
+      "cat": "노동",
+      "title": "\"산재 은폐 정황 확인했지만\"…쿠팡, 형사처벌 없이 19억 과태료로 끝났...",
+      "source": "newsroad.co.kr",
+      "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=66265",
+      "created": "2026-10-22T22:30:00.000Z"
+    },
+    {
+      "cat": "노동",
+      "title": "[채권/외환] AI 투자 불안에 美 국채 금리 급락…10년물 5% 아래로, 엔화...",
+      "source": "newspim.com",
+      "link": "https://www.newspim.com/news/view/20261023000034",
+      "created": "2026-10-22T22:28:00.000Z"
+    },
+    {
+      "cat": "노동",
+      "title": "국회 상임위 8곳 국정감사…미래대응기금·초광역특구법 공방",
+      "source": "the-today.com",
+      "link": "https://www.the-today.com/news/articleView.html?idxno=92240",
+      "created": "2026-10-22T22:22:00.000Z"
+    },
+    {
+      "cat": "노동",
+      "title": "[오늘의 주요일정·23일] 오세훈 '명태균 여론조사 대납의혹' 2심 선고",
+      "source": "safetimes.co.kr",
+      "link": "https://www.safetimes.co.kr/news/articleView.html?idxno=246756",
+      "created": "2026-10-22T22:04:00.000Z"
+    },
+    {
+      "cat": "노동",
+      "title": "중상해·사망사고에도 95%는 '안전인증' 유지…취소는 12곳뿐",
+      "source": "newsis.com",
+      "link": "https://www.newsis.com/view/NISX20261022_0003837126",
+      "created": "2026-10-22T22:02:00.000Z"
+    },
+    {
+      "cat": "조세",
+      "title": "강수영 \"김지용 중수청장, 매주 국무회의 배석할 필요 있나?\"[한판승부...",
+      "source": "nocutnews.co.kr",
+      "link": "https://www.nocutnews.co.kr/news/6595899?utm_source=naver&utm_medium=article&utm_campaign=20261023070031",
+      "created": "2026-10-22T22:01:00.000Z"
+    },
+    {
+      "cat": "공정거래",
+      "title": "[Who is ?] 이운익 삼양사 대표이사",
+      "source": "businesspost.co.kr",
+      "link": "https://www.businesspost.co.kr/BP?command=article_view&num=449928",
+      "created": "2026-10-22T22:00:00.000Z"
+    },
+    {
+      "cat": "노동",
+      "title": "선명성 앞세운 조국혁신당, 지지율 두 자릿수 눈앞…민주당 ‘중도 확장...",
+      "source": "sedaily.com",
+      "link": "https://www.sedaily.com/article/20104965?ref=naver",
+      "created": "2026-10-22T22:00:00.000Z"
+    },
+    {
+      "cat": "노동",
+      "title": "[오늘의 국감] 국감 막판, 미래대응기금·부동산 정책 격돌…PHP 해킹 대...",
+      "source": "newsian.co.kr",
+      "link": "http://www.newsian.co.kr/news/articleView.html?idxno=97574",
+      "created": "2026-10-22T21:48:00.000Z"
+    },
+    {
+      "cat": "시사",
+      "title": "한은, 기준금리 연 3.0% 동결‥추가 인상 가능성",
+      "source": "imnews.imbc.com",
+      "link": "https://imnews.imbc.com/replay/2026/nwtoday/article/6860105_37012.html",
+      "created": "2026-10-22T21:32:00.000Z"
+    },
+    {
+      "cat": "시사",
+      "title": "\"탈출 기회 안 주나요\" 삼전닉스 개미 속타는데…뜻밖의 전망 [분석+]",
+      "source": "한국경제",
+      "link": "https://www.hankyung.com/article/2026102296756",
+      "created": "2026-10-22T21:31:00.000Z"
+    },
+    {
+      "cat": "공정거래",
+      "title": "[법률라운지] 금융소비자보호법상 PF대출의 연대보증인이 될 수 있는 제...",
+      "source": "dnews.co.kr",
+      "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202610221309001510711",
+      "created": "2026-10-22T21:20:00.000Z"
+    },
+    {
+      "cat": "시사",
+      "title": "[퇴직연금 개편]사업장 부담 완화ㆍ수급권 보호 해결 방안은",
+      "source": "dnews.co.kr",
+      "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202610221634346770797",
+      "created": "2026-10-22T21:20:00.000Z"
+    },
+    {
+      "cat": "부동산·건설",
+      "title": "[단독] 반포124 조합장 일가, 1+1 분양 신청 뒤 자녀에 지분 증여⋯승계...",
+      "source": "etoday.co.kr",
+      "link": "https://www.etoday.co.kr/news/view/2638798",
+      "created": "2026-10-22T21:02:00.000Z"
+    },
+    {
+      "cat": "시사",
+      "title": "'민생 올인' 외치며 특검 미룬 민주당…국감 끝나면 '정쟁 2라운드'?",
+      "source": "dailian.co.kr",
+      "link": "https://www.dailian.co.kr/news/view/1704812/?sc=Naver",
+      "created": "2026-10-22T21:01:00.000Z"
+    },
+    {
+      "cat": "시사",
+      "title": "軍, 해외 파병 위해 필요한 ‘법적 절차’는[이현호의 밀리터리!톡]",
+      "source": "sedaily.com",
+      "link": "https://www.sedaily.com/article/20104978?ref=naver",
+      "created": "2026-10-22T21:01:00.000Z"
+    },
+    {
+      "cat": "공정거래",
+      "title": "형사재판 무죄인데 행정재판 '심리 없이 패소'…오늘 재판소원 변론",
+      "source": "newsis.com",
+      "link": "https://www.newsis.com/view/NISX20261022_0003837550",
+      "created": "2026-10-22T21:00:00.000Z"
+    },
+    {
+      "cat": "IP·개인정보",
+      "title": "장모 살인에도 등장한 흥신소…범죄 악용 우려에도 '불법 의뢰' 사각지...",
+      "source": "news1.kr",
+      "link": "https://www.news1.kr/society/incident-accident/6328798",
+      "created": "2026-10-22T21:00:00.000Z"
+    },
+    {
+      "cat": "시사",
+      "title": "5년간 공장·창고 화재로 재산피해 3조2천억…\"내화성능 높여야\"",
+      "source": "연합뉴스",
+      "link": "https://www.yna.co.kr/view/AKR20261022180200001?input=1195m",
+      "created": "2026-10-22T21:00:00.000Z"
+    },
+    {
+      "cat": "조세",
+      "title": "[이코노 브리핑] 네이버페이 ‘Npay 우리 체크카드’ 출시 외",
+      "source": "segye.com",
+      "link": "https://www.segye.com/newsView/20261022520097?OutUrl=naver",
+      "created": "2026-10-22T20:02:00.000Z"
+    },
+    {
+      "cat": "시사",
+      "title": "與 ‘코인 과세’ 네 번째 유예 가닥… “여태껏 준비 안 됐다니”",
+      "source": "seoul.co.kr",
+      "link": "https://www.seoul.co.kr/news/politics/2026/10/23/20261023005004?wlog_tag3=naver",
+      "created": "2026-10-22T20:02:00.000Z"
+    },
+    {
+      "cat": "IP·개인정보",
+      "title": "42조원 ‘키트루다’ 복제약 전쟁…한국이 격전지 된 이유",
+      "source": "중앙일보",
+      "link": "https://www.joongang.co.kr/article/25472151",
+      "created": "2026-10-22T20:00:00.000Z"
+    },
+    {
+      "cat": "조세",
+      "title": "조세포탈 등 고발하면 ‘가욋일’…세무공무원 ‘과부하’ 해묵은 난제",
+      "source": "이데일리",
+      "link": "https://www.edaily.co.kr/News/Read?newsId=01636726645615872&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+      "created": "2026-10-22T19:32:00.000Z"
+    },
+    {
+      "cat": "조세",
+      "title": "[단독] 중수청 조세범칙 1호 사건은 '쿠팡'…국세청 고발",
+      "source": "이데일리",
+      "link": "https://www.edaily.co.kr/News/Read?newsId=01626886645615872&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+      "created": "2026-10-22T19:31:00.000Z"
+    },
+    {
+      "cat": "시사",
+      "title": "솔리다임 '중복 상장' 판단에도...규제 방안은?",
+      "source": "ytn.co.kr",
+      "link": "https://www.ytn.co.kr/_ln/0102_202610230335312459",
+      "created": "2026-10-22T18:35:00.000Z"
+    },
+    {
+      "cat": "조세",
+      "title": "신세계그룹, 23일 정기 인사… 이마트 중심 인적쇄신 나서나",
+      "source": "segye.com",
+      "link": "https://www.segye.com/newsView/20261022525653?OutUrl=naver",
+      "created": "2026-10-22T16:20:00.000Z"
+    },
+    {
+      "cat": "공정거래",
+      "title": "“단 한 건에도 사업 망한다”… 식당부터 벤처까지 ‘집단소송제’ 공...",
+      "source": "조선일보",
+      "link": "https://www.chosun.com/economy/industry-company/2026/10/23/UC5IKI4V7NFEFOTGQLJCNMV2BI/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
+      "created": "2026-10-22T15:51:00.000Z"
+    },
+    {
+      "cat": "공정거래",
+      "title": "美기업, 집단소송 방어비만 연 6조원",
+      "source": "조선일보",
+      "link": "https://www.chosun.com/economy/industry-company/2026/10/23/QRLSKSZO4JHQRJHWJ7O6W27XOY/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
+      "created": "2026-10-22T15:51:00.000Z"
+    },
+    {
+      "cat": "시사",
+      "title": "[주요경제지표] 2026년 10월 22일자",
+      "source": "조선일보",
+      "link": "https://www.chosun.com/economy/stock-finance/2026/10/23/DGGT5FQMPBDTTJMO75Q5UAUJ74/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
+      "created": "2026-10-22T15:32:00.000Z"
+    },
+    {
+      "cat": "시사",
+      "title": "박수영 \"이재명, 미래대응기금 쌈짓돈 쓰려고 기획예산처 편드나\"",
+      "source": "imaeil.com",
+      "link": "https://www.imaeil.com/page/view/2026102223304923910",
+      "created": "2026-10-22T15:22:00.000Z"
+    },
+    {
+      "cat": "공정거래",
+      "title": "'재판소원 1호' 녹십자 입찰 담합 오늘 첫 변론기일",
+      "source": "ytn.co.kr",
+      "link": "https://www.ytn.co.kr/_ln/0103_202610230014164343",
+      "created": "2026-10-22T15:14:00.000Z"
+    },
+    {
+      "cat": "조세",
+      "title": "국세청, 신세계 계열사 특별 세무조사…친인척 소유 여행사도 조사",
+      "source": "seoultimes.news",
+      "link": "https://www.seoultimes.news/news/article.html?no=2000101261",
+      "created": "2026-10-22T14:44:00.000Z"
+    },
+    {
+      "cat": "IP·개인정보",
+      "title": "[2026국감]방미통위 \"해킹 보상 미흡하면 개입\"…구글·X 등 플랫폼 도마",
+      "source": "view.asiae.co.kr",
+      "link": "https://view.asiae.co.kr/article/2026102222072767786",
+      "created": "2026-10-22T13:07:00.000Z"
+    },
+    {
+      "cat": "부동산·건설",
+      "title": "[이동학의 사람사는 법] 부동산 분쟁에서 '가처분'이 갖는 실질적·법적...",
+      "source": "the-today.com",
+      "link": "https://www.the-today.com/news/articleView.html?idxno=92232",
+      "created": "2026-10-22T12:22:00.000Z"
+    },
+    {
+      "cat": "IP·개인정보",
+      "title": "경남경찰청 산업보안협의회 정영식 신임 위원장 취임",
+      "source": "idomin.com",
+      "link": "https://www.idomin.com/news/articleView.html?idxno=2017717",
+      "created": "2026-10-22T11:06:00.000Z"
+    },
+    {
+      "cat": "IP·개인정보",
+      "title": "‘반도체 기술 무단 유출’…삼성전자 자회사서 기술 유출한 전 직원 구...",
+      "source": "munhwa.com",
+      "link": "https://www.munhwa.com/article/11625542?ref=naver",
+      "created": "2026-10-22T10:50:00.000Z"
+    },
+    {
+      "cat": "IP·개인정보",
+      "title": "[2026국감] \"해킹 보상 미흡하면 개입\"… 방미통위, 이용자 구제 강화",
+      "source": "newscj.com",
+      "link": "https://www.newscj.com/news/articleView.html?idxno=3442478",
+      "created": "2026-10-22T10:48:00.000Z"
+    },
+    {
+      "cat": "IP·개인정보",
+      "title": "이훈기 \"쿠팡 납치광고, 카카오 브랜드메시지 소비자 불만 커\"",
+      "source": "이데일리",
+      "link": "https://www.edaily.co.kr/News/Read?newsId=05926966645615544&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+      "created": "2026-10-22T10:47:00.000Z"
+    },
+    {
+      "cat": "IP·개인정보",
+      "title": "유락 “증거 찾던 포렌식, AI 적용해 데이터 위험 관리까지 확장”",
+      "source": "byline.network",
+      "link": "https://byline.network/?p=9004111222624154",
+      "created": "2026-10-22T09:38:00.000Z"
+    },
+    {
+      "cat": "IP·개인정보",
+      "title": "방미통위, 쿠팡 ‘납치광고’ 사실조사 완료…제재 여부 심의",
+      "source": "sateconomy.co.kr",
+      "link": "https://sateconomy.co.kr/news/view/1065599440747424",
+      "created": "2026-10-22T09:36:00.000Z"
+    },
+    {
+      "cat": "IP·개인정보",
+      "title": "‘경남 핵심산업 기술유출 막아라’ 경찰·기업 손잡았다",
+      "source": "seoul.co.kr",
+      "link": "https://www.seoul.co.kr/news/publicnews/local_govern/2026/10/22/20261022500311?wlog_tag3=naver",
+      "created": "2026-10-22T09:19:00.000Z"
+    },
+    {
+      "cat": "IP·개인정보",
+      "title": "톱텍 \"삼성D, BOE와 특허 계약서 제출해야\" vs. 삼성D \"비밀유지계약 때...",
+      "source": "zdnet.co.kr",
+      "link": "https://zdnet.co.kr/view/?no=20261022175251",
+      "created": "2026-10-22T09:00:00.000Z"
+    },
+    {
+      "cat": "부동산·건설",
+      "title": "[단독] 대명종합건설 지우종 전 대표, 1심서 징역형 집유·벌금 138억 선...",
+      "source": "news.bbsi.co.kr",
+      "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4114056",
+      "created": "2026-10-22T09:00:00.000Z"
+    },
+    {
+      "cat": "부동산·건설",
+      "title": "[단독] 청담르엘 공사비 못 받은 롯데건설, 부지 862억 가압류",
+      "source": "bizhankook.com",
+      "link": "https://bizhankook.com/articles/cheongdam-le-el-seizure-lotte-construction.html",
+      "created": "2026-10-22T08:20:00.000Z"
+    },
+    {
+      "cat": "부동산·건설",
+      "title": "李 '공급 전격전' 주문했지만 산 너머 산…올해 착공 목표 달성 '어려워...",
+      "source": "kpinews.kr",
+      "link": "https://www.kpinews.kr/newsView/1065595325001258",
+      "created": "2026-10-22T07:54:00.000Z"
+    },
+    {
+      "cat": "부동산·건설",
+      "title": "\"보증금에서 월세 빼면 되잖아요\"…세입자 주장에 명도소송 가능할까",
+      "source": "ppss.kr",
+      "link": "https://www.ppss.kr/news/articleView.html?idxno=316890",
+      "created": "2026-10-22T07:54:00.000Z"
+    },
+    {
+      "cat": "부동산·건설",
+      "title": "[단독] 광진구 “광장극동 5동 제척, 주민이 결정할 일…신청 시 법령 따...",
+      "source": "ekn.kr",
+      "link": "https://www.ekn.kr/web/view.php?key=20261022029029866",
+      "created": "2026-10-22T05:40:00.000Z"
+    },
+    {
+      "cat": "부동산·건설",
+      "title": "“560만원이던 공사비가 1300만원으로”…서울 정비사업 몸살",
+      "source": "매일경제",
+      "link": "https://www.mk.co.kr/article/12182566",
+      "created": "2026-10-22T00:53:00.000Z"
+    },
+    {
+      "cat": "부동산·건설",
+      "title": "[장혜원의 부동산현장] “5동 제척됩니다” vs “재산권 지키자”…광장...",
+      "source": "ekn.kr",
+      "link": "https://www.ekn.kr/web/view.php?key=20261022025228776",
+      "created": "2026-10-22T00:12:00.000Z"
     },
     {
       "cat": "부동산·건설",
@@ -772,76 +842,6 @@
       "source": "조선일보",
       "link": "https://biz.chosun.com/industry/business_info/2026/10/21/DWCEAUAUIRFK5M6TEY7TRDYHFE/?utm_source=naver&utm_medium=original&utm_campaign=biz",
       "created": "2026-10-21T07:36:00.000Z"
-    },
-    {
-      "cat": "부동산·건설",
-      "title": "서울 정비사업 공사비 분쟁 5년간 75건…올해 9개월간 15건",
-      "source": "financialpost.co.kr",
-      "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=281754",
-      "created": "2026-10-21T06:46:00.000Z"
-    },
-    {
-      "cat": "부동산·건설",
-      "title": "[자취꿀팁] 전세 만기, 더 살려니 월세 내라는데…이사·재계약 전 따져...",
-      "source": "dailypop.kr",
-      "link": "http://www.dailypop.kr/news/articleView.html?idxno=103223",
-      "created": "2026-10-21T05:20:00.000Z"
-    },
-    {
-      "cat": "부동산·건설",
-      "title": "마산교구 가음동본당",
-      "source": "news.cpbc.co.kr",
-      "link": "https://news.cpbc.co.kr/article/1176495?division=NAVER",
-      "created": "2026-10-21T04:46:00.000Z"
-    },
-    {
-      "cat": "부동산·건설",
-      "title": "채권자 고소했다가 ‘무고’ 역고소 당한 채권자 무혐의… “허위 신고...",
-      "source": "seoul.co.kr",
-      "link": "https://www.seoul.co.kr/news/society/2026/10/21/20261021500139?wlog_tag3=naver",
-      "created": "2026-10-21T04:32:00.000Z"
-    },
-    {
-      "cat": "부동산·건설",
-      "title": "상속 다물권자 처분과 조합원 지위",
-      "source": "housingherald.co.kr",
-      "link": "https://www.housingherald.co.kr/news/articleView.html?idxno=63140",
-      "created": "2026-10-21T04:30:00.000Z"
-    },
-    {
-      "cat": "부동산·건설",
-      "title": "조합의 목적에 위배되는 행위를 하였음을 이유로 곧바로 조합원을 제명...",
-      "source": "arunews.com",
-      "link": "https://www.arunews.com/news/articleView.html?idxno=68419",
-      "created": "2026-10-21T03:38:00.000Z"
-    },
-    {
-      "cat": "부동산·건설",
-      "title": "[단독] '25억 배상' 턴 상계주공5단지, 이번엔 한화건설과 '게이트 이견...",
-      "source": "newsian.co.kr",
-      "link": "http://www.newsian.co.kr/news/articleView.html?idxno=97418",
-      "created": "2026-10-20T23:54:00.000Z"
-    },
-    {
-      "cat": "부동산·건설",
-      "title": "서울 정비사업 공사비 분쟁 올해만 15건 … 5년간 평균 인상률 38%",
-      "source": "queen.co.kr",
-      "link": "http://www.queen.co.kr/news/articleView.html?idxno=465022",
-      "created": "2026-10-20T22:26:00.000Z"
-    },
-    {
-      "cat": "부동산·건설",
-      "title": "엘리스 폭락에 세계가 충격, “한국이 글로벌 AI 풍향계가 됐다”: 슬로...",
-      "source": "slownews.kr",
-      "link": "https://slownews.kr/168257",
-      "created": "2026-10-20T22:08:00.000Z"
-    },
-    {
-      "cat": "부동산·건설",
-      "title": "[김재권의 부동산읽기] 공장이나 창고건물이 상가임대차보호법 적용받...",
-      "source": "yeongnam.com",
-      "link": "https://www.yeongnam.com/web/view.php?key=20261020029045242",
-      "created": "2026-10-20T21:00:00.000Z"
     }
   ]
 }
