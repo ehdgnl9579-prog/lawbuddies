@@ -230,25 +230,6 @@
     "id": 83
   },
   {
-    "source": "jobalio",
-    "sourceId": "306075",
-    "title": "한국연구재단 2026년도 체험형 청년인턴(장애)·전문위촉직(변호사)·제8차 사업위촉직 채용 공고",
-    "firm": "한국연구재단",
-    "firmKey": "한국연구재단",
-    "role": "공공",
-    "region": "지방",
-    "exp": "비정규직,청년인턴(체험형)",
-    "pay": "공고 참조",
-    "deadline": "2026-10-29T15:00:00.000Z",
-    "link": "https://www.nrf.re.kr/page/54?ac=view&searchType=&searchText=&pageNum=1&menuNo=54&boardNo=7&menuTypeCd=MENU_TYPE_02&code=&postNo=283914",
-    "body": "공공기관 채용공고 (잡알리오 자동수집)\n기관: 한국연구재단\n채용인원: 8명\n고용유형: 비정규직,청년인턴(체험형)\n\n※ 원문에서 상세 자격요건·전형절차를 확인하세요.",
-    "created": "2026-10-14T15:00:00.000Z",
-    "archived": false,
-    "comments": [],
-    "seen": 0,
-    "id": 78
-  },
-  {
     "source": "saas",
     "platform": "greeting",
     "sourceId": "https://nice.career.greetinghr.com/ko/o/237706",
@@ -427,6 +408,25 @@
     "comments": [],
     "seen": 0,
     "id": 13
+  },
+  {
+    "source": "jobalio",
+    "sourceId": "306075",
+    "title": "한국연구재단 2026년도 체험형 청년인턴(장애)·전문위촉직(변호사)·제8차 사업위촉직 채용 공고",
+    "firm": "한국연구재단",
+    "firmKey": "한국연구재단",
+    "role": "공공",
+    "region": "지방",
+    "exp": "비정규직,청년인턴(체험형)",
+    "pay": "공고 참조",
+    "deadline": "2026-10-29T15:00:00.000Z",
+    "link": "https://www.nrf.re.kr/page/54?ac=view&searchType=&searchText=&pageNum=1&menuNo=54&boardNo=7&menuTypeCd=MENU_TYPE_02&code=&postNo=283914",
+    "body": "공공기관 채용공고 (잡알리오 자동수집)\n기관: 한국연구재단\n채용인원: 8명\n고용유형: 비정규직,청년인턴(체험형)\n\n※ 원문에서 상세 자격요건·전형절차를 확인하세요.",
+    "created": "2026-10-14T15:00:00.000Z",
+    "archived": true,
+    "comments": [],
+    "seen": 0,
+    "id": 78
   },
   {
     "source": "saas",
