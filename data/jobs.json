@@ -1,6 +1,25 @@
 [
   {
     "source": "jobalio",
+    "sourceId": "306988",
+    "title": "2026년 제1차 국민연금공단 준법감시담당자(기금운용직) 채용공고",
+    "firm": "국민연금공단",
+    "firmKey": "국민연금공단",
+    "role": "공공",
+    "region": "지방",
+    "exp": "정규직",
+    "pay": "공고 참조",
+    "deadline": "2026-11-30T15:00:00.000Z",
+    "link": "https://www.nps.or.kr/pnsgdnc/hiregdnc/getOHAE0005M0.do?menuId=MN24000970",
+    "body": "공공기관 채용공고 (잡알리오 자동수집)\n기관: 국민연금공단\n채용인원: 2명\n고용유형: 정규직\n\n※ 원문에서 상세 자격요건·전형절차를 확인하세요.",
+    "created": "2026-11-16T15:00:00.000Z",
+    "archived": false,
+    "comments": [],
+    "seen": 0,
+    "id": 101
+  },
+  {
+    "source": "jobalio",
     "sourceId": "307010",
     "title": "2026년 한국법무보호복지공단 개방형직위(미래전략부장) 경력경쟁채용 공고",
     "firm": "한국법무보호복지공단",
@@ -171,25 +190,6 @@
     "comments": [],
     "seen": 0,
     "id": 91
-  },
-  {
-    "source": "jobalio",
-    "sourceId": "306588",
-    "title": "2026년 한국관광공사 개방형직위(정보보안파트장) 공개 모집",
-    "firm": "한국관광공사",
-    "firmKey": "한국관광공사",
-    "role": "공공",
-    "region": "지방",
-    "exp": "정규직,비정규직",
-    "pay": "공고 참조",
-    "deadline": "2026-11-15T15:00:00.000Z",
-    "link": "https://knto.or.kr/recruitInfo#",
-    "body": "공공기관 채용공고 (잡알리오 자동수집)\n기관: 한국관광공사\n채용인원: 1명\n고용유형: 정규직,비정규직\n\n※ 원문에서 상세 자격요건·전형절차를 확인하세요.",
-    "created": "2026-11-01T15:00:00.000Z",
-    "archived": false,
-    "comments": [],
-    "seen": 0,
-    "id": 92
   },
   {
     "source": "saas",
@@ -390,6 +390,25 @@
     "comments": [],
     "seen": 0,
     "id": 13
+  },
+  {
+    "source": "jobalio",
+    "sourceId": "306588",
+    "title": "2026년 한국관광공사 개방형직위(정보보안파트장) 공개 모집",
+    "firm": "한국관광공사",
+    "firmKey": "한국관광공사",
+    "role": "공공",
+    "region": "지방",
+    "exp": "정규직,비정규직",
+    "pay": "공고 참조",
+    "deadline": "2026-11-15T15:00:00.000Z",
+    "link": "https://knto.or.kr/recruitInfo#",
+    "body": "공공기관 채용공고 (잡알리오 자동수집)\n기관: 한국관광공사\n채용인원: 1명\n고용유형: 정규직,비정규직\n\n※ 원문에서 상세 자격요건·전형절차를 확인하세요.",
+    "created": "2026-11-01T15:00:00.000Z",
+    "archived": true,
+    "comments": [],
+    "seen": 0,
+    "id": 92
   },
   {
     "source": "saas",
