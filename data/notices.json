@@ -1,9 +1,17 @@
 {
-  "updated": "2026-11-24T05:21:12.152Z",
+  "updated": "2026-11-25T04:17:53.746Z",
   "source": "대한변협 공지사항",
   "items": [
     {
       "id": 1,
+      "org": "대한변협",
+      "title": "2027년도 대한변협 달력 수령 안내",
+      "deadline": null,
+      "link": "https://www.koreanbar.or.kr/pages/news/view.asp?teamcode=&category=&page=1&seq=15698&types=1&searchtype=&searchstr=",
+      "created": "2026-11-24"
+    },
+    {
+      "id": 2,
       "org": "대한변협",
       "title": "[연수팀] 제520기 「데이터3법」 특별연수 신청안내",
       "deadline": null,
@@ -11,7 +19,7 @@
       "created": "2026-11-23"
     },
     {
-      "id": 2,
+      "id": 3,
       "org": "대한변협",
       "title": "[연수팀] 제519기 「형사법」 특별연수 신청안내",
       "deadline": null,
@@ -19,7 +27,7 @@
       "created": "2026-11-16"
     },
     {
-      "id": 3,
+      "id": 4,
       "org": "대한변협",
       "title": "[연수팀] 변호사 의무연수 제9주기(2025~2026년) 종료 예정 안내",
       "deadline": null,
@@ -27,7 +35,7 @@
       "created": "2026-11-12"
     },
     {
-      "id": 4,
+      "id": 5,
       "org": "대한변협",
       "title": "[연수팀] 제518기 「상속·신탁」 특별연수 신청안내",
       "deadline": null,
@@ -35,20 +43,12 @@
       "created": "2026-11-09"
     },
     {
-      "id": 5,
+      "id": 6,
       "org": "대한변협",
       "title": "[연수팀] 제517기 「민사집행」 특별연수 신청안내",
       "deadline": null,
       "link": "https://www.koreanbar.or.kr/pages/news/view.asp?teamcode=&category=&page=1&seq=15621&types=1&searchtype=&searchstr=",
       "created": "2026-11-09"
-    },
-    {
-      "id": 6,
-      "org": "대한변협",
-      "title": "[사업팀] 제15회 변호사공익대상 수상 후보자 추천 및 신청 공고",
-      "deadline": null,
-      "link": "https://www.koreanbar.or.kr/pages/news/view.asp?teamcode=&category=&page=1&seq=15597&types=1&searchtype=&searchstr=",
-      "created": "2026-11-02"
     }
   ]
 }
